@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import {
   Row, Col, Button,
 } from 'react-bootstrap';
@@ -27,14 +29,14 @@ const initialForm = {
 };
 
 const Login = () => {
-  const r = 7;
+  const [nameError, setNameError] = useState('');
+  const navigate = useNavigate();
 
   return (
     <Container className="login_wrapper" width={60}>
       <Row className="header_wrapper">
         <Col className="login_header">
           Зарегистрироваться
-          {r}
         </Col>
       </Row>
       <Row className="form_wrapper">
@@ -42,7 +44,18 @@ const Login = () => {
           initialValues={initialForm}
           validationSchema={LoginSchema}
           onSubmit={(values) => {
-            console.log(values);
+            axios.post('/api/v1/signup', { username: values.name, password: values.password })
+              .then((response) => {
+                setNameError('');
+                localStorage.setItem('user', JSON.stringify(values.name));
+                localStorage.setItem('token', JSON.stringify(response.data.token));
+                navigate('/');
+              })
+              .catch((error) => {
+                if (error.message === 'Request failed with status code 409') {
+                  setNameError('Такой пользователь уже существует');
+                }
+              });
           }}
         >
           {({ errors, touched }) => (
@@ -54,6 +67,9 @@ const Login = () => {
               />
               {touched.name && errors.name && (
                 <div className="error_block">{errors.name}</div>
+              )}
+              {nameError && (
+                <div className="error_block">{nameError}</div>
               )}
               <Field
                 name="password"
