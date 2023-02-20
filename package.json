@@ -20,6 +20,8 @@
   },
   "homepage": "https://github.com/Meetyouafter/frontend-project-12#readme",
   "dependencies": {
-    "@hexlet/chat-server": "^1.1.6"
+    "@hexlet/chat-server": "^1.1.6",
+    "node-sass": "^8.0.0",
+    "sass": "^1.58.3"
   }
 }

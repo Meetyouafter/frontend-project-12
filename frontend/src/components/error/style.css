@@ -1,0 +1,14 @@
+.error_image {
+  width: 100%;
+}
+
+.error_page_description {
+    text-align: center;
+    font-size: 32px;
+    font-weight: 600;
+}
+
+#errorPage_button {
+    height: 50px;
+    width: 60%;
+}
