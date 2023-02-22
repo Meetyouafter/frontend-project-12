@@ -1,21 +1,39 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-//import channelSlice from '../../store/slices/channel/index';
-import getChannelDataSlice from '../../store/slices/channel/getChannelDataSlice';
+import { getChannel } from '../../store/slices/channel/channelSlice';
 
 const Chat = () => {
   if (!localStorage.token) return <Navigate to="/login" />;
-  const dispatch = useDispatch();
-  const data = useSelector((state) => state.channel);
-  dispatch(getChannelDataSlice())
-    .then(response => console.log(response))
 
-  console.log(data)
+  const dispatch = useDispatch();
+  const channelData = useSelector((state) => state.channelSlice);
+
+  useEffect(() => {
+    dispatch(getChannel());
+  }, [dispatch]);
+
+  console.log(channelData);
+
+  { if (channelData.isLoading) {
+    return (
+      <div>
+        <p>Loading...</p>
+      </div>
+    );
+  } }
+
+  { if (channelData.errors) {
+    return (
+      <div>
+        <p>Error</p>
+      </div>
+    );
+  } }
 
   return (
     <div>
-    <p>Chat</p>
+      <p>Chat</p>
     </div>
   );
 };
