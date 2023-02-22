@@ -1,0 +1,42 @@
+.chat_wrapper {
+    background-color: pink;
+    display: flex;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    column-gap: 20px;
+}
+
+.channels_container {
+    background-color: blue;
+    height: 100%;
+}
+
+.chat {
+    border: 2px solid black;
+    cursor: pointer;
+}
+
+.chat:hover {
+    background-color: lightgray;
+
+}
+
+.active_chat {
+    background-color: gray;
+}
+
+.messages_wrapper {
+    background-color: yellow;
+    height: 100%;
+}
+
+.messages_title {
+    border: 8px solid red;
+}
+
+.messages_container {
+    height: 500px;
+    background-color: orange;
+}

@@ -6,8 +6,9 @@ import {
 } from 'react-bootstrap';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
-import Container from '../container/Container';
+import LayoutContainer from '../layoutContainer/LayoutContainer';
 import './style.css';
+import Header from '../header/Header';
 
 const LoginSchema = Yup.object().shape({
   name: Yup.string()
@@ -33,7 +34,10 @@ const Login = () => {
   const navigate = useNavigate();
 
   return (
-    <Container className="login_wrapper" width={60}>
+    <>
+    <Header />
+    kkkk
+    <LayoutContainer className="login_wrapper" width={60}>
       <Row className="header_wrapper">
         <Col className="login_header">
           Зарегистрироваться
@@ -100,7 +104,8 @@ const Login = () => {
           )}
         </Formik>
       </Row>
-    </Container>
+    </LayoutContainer>
+    </>
   );
 };
 
