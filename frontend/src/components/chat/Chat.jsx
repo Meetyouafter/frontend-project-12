@@ -12,7 +12,18 @@ import Button from 'react-bootstrap/Button';
 import { getChannel } from '../../store/slices/channel/channelSlice';
 import LayoutContainer from '../layoutContainer/LayoutContainer';
 import Header from '../header/Header';
+import { io } from 'socket.io-client';
 import './styles.css';
+
+const socket = io("wss://localhost:5001");
+
+socket.on("connect", () => {
+  console.log(socket.connected); // true
+});
+
+socket.on("disconnect", () => {
+  console.log(socket.connected); // false
+});
 
 const Chat = () => {
   const [activeChat, setActiveChat] = useState(1);
