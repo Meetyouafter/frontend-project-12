@@ -1,5 +1,5 @@
 .error_image {
-  width: 100%;
+  width: 40%;
 }
 
 .error_page_description {
@@ -10,5 +10,5 @@
 
 #errorPage_button {
     height: 50px;
-    width: 60%;
+    width: 30%;
 }

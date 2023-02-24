@@ -17,7 +17,7 @@ import LayoutContainer from '../layoutContainer/LayoutContainer';
 const Chat = () => {
   const [activeChat, setActiveChat] = useState(1);
 
-  if (!localStorage.token) return <Navigate to="/login" />;
+  if (!localStorage.token) return <Navigate to="/sign_up" />;
 
   const dispatch = useDispatch();
   const channelData = useSelector((state) => state.channelSlice);
@@ -29,68 +29,71 @@ const Chat = () => {
 
   console.log(channelData);
 
-  { if (channelData.isLoading) {
+  if (channelData.isLoading) {
     return (
       <div>
         <p>Loading...</p>
       </div>
     );
-  } }
+  }
 
-  { if (channelData.errors) {
+  if (channelData.errors) {
     return (
       <div>
         <p>Error</p>
       </div>
     );
-  } }
+  }
 
   console.log(activeChat);
 
   { if (channelData.channels.length > 0) {
     return (
       <LayoutContainer>
-      <Container className="chat_wrapper">
-        <Row className='channels_container'>
-          <Col>
-            <div>Каналы</div>
-            {channels.map((channel) => (
-              <div
-                key={channel.id}
-                onClick={() => {
-                  setActiveChat(channel.id)
-                }}
-                className={activeChat === channel.id ? 'chat active_chat' : 'chat'}
-              >
-                #
-                {channel.name}
-              </div>
-            ))}
-          </Col>
-        </Row>
-        <Row className='messages_wrapper'>
-          <Col>
-                <div className='messages_title'>
-                <p>#{channels[activeChat - 1].name}</p>
+        <Container className="chat_wrapper">
+          <Row className="channels_container">
+            <Col>
+              <div>Каналы</div>
+              {channels.map((channel) => (
+                <div
+                  key={channel.id}
+                  onClick={() => {
+                    setActiveChat(channel.id);
+                  }}
+                  className={activeChat === channel.id ? 'chat active_chat' : 'chat'}
+                >
+                  #
+                  {channel.name}
+                </div>
+              ))}
+            </Col>
+          </Row>
+          <Row className="messages_wrapper">
+            <Col>
+              <div className="messages_title">
+                <p>
+                  #
+                  {channels[activeChat - 1].name}
+                </p>
                 <p>0 сообщений</p>
-              <div className="messages_container">
-                Messages
+                <div className="messages_container">
+                  Messages
 
                 </div>
               </div>
               <InputGroup className="mb-3">
-        <Form.Control
-          placeholder="Введите сообщение"
-          aria-label="Введите сообщение"
-          aria-describedby="basic-addon2"
-        />
-        <Button variant="outline-secondary" id="button-addon2">
-          Отправить
-        </Button>
-      </InputGroup>
-          </Col>
-        </Row>
-      </Container>
+                <Form.Control
+                  placeholder="Введите сообщение"
+                  aria-label="Введите сообщение"
+                  aria-describedby="basic-addon2"
+                />
+                <Button variant="outline-secondary" id="button-addon2">
+                  Отправить
+                </Button>
+              </InputGroup>
+            </Col>
+          </Row>
+        </Container>
       </LayoutContainer>
     );
   } }
