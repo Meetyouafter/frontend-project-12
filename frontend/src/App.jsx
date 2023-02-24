@@ -5,6 +5,7 @@ import SignUp from './components/signUp/SignUp';
 import ErrorPage from './components/error/Error';
 import Chat from './components/chat/Chat';
 import store from './store';
+import Login from './components/login/Login';
 import './App.css';
 
 const App = () => (
@@ -12,6 +13,7 @@ const App = () => (
     <BrowserRouter>
       <Routes>
         <Route path="/sign_up" element={<SignUp />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/" element={<Chat />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>

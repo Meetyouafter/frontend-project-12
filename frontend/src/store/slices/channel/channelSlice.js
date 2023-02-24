@@ -29,16 +29,19 @@ const channelSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getChannel.pending, (state) => {
+        console.log('pending');
         state.isLoading = true;
       })
       .addCase(getChannel.fulfilled, (state, action) => {
+        console.log('fulfilled');
         state.isLoading = false;
         state.channels.push(action.payload);
       })
       .addCase(getChannel.rejected, (state, action) => {
+        console.log('rejected');
         state.isLoading = false;
         state.channels = [];
-        state.error = action.error.message;
+        state.errors = action.error.message;
       });
   },
 });

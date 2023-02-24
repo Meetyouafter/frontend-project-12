@@ -8,43 +8,36 @@ import LayoutContainer from '../layoutContainer/LayoutContainer';
 import Header from '../header/Header';
 import './style.css';
 
-const SignUpSchema = Yup.object().shape({
+const LoginSchema = Yup.object().shape({
   name: Yup.string()
-    .min(2, 'Имя должно быть не менее 2 символов')
-    .max(20, 'Имя должно быть не более 20 символов')
     .required('Поле обязательно для заполнения'),
   password: Yup.string()
-    .min(6, 'Пароль должен быть не менее 6 символов')
-    .required('Поле обязательно для заполнения'),
-  passwordConfirmation: Yup.string()
-    .oneOf([Yup.ref('password')], 'Пароли должны совпадать')
     .required('Поле обязательно для заполнения'),
 });
 
 const initialForm = {
   name: '',
   password: '',
-  passwordConfirmation: '',
 };
 
-const SignUp = () => {
+const Login = () => {
   const [nameError, setNameError] = useState('');
   const navigate = useNavigate();
 
   return (
     <>
       <Header />
-      <LayoutContainer className="sign_up_wrapper">
-        <div className="sign_up_container">
-          <Row className="sign_up_header">
-            Зарегистрироваться
+      <LayoutContainer className="login_wrapper" >
+        <div className="login_container">
+          <Row className="login_header">
+            Войти
           </Row>
           <Row className="form_wrapper">
             <Formik
               initialValues={initialForm}
-              validationSchema={SignUpSchema}
+              validationSchema={LoginSchema}
               onSubmit={(values) => {
-                axios.post('/api/v1/signup', { username: values.name, password: values.password })
+                axios.post('/api/v1/login', { username: values.name, password: values.password })
                   .then((response) => {
                     setNameError('');
                     localStorage.setItem('user', JSON.stringify(values.name));
@@ -52,8 +45,8 @@ const SignUp = () => {
                     navigate('/');
                   })
                   .catch((error) => {
-                    if (error.message === 'Request failed with status code 409') {
-                      setNameError('Такой пользователь уже существует');
+                    if (error.message === 'Request failed with status code 401') {
+                      setNameError('Такой пользователь не зарегистрирован');
                     }
                   });
               }}
@@ -69,9 +62,6 @@ const SignUp = () => {
                   {touched.name && errors.name && (
                   <div className="error_block">{errors.name}</div>
                   )}
-                  {nameError && (
-                  <div className="error_block">{nameError}</div>
-                  )}
                   <Field
                     name="password"
                     type="password"
@@ -81,31 +71,23 @@ const SignUp = () => {
                   {touched.password && errors.password && (
                   <div className="error_block">{errors.password}</div>
                   )}
-                  <Field
-                    name="passwordConfirmation"
-                    type="password"
-                    placeholder="Повторите пароль"
-                    className={`form_input ${
-                      errors.passwordConfirmation ? 'form_error' : ''
-                    }`}
-                  />
-                  {touched.passwordConfirmation && errors.passwordConfirmation && (
-                  <div className="error_block">{errors.passwordConfirmation}</div>
+                  {nameError && (
+                  <div className="error_block">{nameError}</div>
                   )}
                   <Button
                     className="primary_button"
                     type="submit"
                     variant="primary"
                   >
-                    Регистрация
+                    Войти
                   </Button>
                 </Form>
               )}
             </Formik>
           </Row>
           <Row className="sign_up_footer">
-            Уже есть аккаунт?
-            <a href="/login" className="link">Войти</a>
+            Ещё нет аккаунта?
+            <a href="/sign_up" className="link">Зарегистрироваться</a>
           </Row>
         </div>
       </LayoutContainer>
@@ -113,4 +95,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default Login;

@@ -11,8 +11,8 @@ import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import { getChannel } from '../../store/slices/channel/channelSlice';
-import './styles.css';
 import LayoutContainer from '../layoutContainer/LayoutContainer';
+import './styles.css';
 
 const Chat = () => {
   const [activeChat, setActiveChat] = useState(1);
@@ -20,7 +20,7 @@ const Chat = () => {
   if (!localStorage.token) return <Navigate to="/sign_up" />;
 
   const dispatch = useDispatch();
-  const channelData = useSelector((state) => state.channelSlice);
+  const channelData = useSelector((state) => state.channel);
   const channels = (channelData.channels[0]?.channels);
 
   useEffect(() => {
@@ -38,9 +38,14 @@ const Chat = () => {
   }
 
   if (channelData.errors) {
+    if (channelData.errors === 'Request failed with status code 401') return <Navigate to="/sign_up" />;
     return (
       <div>
-        <p>Error</p>
+        <p>
+          Error:
+          {' '}
+          {channelData.errors}
+        </p>
       </div>
     );
   }
@@ -78,7 +83,6 @@ const Chat = () => {
                 <p>0 сообщений</p>
                 <div className="messages_container">
                   Messages
-
                 </div>
               </div>
               <InputGroup className="mb-3">
