@@ -14,7 +14,8 @@ import { getChannel } from '../../store/slices/channel/channelSlice';
 import LayoutContainer from '../layoutContainer/LayoutContainer';
 import Header from '../header/Header';
 import './styles.css';
-import { getMessages } from '../../store/slices/channel/messagesSlice';
+import NewChannel from '../newChannel/newChannel';
+//  import { getMessages } from '../../store/slices/channel/messagesSlice';
 
 const socket = io();
 
@@ -25,37 +26,37 @@ const Chat = () => {
 
   const dispatch = useDispatch();
   const channelData = useSelector((state) => state.channel);
-  const messagesData = useSelector((state) => state.messages);
+
   const channels = channelData.channels[0]?.channels;
   const messages = channelData.channels[0]?.messages;
 
-  console.log(messagesData);
+  const user = JSON.parse(localStorage.getItem('user'));
 
   useEffect(() => {
     dispatch(getChannel());
-    console.log('effect');
   }, [dispatch]);
 
-  useEffect(() => {
-    socket.on('newMessage', () => {
-      console.log('newMessage');
-    });
-  }, []);
-
-  const user = JSON.parse(localStorage.getItem('user'));
+  const getMessagesCount = () => {
+    const first = messages.filter((mess) => mess.channelId === activeChannel);
+    const second = newMessages.filter((mess) => mess.channelId === activeChannel);
+    return first.length + second.length;
+  };
 
   const handleClick = () => {
-    socket.emit('newMessage', { body: message, channelId: activeChannel, username: user });
     socket.on('newMessage', (payload) => {
       setNewMessages([...newMessages, payload]);
-      // => { body: "new message", channelId: 7, id: 8, username: "admin" }
+    });
+    socket.timeout(1000).emit('newMessage', { body: message, channelId: activeChannel, username: user }, (err, response) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(response);
+      }
     });
     setMessage('');
   };
 
   if (!localStorage.token) return <Navigate to="/sign_up" />;
-
-  console.log(channelData);
 
   if (channelData.isLoading) {
     return (
@@ -100,55 +101,70 @@ const Chat = () => {
                     className={activeChannel === channel.id ? 'chat active_chat' : 'chat'}
                   >
                     #
+                    {' '}
                     {channel.name}
                   </div>
                 ))}
+                <NewChannel channelName="hohoho" />
               </Col>
             </Row>
             <Row className="messages_wrapper">
-              <Col className="channels_container">
+              <Col className="channels_container messages_box">
                 <div className="messages_header">
-                  <p>
+                  <p className="header_channel">
                     #
                     {channels[activeChannel - 1].name}
                   </p>
-                  <p>
-                    {messages.length}
+                  <p className="header_channel">
+                    {getMessagesCount()}
                     {' '}
                     сообщений
                   </p>
                 </div>
                 <div className="messages_container">
-                  {messages.map((mess) => (
-                    <div key={mess.id}>
-                      <span>{mess.username}</span>
-                      <span>{mess.body}</span>
-                    </div>
-                  ))}
-                  {newMessages.map((mess) => (
-                    <div key={mess.id}>
-                      <span>{mess.username}</span>
-                      <span>{mess.body}</span>
-                    </div>
-                  ))}
-                  <InputGroup className="mb-3">
-                    <Form.Control
-                      placeholder="Введите сообщение"
-                      aria-label="Введите сообщение"
-                      aria-describedby="basic-addon2"
-                      onChange={(e) => setMessage(e.target.value)}
-                      value={message}
-                    />
-                    <Button
-                      variant="outline-secondary"
-                      id="button-addon2"
-                      onClick={handleClick}
-                      disabled={!message}
-                    >
-                      Отправить
-                    </Button>
-                  </InputGroup>
+                  {messages
+                    .filter((mess) => mess.channelId === activeChannel)
+                    .map((mess) => (
+                      <div key={mess.id}>
+                        <span className="username">
+                          {mess.username}
+                          :
+                          {' '}
+                        </span>
+                        <span className="message">{mess.body}</span>
+                      </div>
+                    ))}
+                  {newMessages
+                    .filter((mess) => mess.channelId === activeChannel)
+                    .map((mess) => (
+                      <div key={mess.id}>
+                        <span className="username">
+                          {mess.username}
+                          :
+                          {' '}
+                        </span>
+                        <span className="message">{mess.body}</span>
+                      </div>
+                    ))}
                 </div>
+                <InputGroup className="mb-3 bb">
+                  <Form.Control
+                    placeholder="Введите сообщение"
+                    aria-label="Введите сообщение"
+                    aria-describedby="basic-addon2"
+                    onChange={(e) => setMessage(e.target.value)}
+                    value={message}
+                  />
+                  <Button
+                    variant="outline-secondary"
+                    id="button-addon2"
+                    className="send_message_button"
+                    onClick={handleClick}
+                    disabled={!message}
+                  >
+                    Отправить
+                  </Button>
+                </InputGroup>
               </Col>
             </Row>
           </div>
