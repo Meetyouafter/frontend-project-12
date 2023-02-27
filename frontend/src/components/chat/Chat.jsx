@@ -9,20 +9,26 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
+import { io } from 'socket.io-client';
 import { getChannel } from '../../store/slices/channel/channelSlice';
 import LayoutContainer from '../layoutContainer/LayoutContainer';
 import Header from '../header/Header';
-import { io } from 'socket.io-client';
 import './styles.css';
 
-const socket = io("wss://localhost:5001");
-
-socket.on("connect", () => {
-  console.log(socket.connected); // true
+const socket = io('http://localhost:5001', {
+  reconnectionDelayMax: 10000,
 });
 
-socket.on("disconnect", () => {
-  console.log(socket.connected); // false
+socket.on('connect', () => {
+  console.log(111, socket.connected); // true
+});
+
+socket.on('disconnect', () => {
+  console.log(222, socket.connected); // false
+});
+
+socket.on('newMessage', () => {
+  console.log(333, socket.connected); // false
 });
 
 const Chat = () => {

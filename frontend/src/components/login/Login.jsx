@@ -27,7 +27,7 @@ const Login = () => {
   return (
     <>
       <Header />
-      <LayoutContainer className="login_wrapper" >
+      <LayoutContainer className="login_wrapper">
         <div className="login_container">
           <Row className="login_header">
             Войти

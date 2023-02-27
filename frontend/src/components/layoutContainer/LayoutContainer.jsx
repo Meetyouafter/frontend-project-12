@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './style.css';
 
-const LayoutContainer = ({ children, width }) => (
+const LayoutContainer = ({ children }) => (
   <div className="layout_container">
     {children}
   </div>
@@ -10,7 +10,6 @@ const LayoutContainer = ({ children, width }) => (
 
 LayoutContainer.propTypes = {
   children: PropTypes.element,
-  width: PropTypes.number,
 };
 
 export default LayoutContainer;
