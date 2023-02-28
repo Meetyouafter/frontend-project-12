@@ -1,0 +1,26 @@
+.modal_button {
+    width: auto;
+}
+
+.modal_image {
+    width: 30px;
+    cursor: pointer;
+}
+
+.modal_title .h4 {
+    font-size: 22px;
+}
+
+.modal_body {
+    font-size: 18px;
+}
+
+.modal_primary_title {
+    margin: 0;
+    padding-left: 10px;
+    width: 100%;
+}
+
+.modal_primary_title:hover {
+  background-color: lightgray;
+}

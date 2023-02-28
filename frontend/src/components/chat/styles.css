@@ -34,28 +34,6 @@
     width: 35%;
 }
 
-.chat {
-    cursor: pointer;
-    padding-left: 15px;
-    font-size: 24px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    border-radius: 6px;
-}
-
-.chat:hover {
-    background-color: #FFA240;
-}
-
-.active_chat {
-    background-color: #FF8300;
-}
-
-.active_chat:hover {
-    background-color: #FF8300;
-}
-
 .messages_header {
     height: calc(15% + 3px);
     display: flex;
@@ -92,7 +70,7 @@
 }
 
 .send_message_button {
-    width: 25%;
+    width: 20%;
 }
 
 .username {

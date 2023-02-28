@@ -13,9 +13,9 @@ import { io } from 'socket.io-client';
 import { getChannel } from '../../store/slices/channel/channelSlice';
 import LayoutContainer from '../layoutContainer/LayoutContainer';
 import Header from '../header/Header';
+import ChannelItem from '../channelItem/ChannelItem';
+import AddChannelModal from '../modalWindows/addChannel';
 import './styles.css';
-import NewChannel from '../newChannel/newChannel';
-//  import { getMessages } from '../../store/slices/channel/messagesSlice';
 
 const socket = io();
 
@@ -23,18 +23,29 @@ const Chat = () => {
   const [activeChannel, setActiveChannel] = useState(1);
   const [message, setMessage] = useState('');
   const [newMessages, setNewMessages] = useState([]);
+  const [newChannels, setNewChannels] = useState([]);
 
   const dispatch = useDispatch();
   const channelData = useSelector((state) => state.channel);
+
+  const activeChannelName = useSelector((state) => state.channel.channels[activeChannel]);
+  const activeChannelName1 = useSelector((state) => state.channel.channels.channels);
+  const activeChannelName2 = useSelector((state) => state.channel.channels[0]);
 
   const channels = channelData.channels[0]?.channels;
   const messages = channelData.channels[0]?.messages;
 
   const user = JSON.parse(localStorage.getItem('user'));
 
+  console.log(0, activeChannelName);
+  console.log(1, activeChannelName1);
+  console.log(2, activeChannelName2?.channels[activeChannel - 1]?.name);
+
   useEffect(() => {
     dispatch(getChannel());
   }, [dispatch]);
+
+  console.log(channelData);
 
   const getMessagesCount = () => {
     const first = messages.filter((mess) => mess.channelId === activeChannel);
@@ -79,6 +90,8 @@ const Chat = () => {
     );
   }
 
+  console.log(activeChannelName);
+
   { if (channelData.channels.length > 0) {
     return (
       <>
@@ -91,21 +104,24 @@ const Chat = () => {
                   Каналы (
                   {channelData.channels.length + 1}
                   )
+                  <AddChannelModal newChannels={newChannels} setNewChannels={setNewChannels} />
                 </div>
                 {channels.map((channel) => (
-                  <div
+                  <ChannelItem
+                    activeChannel={activeChannel}
+                    setActiveChannel={() => setActiveChannel(channel.id)}
+                    channelData={channel}
                     key={channel.id}
-                    onClick={() => {
-                      setActiveChannel(channel.id);
-                    }}
-                    className={activeChannel === channel.id ? 'chat active_chat' : 'chat'}
-                  >
-                    #
-                    {' '}
-                    {channel.name}
-                  </div>
+                  />
                 ))}
-                <NewChannel channelName="hohoho" />
+                {newChannels.map((channel) => (
+                  <ChannelItem
+                    activeChannel={activeChannel}
+                    setActiveChannel={() => setActiveChannel(channel.id)}
+                    channelData={channel}
+                    key={channel.id}
+                  />
+                ))}
               </Col>
             </Row>
             <Row className="messages_wrapper">
@@ -113,7 +129,7 @@ const Chat = () => {
                 <div className="messages_header">
                   <p className="header_channel">
                     #
-                    {channels[activeChannel - 1].name}
+                    {activeChannelName}
                   </p>
                   <p className="header_channel">
                     {getMessagesCount()}

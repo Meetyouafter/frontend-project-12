@@ -1,0 +1,40 @@
+.chat {
+    cursor: pointer;
+    padding-left: 15px;
+    font-size: 18px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    border-radius: 6px;
+}
+
+.chat:hover {
+    background-color: #FFA240;
+}
+
+.active_chat {
+    background-color: #FF8300;
+}
+
+.active_chat:hover {
+    background-color: #FF8300;
+}
+
+.modal_button {
+    width: auto;
+}
+
+.dropdown {
+    width: 10%;
+}
+
+#dropdown-basic-button {
+    width: 35px;
+    background-color: #A65500;
+}
+
+.channel_name {
+    width: 80%;
+    padding: 0;
+    margin: 0;
+}
