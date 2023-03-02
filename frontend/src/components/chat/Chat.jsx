@@ -14,8 +14,9 @@ import { getChannel } from '../../store/slices/channel/channelSlice';
 import LayoutContainer from '../layoutContainer/LayoutContainer';
 import Header from '../header/Header';
 import ChannelItem from '../channelItem/ChannelItem';
-import AddChannelModal from '../modalWindows/addChannel';
+import AddChannelModal from '../modalWindows/addChannelModal';
 import './styles.css';
+import Notification from '../notification/Notification';
 
 const socket = io();
 
@@ -24,6 +25,9 @@ const Chat = () => {
   const [message, setMessage] = useState('');
   const [newMessages, setNewMessages] = useState([]);
   const [newChannels, setNewChannels] = useState([]);
+
+  const [isShowNotification, setIsShowNotification] = useState(false);
+
 
   const dispatch = useDispatch();
   const channelData = useSelector((state) => state.channel);
@@ -95,12 +99,13 @@ const Chat = () => {
   { if (channelData.channels.length > 0) {
     return (
       <>
+        <Notification show={isShowNotification} setShow={setIsShowNotification}/>
         <Header />
         <LayoutContainer>
           <div className="chat_wrapper">
             <Row className="channels_wrapper">
               <Col className="channels_container">
-                <div className="channels_header">
+                <div className="channels_header" onClick={setIsShowNotification}>
                   Каналы (
                   {channelData.channels.length + 1}
                   )

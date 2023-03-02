@@ -2,8 +2,8 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React from 'react';
 import DropdownButton from 'react-bootstrap/DropdownButton';
-import RenameChannelModal from '../modalWindows/renameChannel';
-import RemoveChannelModal from '../modalWindows/removeChannel';
+import RenameChannelModal from '../modalWindows/renameChannelModal';
+import RemoveChannelModal from '../modalWindows/removeChannelModal';
 import './styles.css';
 
 const ChannelMenu = () => (
