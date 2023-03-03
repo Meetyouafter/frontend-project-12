@@ -30,7 +30,7 @@ const SignUp = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="auth_container">
+    <div className="signup_container">
       <Row className="auth_header">
         Зарегистрироваться
       </Row>

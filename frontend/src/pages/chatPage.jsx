@@ -5,7 +5,7 @@ import Chat from '../components/chat/Chat';
 
 const ChatPage = () => (
   <>
-    <Header />
+    <Header withBackBtn />
     <LayoutContainer>
       <Chat />
     </LayoutContainer>

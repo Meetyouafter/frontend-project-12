@@ -5,7 +5,7 @@ import Error404 from '../components/errors/error404';
 
 const ChatPage = () => (
   <>
-    <Header />
+    <Header withBackBtn />
     <LayoutContainer>
       <Error404 />
     </LayoutContainer>

@@ -23,7 +23,7 @@ const Login = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="auth_container">
+    <div className="login_container">
       <Row className="auth_header">
         Войти
       </Row>
