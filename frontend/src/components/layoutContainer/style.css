@@ -8,3 +8,13 @@
     width: 90%;
     height: 80%;
 }
+
+.layout_auth_container {
+    background-color: #61B4CF;
+    border-radius: 6px;
+}
+
+.layout_auth_wrapper {
+    display: flex;
+    justify-content: center;
+}

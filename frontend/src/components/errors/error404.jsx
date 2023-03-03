@@ -1,12 +1,12 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
-import LayoutContainer from '../layoutContainer/LayoutContainer';
+import { LayoutContainer } from '../layoutContainer/LayoutContainer';
+import Header from '../header/Header';
 import errorImg from '../../assets/images/errorImg.png';
 import './style.css';
-import Header from '../header/Header';
 
-const ErrorPage = () => {
+const Error404 = () => {
   const navigate = useNavigate();
 
   return (
@@ -27,4 +27,4 @@ const ErrorPage = () => {
   );
 };
 
-export default ErrorPage;
+export default Error404;

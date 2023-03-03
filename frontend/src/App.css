@@ -4,8 +4,13 @@
   top: 3%;
 }
 
-
-
+.btn.btn-primary {
+  width: 100%;
+  border-radius: 8px;
+  height: 30%;
+  font-size: 18px;
+  margin-top: 20px;
+}
 
 .primary_wrapper {
   text-align: center;
@@ -13,11 +18,5 @@
   height: 100%;
 }
 
-.primary_button {
-  width: 100%;
-  border-radius: 8px;
-  height: 80px;
-  font-size: 22px;
-  margin-top: 20px;
-}
+
 

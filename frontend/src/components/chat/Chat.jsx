@@ -11,12 +11,13 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import { io } from 'socket.io-client';
 import { getChannel } from '../../store/slices/channel/channelSlice';
-import LayoutContainer from '../layoutContainer/LayoutContainer';
+import { LayoutContainer } from '../layoutContainer/LayoutContainer';
 import Header from '../header/Header';
 import ChannelItem from '../channelItem/ChannelItem';
 import AddChannelModal from '../modalWindows/addChannelModal';
-import './styles.css';
 import Notification from '../notification/Notification';
+import Loader from '../loader/loader';
+import './styles.css';
 
 const socket = io();
 
@@ -25,9 +26,7 @@ const Chat = () => {
   const [message, setMessage] = useState('');
   const [newMessages, setNewMessages] = useState([]);
   const [newChannels, setNewChannels] = useState([]);
-
   const [isShowNotification, setIsShowNotification] = useState(false);
-
 
   const dispatch = useDispatch();
   const channelData = useSelector((state) => state.channel);
@@ -75,9 +74,7 @@ const Chat = () => {
 
   if (channelData.isLoading) {
     return (
-      <div>
-        <p>Loading...</p>
-      </div>
+      <Loader />
     );
   }
 
@@ -99,7 +96,7 @@ const Chat = () => {
   { if (channelData.channels.length > 0) {
     return (
       <>
-        <Notification show={isShowNotification} setShow={setIsShowNotification}/>
+        <Notification show={isShowNotification} setShow={setIsShowNotification} />
         <Header />
         <LayoutContainer>
           <div className="chat_wrapper">

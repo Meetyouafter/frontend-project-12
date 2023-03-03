@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
-import Button from 'react-bootstrap/Button';
+import React from 'react';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Toast from 'react-bootstrap/Toast';
-import Progress from '../items/progress';
+// import Progress from '../items/progress';
 
 const Notification = ({ show, setShow }) => (
   <Row>

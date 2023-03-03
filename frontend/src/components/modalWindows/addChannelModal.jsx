@@ -76,6 +76,7 @@ const AddChannelModal = ({ newChannels, setNewChannels }) => {
                 <Form.Control
                   type="text"
                   placeholder="New channel name"
+                  htmlFor="add channel input"
                   autoFocus
                   required
                   isInvalid={!!formerror}

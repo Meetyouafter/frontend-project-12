@@ -74,6 +74,7 @@ const RenameChannelModal = () => {
                 <Form.Control
                   type="text"
                   placeholder="New channel name"
+                  htmlFor="rename channel input"
                   autoFocus
                   required
                   isInvalid={!!formerror}

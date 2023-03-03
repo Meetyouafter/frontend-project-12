@@ -1,5 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import './style.css';
 
 const LayoutContainer = ({ children }) => (
@@ -8,8 +10,14 @@ const LayoutContainer = ({ children }) => (
   </div>
 );
 
-LayoutContainer.propTypes = {
-  children: PropTypes.element,
-};
+const LayoutContainerForAuth = ({ children, height }) => (
+  <Container className="layout_auth_wrapper" style={{ height: `${height}` }}>
+    <Row>
+      <Col lg={6} md={9} sm={12} className="layout_auth_container">
+        {children}
+      </Col>
+    </Row>
+  </Container>
+);
 
-export default LayoutContainer;
+export { LayoutContainer, LayoutContainerForAuth };

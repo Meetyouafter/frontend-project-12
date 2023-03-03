@@ -1,0 +1,8 @@
+.loader_container.container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: auto;
+  row-gap: 15px;
+  height: 90%;
+}
