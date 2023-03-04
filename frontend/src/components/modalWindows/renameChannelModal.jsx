@@ -1,20 +1,21 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable functional/no-let */
 import React, { useState } from 'react';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
-import InputGroup from 'react-bootstrap/InputGroup';
-import { io } from 'socket.io-client';
+import {
+  Form, Button, Modal, InputGroup,
+} from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
+import { renameChannel } from '../../store/slices/channels/channelSlice';
 import './styles.css';
 
-const RenameChannelModal = () => {
+const RenameChannelModal = ({ channelId }) => {
   const [isShowModal, setIsShowModal] = useState(false);
   const [newChannelName, setNewChannelName] = useState('');
   const [formerror, setFormError] = useState('');
 
   const handleClose = () => setIsShowModal(false);
   const handleShow = () => setIsShowModal(true);
+
+  const dispatch = useDispatch();
 
   const validate = () => {
     let error = '';
@@ -25,36 +26,17 @@ const RenameChannelModal = () => {
     }
 
     setFormError(error);
-
-    if (error.length === 0) {
-      return true;
-    }
-    return false;
+    return !error.length;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (validate()) {
-      console.log(true);
+      dispatch(renameChannel({ id: channelId, name: newChannelName }));
       setNewChannelName('');
       handleClose();
-    } else {
-      console.log(false);
     }
-  };
-
-  const socket = io();
-
-  const renameChannel = () => {
-    console.log('rename');
-    socket.emit('renameChannel', { id: 7, name: 'new name channel' });
-    socket.on('renameChannel', (payload) => {
-      console.log('on add');
-      console.log(payload); // { id: 7, name: "new name channel", removable: true }
-    });
-    handleClose();
-    setNewChannelName('');
   };
 
   return (

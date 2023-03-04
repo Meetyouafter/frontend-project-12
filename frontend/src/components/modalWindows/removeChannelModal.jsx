@@ -1,25 +1,19 @@
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState } from 'react';
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
-import { io } from 'socket.io-client';
+import { useDispatch } from 'react-redux';
+import { Button, Modal } from 'react-bootstrap';
+import { removeChannel } from '../../store/slices/channels/channelSlice';
 import './styles.css';
 
-const RemoveChannelModal = () => {
+const RemoveChannelModal = ({ channelId }) => {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const socket = io();
+  const dispatch = useDispatch();
 
-  const removeChannel = () => {
-    console.log('remove');
-    socket.emit('removeChannel', { id: 6 });
-    socket.on('removeChannel', (response) => {
-      console.log(response); // { id: 6 };
-    });
+  const handleClick = () => {
+    dispatch(removeChannel({ id: channelId }));
     handleClose();
   };
 
@@ -38,7 +32,7 @@ const RemoveChannelModal = () => {
           <Button variant="primary" className="modal_button" onClick={handleClose}>
             Отменить
           </Button>
-          <Button variant="danger" className="modal_button" onClick={removeChannel}>
+          <Button variant="danger" className="modal_button" onClick={handleClick}>
             Удалить
           </Button>
         </Modal.Footer>

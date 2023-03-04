@@ -6,10 +6,10 @@ import RenameChannelModal from '../modalWindows/renameChannelModal';
 import RemoveChannelModal from '../modalWindows/removeChannelModal';
 import './styles.css';
 
-const ChannelMenu = () => (
+const ChannelMenu = ({ channelId }) => (
   <DropdownButton id="dropdown-basic-button" title="">
-    <RemoveChannelModal />
-    <RenameChannelModal />
+    <RemoveChannelModal channelId={channelId} />
+    <RenameChannelModal channelId={channelId} />
   </DropdownButton>
 );
 
@@ -23,7 +23,7 @@ const ChannelItem = ({ activeChannel, channelData, setActiveChannel }) => (
       {' '}
       {channelData.name}
     </p>
-    {channelData.removable && <ChannelMenu />}
+    {channelData.removable && <ChannelMenu channelId={channelData.id} />}
   </div>
 );
 

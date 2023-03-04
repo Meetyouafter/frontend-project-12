@@ -1,21 +1,22 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable functional/no-let */
 import React, { useState } from 'react';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
-import InputGroup from 'react-bootstrap/InputGroup';
-import { io } from 'socket.io-client';
+import { useDispatch } from 'react-redux';
+import {
+  Button, InputGroup, Modal, Form,
+} from 'react-bootstrap';
+import { addChannel } from '../../store/slices/channels/channelSlice';
 import addIcon from '../../assets/images/add_icon.svg';
 import './styles.css';
 
-const AddChannelModal = ({ newChannels, setNewChannels }) => {
+const AddChannelModal = () => {
   const [isShowModal, setIsShowModal] = useState(false);
   const [newChannelName, setNewChannelName] = useState('');
   const [formerror, setFormError] = useState('');
 
   const handleClose = () => setIsShowModal(false);
   const handleShow = () => setIsShowModal(true);
+
+  const dispatch = useDispatch();
 
   const validate = () => {
     let error = '';
@@ -24,41 +25,18 @@ const AddChannelModal = ({ newChannels, setNewChannels }) => {
     } else if (newChannelName.length < 3 || newChannelName.length > 20) {
       error = 'От 3 до 20 символов';
     }
-
     setFormError(error);
-
-    if (error.length === 0) {
-      return true;
-    }
-    return false;
+    return !error.length;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (validate()) {
-      console.log(true);
+      dispatch(addChannel({ name: newChannelName }));
       setNewChannelName('');
       handleClose();
-    } else {
-      console.log(false);
     }
-  };
-
-  const socket = io();
-
-  const addChannel = () => {
-    console.log('add');
-    socket.emit('newChannel', { name: newChannelName });
-    socket.on('newChannel', (payload) => {
-      console.log('on add');
-
-      setNewChannels([...newChannels, payload]);
-      console.log(newChannels); // { id: 6, name: "new channel", removable: true }
-      console.log(payload); // { id: 6, name: "new channel", removable: true }
-    });
-    handleClose();
-    setNewChannelName('');
   };
 
   return (
