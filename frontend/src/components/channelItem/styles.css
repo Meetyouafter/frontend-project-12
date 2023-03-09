@@ -29,7 +29,9 @@
 }
 
 #dropdown-basic-button {
-    width: 35px;
+    width: 25px;
+    padding: 0;
+    height: 25px;
     background-color: #A65500;
 }
 

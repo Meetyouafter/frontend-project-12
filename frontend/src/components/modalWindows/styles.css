@@ -16,12 +16,12 @@
     font-size: 20px;
 }
 
-.modal_button.btn.btn-secondary {
-    width: auto;
-    height: 45px;
+.modal_primary_title {
+    padding-left: 10px;
+    margin-bottom: 0;
 }
 
-.modal_button.btn.btn-primary {
+.modal_button.btn.btn-secondary .modal_button.btn.btn-primary .modal_button.btn.btn-danger {
     width: auto;
     height: 45px;
 }

@@ -5,34 +5,37 @@ import { Row, Button } from 'react-bootstrap';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import './style.css';
-
-const SignUpSchema = Yup.object().shape({
-  name: Yup.string()
-    .min(2, 'Имя должно быть не менее 2 символов')
-    .max(20, 'Имя должно быть не более 20 символов')
-    .required('Поле обязательно для заполнения'),
-  password: Yup.string()
-    .min(6, 'Пароль должен быть не менее 6 символов')
-    .required('Поле обязательно для заполнения'),
-  passwordConfirmation: Yup.string()
-    .oneOf([Yup.ref('password')], 'Пароли должны совпадать')
-    .required('Поле обязательно для заполнения'),
-});
-
-const initialForm = {
-  name: '',
-  password: '',
-  passwordConfirmation: '',
-};
+import { useTranslation } from 'react-i18next';
 
 const SignUp = () => {
   const [nameError, setNameError] = useState('');
   const navigate = useNavigate();
 
+  const { t } = useTranslation();
+
+  const SignUpSchema = Yup.object().shape({
+    name: Yup.string()
+      .min(2, t('sign_up.errors.name_min_length'))
+      .max(20, t('sign_up.errors.name_max_length'))
+      .required(t('sign_up.errors.required')),
+    password: Yup.string()
+      .min(6, t('sign_up.errors.password_length'))
+      .required(t('sign_up.errors.required')),
+    passwordConfirmation: Yup.string()
+      .oneOf([Yup.ref('password')], t('sign_up.errors.password_match'))
+      .required(t('sign_up.errors.required')),
+  });
+
+  const initialForm = {
+    name: '',
+    password: '',
+    passwordConfirmation: '',
+  };
+
   return (
     <div className="signup_container">
       <Row className="auth_header">
-        Зарегистрироваться
+        {t('sign_up.pages_data.title')}
       </Row>
       <Row className="form_wrapper">
         <Formik
@@ -48,7 +51,7 @@ const SignUp = () => {
               })
               .catch((error) => {
                 if (error.message === 'Request failed with status code 409') {
-                  setNameError('Такой пользователь уже существует');
+                  setNameError(t('sign_up.errors.user_not_uniq'));
                 }
               });
           }}
@@ -58,7 +61,7 @@ const SignUp = () => {
               <Field
                 name="name"
                 type="name"
-                placeholder="Имя пользователя"
+                placeholder={t('sign_up.forms.name')}
                 className={`${errors.name ? 'form_input form_error' : 'form_input'}`}
               />
               {touched.name && errors.name && (
@@ -70,7 +73,7 @@ const SignUp = () => {
               <Field
                 name="password"
                 type="password"
-                placeholder="Пароль"
+                placeholder={t('sign_up.forms.password')}
                 className={`${errors.password ? 'form_input form_error' : 'form_input'}`}
               />
               {touched.password && errors.password && (
@@ -79,7 +82,7 @@ const SignUp = () => {
               <Field
                 name="passwordConfirmation"
                 type="password"
-                placeholder="Повторите пароль"
+                placeholder={t('sign_up.forms.password_repeat')}
                 className={`${
                   errors.passwordConfirmation ? 'form_input form_error' : 'form_input '
                 }`}
@@ -92,15 +95,15 @@ const SignUp = () => {
                 type="submit"
                 variant="primary"
               >
-                Регистрация
+                {t('sign_up.pages_data.button')}
               </Button>
             </Form>
           )}
         </Formik>
       </Row>
       <Row className="auth_footer">
-        Уже есть аккаунт?
-        <a href="/login" className="link">Войти</a>
+        {t('sign_up.pages_data.footer_description')}
+        <a href="/" className="link">{t('sign_up.pages_data.footer_link')}</a>
       </Row>
     </div>
   );

@@ -3,29 +3,32 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { Row, Button } from 'react-bootstrap';
 import { Formik, Form, Field } from 'formik';
+import { useTranslation } from 'react-i18next';
 import * as Yup from 'yup';
 import './style.css';
-
-const LoginSchema = Yup.object().shape({
-  name: Yup.string()
-    .required('Поле обязательно для заполнения'),
-  password: Yup.string()
-    .required('Поле обязательно для заполнения'),
-});
-
-const initialForm = {
-  name: '',
-  password: '',
-};
 
 const Login = () => {
   const [nameError, setNameError] = useState('');
   const navigate = useNavigate();
 
+  const { t } = useTranslation();
+
+  const LoginSchema = Yup.object().shape({
+    name: Yup.string()
+      .required(t('login.errors.required')),
+    password: Yup.string()
+      .required(t('login.errors.required')),
+  });
+
+  const initialForm = {
+    name: '',
+    password: '',
+  };
+
   return (
     <div className="login_container">
       <Row className="auth_header">
-        Войти
+        {t('login.pages_data.title')}
       </Row>
       <Row className="form_wrapper">
         <Formik
@@ -37,11 +40,11 @@ const Login = () => {
                 setNameError('');
                 localStorage.setItem('user', JSON.stringify(values.name));
                 localStorage.setItem('token', JSON.stringify(response.data.token));
-                navigate('/');
+                navigate('/chat');
               })
               .catch((error) => {
                 if (error.message === 'Request failed with status code 401') {
-                  setNameError('Такой пользователь не зарегистрирован');
+                  setNameError(t('login.errors.unregister'));
                 }
               });
           }}
@@ -51,8 +54,8 @@ const Login = () => {
               <Field
                 name="name"
                 type="name"
-                placeholder="Имя пользователя"
-                className={`${errors.name ? 'form_input form_error' : 'form_input'}`}
+                placeholder={t('login.forms.name')}
+                className={errors.name || nameError ? 'form_input form_error' : 'form_input'}
               />
               {touched.name && errors.name && (
               <div className="error_block">{errors.name}</div>
@@ -60,8 +63,8 @@ const Login = () => {
               <Field
                 name="password"
                 type="password"
-                placeholder="Пароль"
-                className={`${errors.password ? 'form_input form_error' : 'form_input'}`}
+                placeholder={t('login.forms.password')}
+                className={errors.name || nameError ? 'form_input form_error' : 'form_input'}
               />
               {touched.password && errors.password && (
               <div className="error_block">{errors.password}</div>
@@ -73,15 +76,15 @@ const Login = () => {
                 type="submit"
                 variant="primary"
               >
-                Войти
+                {t('login.pages_data.button')}
               </Button>
             </Form>
           )}
         </Formik>
       </Row>
       <Row className="auth_footer">
-        Ещё нет аккаунта?
-        <a href="/sign_up" className="link">Зарегистрироваться</a>
+        {t('login.pages_data.footer_description')}
+        <a href="/sign_up" className="link">{t('login.pages_data.footer_link')}</a>
       </Row>
     </div>
   );

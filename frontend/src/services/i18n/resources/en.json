@@ -1,0 +1,47 @@
+{
+  "translation": {
+    "header": {
+      "choise_lng": "Change language",
+      "en": "English",
+      "ru": "Russian",
+      "button": "Logout"
+    },
+    "login": {
+      "pages_data": {
+        "title": "Login",
+        "button": "Login",
+        "footer_description": "Don't have an account?",
+        "footer_link": "Sign Up"
+      },
+      "forms": {
+        "name": "Username",
+        "password": "Password"
+      },
+      "errors": {
+        "unregister": "This user is not registed",
+        "required": "This form is required"
+      }
+    },
+    "sign_up": {
+      "pages_data": {
+        "title": "Sign Up",
+        "button": "Sign Up",
+        "footer_description": "Do you have an account?",
+        "footer_link": "Login"
+      },
+      "forms": {
+        "name": "Username",
+        "password": "Password",
+        "password_repeat": "Repeat password"
+      },
+      "errors": {
+        "required": "This form is required",
+        "password_length": "Password must be more than 6 characters",
+        "password_match": "Passwords must match",
+        "name_min_length": "Name must be shorted than 2 characters",
+        "name_max_length": "Name must be no more than 20 characters",
+        "user_not_uniq": "Such a user already exist"
+      }
+    }
+  }
+}

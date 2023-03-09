@@ -4,7 +4,7 @@
   top: 3%;
 }
 
-.btn.btn-primary {
+.btn.btn-primary .btn.btn-danger {
   width: 100%;
   border-radius: 8px;
   height: 30%;

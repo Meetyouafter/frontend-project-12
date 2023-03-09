@@ -4,11 +4,9 @@
 import React, { useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import Row from 'react-bootstrap/Row';
-import InputGroup from 'react-bootstrap/InputGroup';
-import Form from 'react-bootstrap/Form';
-import Col from 'react-bootstrap/Col';
-import Button from 'react-bootstrap/Button';
+import {
+  Row, InputGroup, Form, Col, Button,
+} from 'react-bootstrap';
 import { io } from 'socket.io-client';
 import getInitialData from '../../store/slices/initialData/getInitialData';
 import ChannelItem from '../channelItem/ChannelItem';
@@ -17,8 +15,10 @@ import Notification from '../notification/Notification';
 import Loader from '../loader/loader';
 import { addMessage, subscribeMessages } from '../../store/slices/messages/messageSlice';
 import chatEvents from '../../api/chatEvents';
-import './styles.css';
 import { subscribeChannels, subscribeChannelsRename, subscribeChannelsRemove } from '../../store/slices/channels/channelSlice';
+import getMessageNameCount from './helper';
+import sendImage from '../../assets/images/send_icon.svg';
+import './styles.css';
 
 const socket = io();
 
@@ -37,9 +37,14 @@ const Chat = () => {
   const messages = initialData?.initialData[0]?.messages || [];
 
   console.log(state);
-  console.log(newChannels);
+  console.log(channels.concat(newChannels));
 
-  const activeChannelName = 12;
+  const getActiveChannelName = (channelsData, activeIndex) => {
+    const activeChannelName = channelsData
+      .filter((channel) => channel.id === activeIndex)
+      .map((channel) => channel.name);
+    return activeChannelName;
+  };
 
   const user = JSON.parse(localStorage.getItem('user'));
 
@@ -57,19 +62,19 @@ const Chat = () => {
     socket.on(chatEvents.newChannel, (payload) => {
       dispatch(subscribeChannels(payload));
     });
-  }, [dispatch]);
+  }, [dispatch, newChannels]);
 
   useEffect(() => {
     socket.on(chatEvents.renameChannel, (payload) => {
       dispatch(subscribeChannelsRename(payload));
     });
-  }, [dispatch]);
+  }, [dispatch, newChannels]);
 
   useEffect(() => {
     socket.on(chatEvents.removeChannel, (payload) => {
       dispatch(subscribeChannelsRemove(payload));
     });
-  }, [dispatch]);
+  }, [dispatch, newChannels]);
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -107,8 +112,6 @@ const Chat = () => {
     );
   }
 
-  console.log(activeChannelName);
-
   { if (channels.length > 0) {
     return (
       <>
@@ -145,12 +148,12 @@ const Chat = () => {
               <div className="messages_header">
                 <p className="header_channel">
                   #
-                  {activeChannelName}
+                  {getActiveChannelName(channels.concat(newChannels), activeChannel)}
                 </p>
                 <p className="header_channel">
                   {getMessagesCount()}
                   {' '}
-                  сообщений
+                  {getMessageNameCount(getMessagesCount())}
                 </p>
               </div>
               <div className="messages_container">
@@ -179,24 +182,26 @@ const Chat = () => {
                     </div>
                   ))}
               </div>
-              <InputGroup className="mb-3 bb">
-                <Form.Control
-                  placeholder="Введите сообщение"
-                  aria-label="Введите сообщение"
-                  aria-describedby="basic-addon2"
-                  onChange={(e) => setMessage(e.target.value)}
-                  value={message}
-                />
-                <Button
-                  variant="outline-secondary"
-                  id="button-addon2"
-                  className="send_message_button"
-                  onClick={handleClick}
-                  disabled={!message}
-                >
-                  Отправить
-                </Button>
-              </InputGroup>
+              <form onSubmit={handleClick} className="send_form">
+                <InputGroup className="mb-3 bb">
+                  <Form.Control
+                    placeholder="Введите сообщение"
+                    aria-label="Введите сообщение"
+                    aria-describedby="basic-addon2"
+                    onChange={(e) => setMessage(e.target.value)}
+                    value={message}
+                  />
+                  <Button
+                    variant="outline-secondary"
+                    id="button-addon2"
+                    className="send_message_button"
+                    type="submit"
+                    disabled={!message}
+                  >
+                    <img src={sendImage} alt="send message" />
+                  </Button>
+                </InputGroup>
+              </form>
             </Col>
           </Row>
         </div>

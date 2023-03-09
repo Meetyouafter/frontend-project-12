@@ -18,3 +18,7 @@
     font-weight: 800;
     margin: 0;
 }
+
+.select.form-select {
+    width: 120px;
+}
