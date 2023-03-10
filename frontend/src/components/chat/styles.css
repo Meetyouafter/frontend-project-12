@@ -15,10 +15,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow-y: auto;
 }
 
 .channels_header {
     height: 15%;
+    min-height: 75px;
     display: flex;
     align-items: center;
     border-bottom: 1px solid gray;
@@ -98,4 +100,37 @@
 
 .messages_box {
     row-gap: 2.5%;
+}
+
+div.dropdow-menu.show {
+    min-width: 100px;
+}
+
+@media (max-width: 400px) {
+    .channel_name {
+        font-size: 12px;
+        width: 65%;
+    }
+
+    .chat {
+        padding-left: 5px;
+    }
+
+    .channels_header {
+        padding-left: 5px;
+        flex-wrap: wrap;
+        justify-content: center;
+        min-height: 40px;
+        font-size: 14px;
+    }
+
+    .modal_image {
+        margin: 0;
+        width: 20px;
+    }
+
+    #dropdown-basic-button {
+        width: 20px;
+        height: 20px;
+    }
 }

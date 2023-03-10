@@ -12,7 +12,6 @@ import { io } from 'socket.io-client';
 import getInitialData from '../../store/slices/initialData/getInitialData';
 import ChannelItem from '../channelItem/ChannelItem';
 import AddChannelModal from '../modalWindows/addChannelModal';
-import Notification from '../notification/Notification';
 import Loader from '../loader/loader';
 import { addMessage, subscribeMessages } from '../../store/slices/messages/messageSlice';
 import chatEvents from '../../api/chatEvents';
@@ -26,7 +25,6 @@ const socket = io();
 const Chat = () => {
   const [activeChannel, setActiveChannel] = useState(1);
   const [message, setMessage] = useState('');
-  const [isShowNotification, setIsShowNotification] = useState(false);
 
   const dispatch = useDispatch();
   const state = useSelector((state) => state);
@@ -60,6 +58,22 @@ const Chat = () => {
       dispatch(subscribeMessages(payload));
     });
   }, [dispatch]);
+
+  useEffect(() => {
+    socket.on('connect', () => {
+      console.warn('CONNECT');
+    });
+    socket.on('disconnect', () => {
+      console.warn('DISCONNECT');
+    });
+  }, []);
+
+  socket.on('connect', () => {
+    console.warn('CONNECT');
+  });
+  socket.on('disconnect', () => {
+    console.warn('DISCONNECT');
+  });
 
   useEffect(() => {
     socket.on(chatEvents.newChannel, (payload) => {

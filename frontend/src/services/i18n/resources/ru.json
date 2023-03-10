@@ -57,6 +57,24 @@
         "required_error": "Поле обязательно для заполнения",
         "length_error": "От 3 до 20 символов",
         "notification": "Канал успешно добавлен"
+      },
+      "renameModal": {
+        "rename_link": "Переименовать",
+        "title": "Переименовать канал",
+        "input_form": "Новое имя",
+        "escape_button": "Отменить",
+        "success_button": "Переименовать",
+        "required_error": "Поле обязательно для заполнения",
+        "length_error": "От 3 до 20 символов",
+        "notification": "Канал переименован"
+      },
+      "removeModal": {
+        "remove_link": "Удалить",
+        "title": "Удалить канал",
+        "description": "Вы уверены?",
+        "escape_button": "Отменить",
+        "success_button": "Удалить",
+        "notification": "Канал удален"
       }
     }
   }

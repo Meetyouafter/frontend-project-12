@@ -3,6 +3,7 @@
     padding-left: 15px;
     font-size: 18px;
     height: 40px;
+    min-height: 40px;
     display: flex;
     align-items: center;
     border-radius: 6px;

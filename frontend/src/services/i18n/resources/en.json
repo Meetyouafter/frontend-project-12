@@ -57,6 +57,24 @@
         "required_error": "This form is required",
         "length_error": "From 3 to 20 characters",
         "notification": "Channel was added"
+      },
+      "renameModal": {
+        "rename_link": "Rename",
+        "title": "Rename channel",
+        "input_form": "New channel name",
+        "escape_button": "Close",
+        "success_button": "Rename",
+        "required_error": "This form is required",
+        "length_error": "From 3 to 20 characters",
+        "notification": "Channel was renamed"
+      },
+      "removeModal": {
+        "remove_link": "Remove",
+        "title": "Reemove channel",
+        "description": "Are you shure?",
+        "escape_button": "Close",
+        "success_button": "Remove",
+        "notification": "Channel was removed"
       }
     }
   }

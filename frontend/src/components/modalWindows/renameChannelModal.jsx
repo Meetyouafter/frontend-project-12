@@ -1,28 +1,35 @@
 /* eslint-disable functional/no-let */
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import {
   Form, Button, Modal, InputGroup,
 } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { renameChannel } from '../../store/slices/channels/channelSlice';
+import Notification from '../notification/Notification';
 import './styles.css';
 
 const RenameChannelModal = ({ channelId }) => {
   const [isShowModal, setIsShowModal] = useState(false);
   const [newChannelName, setNewChannelName] = useState('');
   const [formerror, setFormError] = useState('');
+  const [showNotification, setShowNotification] = useState(false);
+
+  const toggleShow = () => setShowNotification(!showNotification);
 
   const handleClose = () => setIsShowModal(false);
   const handleShow = () => setIsShowModal(true);
+
+  const { t } = useTranslation('translation', { keyPrefix: 'modal.renameModal' });
 
   const dispatch = useDispatch();
 
   const validate = () => {
     let error = '';
     if (!newChannelName) {
-      error = 'Поле обязательно для заполнения';
+      error = t('required_error');
     } else if (newChannelName.length < 3 || newChannelName.length > 20) {
-      error = 'От 3 до 20 символов';
+      error = t('length_error');
     }
 
     setFormError(error);
@@ -36,18 +43,18 @@ const RenameChannelModal = ({ channelId }) => {
       dispatch(renameChannel({ id: channelId, name: newChannelName }));
       setNewChannelName('');
       handleClose();
+      toggleShow();
     }
   };
 
   return (
     <>
       <p onClick={handleShow} className="modal_primary_title">
-        Переименовать
+        {t('rename_link')}
       </p>
-
       <Modal centered show={isShowModal} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Переименовать канал</Modal.Title>
+          <Modal.Title>{t('title')}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form noValidate onSubmit={handleSubmit} className="modal_body">
@@ -55,7 +62,7 @@ const RenameChannelModal = ({ channelId }) => {
               <InputGroup hasValidation>
                 <Form.Control
                   type="text"
-                  placeholder="New channel name"
+                  placeholder={t('input_form')}
                   htmlFor="rename channel input"
                   autoFocus
                   required
@@ -71,15 +78,16 @@ const RenameChannelModal = ({ channelId }) => {
             </Form.Group>
             <div className="modal_button_group">
               <Button variant="secondary" className="modal_button" onClick={handleClose}>
-                Отменить
+                {t('escape_button')}
               </Button>
               <Button variant="primary" className="modal_button" type="submit">
-                Переименовать
+                {t('success_button')}
               </Button>
             </div>
           </Form>
         </Modal.Body>
       </Modal>
+      <Notification variant="success" text={t('notification')} show={showNotification} toggleShow={toggleShow} />
     </>
   );
 };
