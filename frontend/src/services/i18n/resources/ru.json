@@ -1,10 +1,10 @@
 {
   "translation": {
     "header": {
-      "choise_lng": "Сменить язык",
-      "en": "Английский",
-      "ru": "Русский",
-      "button": "Выйти"
+      "en": "En",
+      "ru": "Ru",
+      "button": "Выйти",
+      "notification": "Язык изменен на русский"
     },
     "login": {
       "pages_data": {
@@ -42,6 +42,11 @@
         "name_max_length": "Имя должно быть не более 20 символов",
         "user_not_uniq": "Такой пользователь уже существует"
       }
+    },
+    "chat": {
+      "channels": "Каналы",
+      "message_form": "Введите сообщение",
+      "message": "{messageCount, plural, =0 {сообщений} =1 {сообщений} =2 {сообщения} other {сообщение}}"
     }
   }
 }

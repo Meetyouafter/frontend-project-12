@@ -4,6 +4,7 @@
 import React, { useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import {
   Row, InputGroup, Form, Col, Button,
 } from 'react-bootstrap';
@@ -35,6 +36,8 @@ const Chat = () => {
 
   const channels = initialData?.initialData[0]?.channels || [];
   const messages = initialData?.initialData[0]?.messages || [];
+
+  const { t } = useTranslation('translation', { keyPrefix: 'chat' });
 
   console.log(state);
   console.log(channels.concat(newChannels));
@@ -99,6 +102,8 @@ const Chat = () => {
     );
   }
 
+  const messageCount = getMessageNameCount(getMessagesCount());
+
   if (initialData.errors) {
     if (initialData.errors === 'Request failed with status code 401') return <Navigate to="/sign_up" />;
     return (
@@ -120,7 +125,9 @@ const Chat = () => {
           <Row className="channels_wrapper">
             <Col className="channels_container">
               <div className="channels_header" onClick={setIsShowNotification}>
-                Каналы (
+                {t('channels')}
+                {' '}
+                (
                 {channels.length}
                 )
                 <AddChannelModal />
@@ -153,7 +160,7 @@ const Chat = () => {
                 <p className="header_channel">
                   {getMessagesCount()}
                   {' '}
-                  {getMessageNameCount(getMessagesCount())}
+                  {t('message', { messageCount })}
                 </p>
               </div>
               <div className="messages_container">
@@ -185,8 +192,8 @@ const Chat = () => {
               <form onSubmit={handleClick} className="send_form">
                 <InputGroup className="mb-3 bb">
                   <Form.Control
-                    placeholder="Введите сообщение"
-                    aria-label="Введите сообщение"
+                    placeholder={t('message_form')}
+                    aria-label={t('message_form')}
                     aria-describedby="basic-addon2"
                     onChange={(e) => setMessage(e.target.value)}
                     value={message}

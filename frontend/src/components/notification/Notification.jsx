@@ -1,26 +1,29 @@
 import React from 'react';
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
-import Toast from 'react-bootstrap/Toast';
-// import Progress from '../items/progress';
+import { Toast } from 'react-bootstrap';
+import closeImg from '../../assets/images/close_icon.svg';
+import infoImg from '../../assets/images/info_icon.svg';
+import successImg from '../../assets/images/success_icon.svg';
+import './styles.css';
 
-const Notification = ({ show, setShow }) => (
-  <Row>
-    <Col xs={6}>
-      <Toast onClose={() => setShow(false)} show={show} delay={5000} autohide>
-        <Toast.Header>
-          <img
-            src="holder.js/20x20?text=%20"
-            className="rounded me-2"
-            alt=""
-          />
-          <strong className="me-auto">Bootstrap</strong>
-          <small>11 mins ago</small>
-        </Toast.Header>
-        <Toast.Body>Woohoo, youre reading this text in a Toast!</Toast.Body>
-      </Toast>
-    </Col>
-  </Row>
+const getIcon = (variant) => {
+  if (variant === 'success') {
+    return successImg;
+  }
+  return infoImg;
+};
+
+const Notification = ({
+  variant, text, show, toggleShow,
+}) => (
+  <Toast show={show} onClose={toggleShow} delay={5000} autohide className="notification">
+    <Toast.Body>
+      <div>
+        <img src={getIcon(variant)} alt="notification info" />
+        <p>{text}</p>
+      </div>
+      <img src={closeImg} alt="close notification" onClick={toggleShow} style={{ cursor: 'pointer' }} />
+    </Toast.Body>
+  </Toast>
 );
 
 export default Notification;

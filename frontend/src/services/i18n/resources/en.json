@@ -1,10 +1,10 @@
 {
   "translation": {
     "header": {
-      "choise_lng": "Change language",
-      "en": "English",
-      "ru": "Russian",
-      "button": "Logout"
+      "en": "En",
+      "ru": "Ru",
+      "button": "Logout",
+      "notification": "Language changed to english"
     },
     "login": {
       "pages_data": {
@@ -42,6 +42,11 @@
         "name_max_length": "Name must be no more than 20 characters",
         "user_not_uniq": "Such a user already exist"
       }
+    },
+    "chat": {
+      "channels": "Channels",
+      "message_form": "Text your message",
+      "message": "{messageCount, plural, =0 {messages} =5 {message} other {messages}}"
     }
   }
 }

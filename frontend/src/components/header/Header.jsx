@@ -1,10 +1,17 @@
-import React from 'react';
-import { Button, Form } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Button, Dropdown } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
+import logOutImg from '../../assets/images/logout_icon.svg';
+import lngImg from '../../assets/images/language_icon.svg';
 import './styles.css';
+import Notification from '../notification/Notification';
 
 const Header = ({ withBackBtn }) => {
+  const [show, setShow] = useState(false);
+
+  const toggleShow = () => setShow(!show);
+
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
 
@@ -14,20 +21,38 @@ const Header = ({ withBackBtn }) => {
     return navigate('/');
   };
 
-  const onChange = (e) => {
-    window.localStorage.setItem('language', e.target.value);
-    i18n.changeLanguage(e.target.value);
+  const handleClick = (value) => {
+    window.localStorage.setItem('language', value);
+    i18n.changeLanguage(value);
+    toggleShow();
   };
 
   return (
     <div className="primary_header">
       <p className="header_content"> Chat by Meetyouafter</p>
-      {withBackBtn && <Button type="button" variant="light" onClick={logout} disabled={!localStorage.token}>{t('header.button')}</Button>}
-      <Form.Select aria-label="Default select example" onChange={onChange}>
-        <option>{t('header.choise_lng')}</option>
-        <option value="ru">{t('header.ru')}</option>
-        <option value="en">{t('header.en')}</option>
-      </Form.Select>
+      <div className="header_btn_container">
+        {withBackBtn
+        && (
+        <Button
+          type="button"
+          variant="light"
+          onClick={logout}
+        >
+          <img src={logOutImg} alt="log out" />
+        </Button>
+        )}
+
+        <Dropdown>
+          <Dropdown.Toggle variant="light">
+            <img src={lngImg} alt="change language" />
+          </Dropdown.Toggle>
+          <Dropdown.Menu>
+            <Dropdown.Item eventKey="ru" onClick={() => handleClick('ru')}>{t('header.ru')}</Dropdown.Item>
+            <Dropdown.Item eventKey="en" onClick={() => handleClick('en')}>{t('header.en')}</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+      </div>
+      <Notification variant="info" text={t('header.notification')} show={show} toggleShow={toggleShow} />
     </div>
   );
 };
