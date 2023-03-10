@@ -29,5 +29,10 @@
 .modal_image {
     width: 30px;
     cursor: pointer;
+    margin-right: 5%;
+}
+
+div.input-group {
+    padding-bottom: 10px;
 }
 

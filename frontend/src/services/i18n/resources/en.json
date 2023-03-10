@@ -47,6 +47,17 @@
       "channels": "Channels",
       "message_form": "Text your message",
       "message": "{messageCount, plural, =0 {messages} =5 {message} other {messages}}"
+    },
+    "modal": {
+      "addModal": {
+        "title": "Add a new channel",
+        "input_form": "New channel name",
+        "escape_button": "Close",
+        "success_button": "Add",
+        "required_error": "This form is required",
+        "length_error": "From 3 to 20 characters",
+        "notification": "Channel was added"
+      }
     }
   }
 }

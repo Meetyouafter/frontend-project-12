@@ -4,13 +4,13 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import logOutImg from '../../assets/images/logout_icon.svg';
 import lngImg from '../../assets/images/language_icon.svg';
-import './styles.css';
 import Notification from '../notification/Notification';
+import './styles.css';
 
 const Header = ({ withBackBtn }) => {
-  const [show, setShow] = useState(false);
+  const [showNotification, setShowNotification] = useState(false);
 
-  const toggleShow = () => setShow(!show);
+  const toggleShow = () => setShowNotification(!showNotification);
 
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
@@ -41,7 +41,6 @@ const Header = ({ withBackBtn }) => {
           <img src={logOutImg} alt="log out" />
         </Button>
         )}
-
         <Dropdown>
           <Dropdown.Toggle variant="light">
             <img src={lngImg} alt="change language" />
@@ -52,7 +51,7 @@ const Header = ({ withBackBtn }) => {
           </Dropdown.Menu>
         </Dropdown>
       </div>
-      <Notification variant="info" text={t('header.notification')} show={show} toggleShow={toggleShow} />
+      <Notification variant="info" text={t('header.notification')} show={showNotification} toggleShow={toggleShow} />
     </div>
   );
 };

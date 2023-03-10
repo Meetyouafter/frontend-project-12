@@ -1,29 +1,35 @@
 /* eslint-disable functional/no-let */
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import {
   Button, InputGroup, Modal, Form,
 } from 'react-bootstrap';
 import { addChannel } from '../../store/slices/channels/channelSlice';
 import addIcon from '../../assets/images/add_icon.svg';
+import Notification from '../notification/Notification';
 import './styles.css';
 
 const AddChannelModal = () => {
   const [isShowModal, setIsShowModal] = useState(false);
   const [newChannelName, setNewChannelName] = useState('');
   const [formerror, setFormError] = useState('');
+  const [showNotification, setShowNotification] = useState(false);
+
+  const toggleShow = () => setShowNotification(!showNotification);
 
   const handleClose = () => setIsShowModal(false);
   const handleShow = () => setIsShowModal(true);
 
+  const { t } = useTranslation('translation', { keyPrefix: 'modal.addModal' });
   const dispatch = useDispatch();
 
   const validate = () => {
     let error = '';
     if (!newChannelName) {
-      error = 'Поле обязательно для заполнения';
+      error = t('required_error');
     } else if (newChannelName.length < 3 || newChannelName.length > 20) {
-      error = 'От 3 до 20 символов';
+      error = t('length_error');
     }
     setFormError(error);
     return !error.length;
@@ -36,16 +42,16 @@ const AddChannelModal = () => {
       dispatch(addChannel({ name: newChannelName }));
       setNewChannelName('');
       handleClose();
+      toggleShow();
     }
   };
 
   return (
     <>
       <img className="modal_image" src={addIcon} alt="add channel" onClick={handleShow} />
-
       <Modal centered show={isShowModal} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Добавить новый канал</Modal.Title>
+          <Modal.Title>{t('title')}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form noValidate onSubmit={handleSubmit} className="modal_body">
@@ -53,7 +59,7 @@ const AddChannelModal = () => {
               <InputGroup hasValidation>
                 <Form.Control
                   type="text"
-                  placeholder="New channel name"
+                  placeholder={t('input_form')}
                   htmlFor="add channel input"
                   autoFocus
                   required
@@ -69,15 +75,16 @@ const AddChannelModal = () => {
             </Form.Group>
             <div className="modal_button_group">
               <Button variant="secondary" className="modal_button" onClick={handleClose}>
-                Отменить
+                {t('escape_button')}
               </Button>
               <Button variant="primary" className="modal_button" type="submit">
-                Добавить
+                {t('success_button')}
               </Button>
             </div>
           </Form>
         </Modal.Body>
       </Modal>
+      <Notification variant="success" text={t('notification')} show={showNotification} toggleShow={toggleShow} />
     </>
   );
 };

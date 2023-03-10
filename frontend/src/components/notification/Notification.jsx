@@ -15,7 +15,7 @@ const getIcon = (variant) => {
 const Notification = ({
   variant, text, show, toggleShow,
 }) => (
-  <Toast show={show} onClose={toggleShow} delay={5000} autohide className="notification">
+  <Toast show={show} onClose={toggleShow} delay={3000} autohide className="notification">
     <Toast.Body>
       <div>
         <img src={getIcon(variant)} alt="notification info" />

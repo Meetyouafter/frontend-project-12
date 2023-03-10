@@ -119,100 +119,97 @@ const Chat = () => {
 
   { if (channels.length > 0) {
     return (
-      <>
-        <Notification show={isShowNotification} setShow={setIsShowNotification} />
-        <div className="chat_wrapper">
-          <Row className="channels_wrapper">
-            <Col className="channels_container">
-              <div className="channels_header" onClick={setIsShowNotification}>
-                {t('channels')}
+      <div className="chat_wrapper">
+        <Row className="channels_wrapper">
+          <Col className="channels_container">
+            <div className="channels_header">
+              {t('channels')}
+              {' '}
+              (
+              {channels.length}
+              )
+              <AddChannelModal />
+            </div>
+            {channels.map((channel) => (
+              <ChannelItem
+                activeChannel={activeChannel}
+                setActiveChannel={() => setActiveChannel(channel.id)}
+                channelData={channel}
+                key={channel.id}
+              />
+            ))}
+            {newChannels.map((channel) => (
+              <ChannelItem
+                activeChannel={activeChannel}
+                setActiveChannel={() => setActiveChannel(channel.id)}
+                channelData={channel}
+                key={channel.id}
+              />
+            ))}
+          </Col>
+        </Row>
+        <Row className="messages_wrapper">
+          <Col className="channels_container messages_box">
+            <div className="messages_header">
+              <p className="header_channel">
+                #
+                {getActiveChannelName(channels.concat(newChannels), activeChannel)}
+              </p>
+              <p className="header_channel">
+                {getMessagesCount()}
                 {' '}
-                (
-                {channels.length}
-                )
-                <AddChannelModal />
-              </div>
-              {channels.map((channel) => (
-                <ChannelItem
-                  activeChannel={activeChannel}
-                  setActiveChannel={() => setActiveChannel(channel.id)}
-                  channelData={channel}
-                  key={channel.id}
+                {t('message', { messageCount })}
+              </p>
+            </div>
+            <div className="messages_container">
+              {messages
+                .filter((mess) => mess.channelId === activeChannel)
+                .map((mess) => (
+                  <div key={mess.id}>
+                    <span className="username">
+                      {mess.username}
+                      :
+                      {' '}
+                    </span>
+                    <span className="message">{mess.body}</span>
+                  </div>
+                ))}
+              {newMessages
+                .filter((mess) => mess.channelId === activeChannel)
+                .map((mess) => (
+                  <div key={mess.id}>
+                    <span className="username">
+                      {mess.username}
+                      :
+                      {' '}
+                    </span>
+                    <span className="message">{mess.body}</span>
+                  </div>
+                ))}
+            </div>
+            <form onSubmit={handleClick} className="send_form">
+              <InputGroup className="mb-3 bb">
+                <Form.Control
+                  placeholder={t('message_form')}
+                  aria-label={t('message_form')}
+                  aria-describedby="basic-addon2"
+                  onChange={(e) => setMessage(e.target.value)}
+                  value={message}
                 />
-              ))}
-              {newChannels.map((channel) => (
-                <ChannelItem
-                  activeChannel={activeChannel}
-                  setActiveChannel={() => setActiveChannel(channel.id)}
-                  channelData={channel}
-                  key={channel.id}
-                />
-              ))}
-            </Col>
-          </Row>
-          <Row className="messages_wrapper">
-            <Col className="channels_container messages_box">
-              <div className="messages_header">
-                <p className="header_channel">
-                  #
-                  {getActiveChannelName(channels.concat(newChannels), activeChannel)}
-                </p>
-                <p className="header_channel">
-                  {getMessagesCount()}
-                  {' '}
-                  {t('message', { messageCount })}
-                </p>
-              </div>
-              <div className="messages_container">
-                {messages
-                  .filter((mess) => mess.channelId === activeChannel)
-                  .map((mess) => (
-                    <div key={mess.id}>
-                      <span className="username">
-                        {mess.username}
-                        :
-                        {' '}
-                      </span>
-                      <span className="message">{mess.body}</span>
-                    </div>
-                  ))}
-                {newMessages
-                  .filter((mess) => mess.channelId === activeChannel)
-                  .map((mess) => (
-                    <div key={mess.id}>
-                      <span className="username">
-                        {mess.username}
-                        :
-                        {' '}
-                      </span>
-                      <span className="message">{mess.body}</span>
-                    </div>
-                  ))}
-              </div>
-              <form onSubmit={handleClick} className="send_form">
-                <InputGroup className="mb-3 bb">
-                  <Form.Control
-                    placeholder={t('message_form')}
-                    aria-label={t('message_form')}
-                    aria-describedby="basic-addon2"
-                    onChange={(e) => setMessage(e.target.value)}
-                    value={message}
-                  />
-                  <Button
-                    variant="outline-secondary"
-                    id="button-addon2"
-                    className="send_message_button"
-                    type="submit"
-                    disabled={!message}
-                  >
-                    <img src={sendImage} alt="send message" />
-                  </Button>
-                </InputGroup>
-              </form>
-            </Col>
-          </Row>
-        </div>
-      </>
+                <Button
+                  variant="outline-secondary"
+                  id="button-addon2"
+                  className="send_message_button"
+                  type="submit"
+                  disabled={!message}
+                >
+                  <img src={sendImage} alt="send message" />
+                </Button>
+              </InputGroup>
+            </form>
+          </Col>
+        </Row>
+      </div>
     );
   } }
 
