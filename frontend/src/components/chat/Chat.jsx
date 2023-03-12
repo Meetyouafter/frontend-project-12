@@ -19,6 +19,7 @@ import { subscribeChannels, subscribeChannelsRename, subscribeChannelsRemove } f
 import getMessageNameCount from './helper';
 import sendImage from '../../assets/images/send_icon.svg';
 import './styles.css';
+import swearsFilter from '../../services/swearsFilter/swearsFilter';
 
 const socket = io();
 
@@ -96,7 +97,7 @@ const Chat = () => {
   const handleClick = (e) => {
     e.preventDefault();
     if (message.length > 0) {
-      const newMessage = { body: message, channelId: activeChannel, username: user };
+      const newMessage = { body: swearsFilter(message), channelId: activeChannel, username: user };
       dispatch(addMessage(newMessage));
       setMessage('');
     }

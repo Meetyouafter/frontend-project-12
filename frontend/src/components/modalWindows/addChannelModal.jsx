@@ -9,6 +9,7 @@ import { addChannel } from '../../store/slices/channels/channelSlice';
 import { setNotificationProps } from '../../store/slices/notification/notificationSlice';
 import addIcon from '../../assets/images/add_icon.svg';
 import './styles.css';
+import swearsFilter from '../../services/swearsFilter/swearsFilter';
 
 const AddChannelModal = () => {
   const [isShowModal, setIsShowModal] = useState(false);
@@ -36,7 +37,7 @@ const AddChannelModal = () => {
     e.preventDefault();
 
     if (validate()) {
-      dispatch(addChannel({ name: newChannelName }));
+      dispatch(addChannel({ name: swearsFilter(newChannelName) }));
       setNewChannelName('');
       handleClose();
       dispatch(setNotificationProps({
