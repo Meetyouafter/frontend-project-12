@@ -1,18 +1,10 @@
 import React, { useCallback, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Toast } from 'react-bootstrap';
-import closeImg from '../../assets/images/close_icon.svg';
-import infoImg from '../../assets/images/info_icon.svg';
-import successImg from '../../assets/images/success_icon.svg';
-import './styles.css';
 import { clearNotificationProps } from '../../store/slices/notification/notificationSlice';
-
-const getIcon = (variant) => {
-  if (variant === 'success') {
-    return successImg;
-  }
-  return infoImg;
-};
+import getStylesForNotification from './getStylesForNotification';
+import closeImg from '../../assets/images/close_icon.svg';
+import './styles.css';
 
 const Notification = ({
   variant, text, isShow, toggleShow,
@@ -28,15 +20,17 @@ const Notification = ({
   useEffect(() => {
     const timer = setTimeout(() => {
       closeAlert();
-    }, 5000);
+    }, 50000);
     return () => clearTimeout(timer);
   }, [closeAlert]);
 
+  const { img, color } = getStylesForNotification(variant);
+
   return (
-    <Toast show={isShow} onClose={toggleShow} autohide className="notification">
+    <Toast show={isShow} onClose={toggleShow} autohide className="notification" style={{ background: color }}>
       <Toast.Body>
         <div>
-          <img src={getIcon(variant)} alt="notification info" />
+          <img src={img} alt="notification info" />
           <p>{text}</p>
         </div>
         <img src={closeImg} alt="close notification" onClick={closeNotification} style={{ cursor: 'pointer' }} />

@@ -2,10 +2,9 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   notificationProps: {
-    type: '',
+    variant: '',
     text: '',
     isShow: false,
-    toggleShow: '',
   },
 };
 

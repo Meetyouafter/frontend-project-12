@@ -63,7 +63,7 @@ const Header = ({ withBackBtn }) => {
       </div>
       {isNotificationShow && (
       <Notification
-        type={notificationProps.type}
+        variant={notificationProps.variant}
         text={notificationProps.text}
         isShow={notificationProps.isShow}
         toggleShow={setIsNotificationShow}
