@@ -6,17 +6,14 @@ import {
   Button, InputGroup, Modal, Form,
 } from 'react-bootstrap';
 import { addChannel } from '../../store/slices/channels/channelSlice';
+import { setNotificationProps } from '../../store/slices/notification/notificationSlice';
 import addIcon from '../../assets/images/add_icon.svg';
-import Notification from '../notification/Notification';
 import './styles.css';
 
 const AddChannelModal = () => {
   const [isShowModal, setIsShowModal] = useState(false);
   const [newChannelName, setNewChannelName] = useState('');
   const [formerror, setFormError] = useState('');
-  const [showNotification, setShowNotification] = useState(false);
-
-  const toggleShow = () => setShowNotification(!showNotification);
 
   const handleClose = () => setIsShowModal(false);
   const handleShow = () => setIsShowModal(true);
@@ -42,7 +39,11 @@ const AddChannelModal = () => {
       dispatch(addChannel({ name: newChannelName }));
       setNewChannelName('');
       handleClose();
-      toggleShow();
+      dispatch(setNotificationProps({
+        variant: 'success',
+        text: t('notification'),
+        isShow: true,
+      }));
     }
   };
 
@@ -84,7 +85,6 @@ const AddChannelModal = () => {
           </Form>
         </Modal.Body>
       </Modal>
-      <Notification variant="success" text={t('notification')} show={showNotification} toggleShow={toggleShow} />
     </>
   );
 };

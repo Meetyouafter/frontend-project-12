@@ -3,14 +3,11 @@ import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { Button, Modal } from 'react-bootstrap';
 import { removeChannel } from '../../store/slices/channels/channelSlice';
-import Notification from '../notification/Notification';
+import { setNotificationProps } from '../../store/slices/notification/notificationSlice';
 import './styles.css';
 
 const RemoveChannelModal = ({ channelId }) => {
   const [show, setShow] = useState(false);
-  const [showNotification, setShowNotification] = useState(false);
-
-  const toggleShow = () => setShowNotification(!showNotification);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -22,7 +19,11 @@ const RemoveChannelModal = ({ channelId }) => {
   const handleClick = () => {
     dispatch(removeChannel({ id: channelId }));
     handleClose();
-    toggleShow();
+    dispatch(setNotificationProps({
+      variant: 'success',
+      text: t('notification'),
+      isShow: true,
+    }));
   };
 
   return (
@@ -45,7 +46,6 @@ const RemoveChannelModal = ({ channelId }) => {
           </Button>
         </Modal.Footer>
       </Modal>
-      <Notification variant="success" text={t('notification')} show={showNotification} toggleShow={toggleShow} />
     </>
   );
 };

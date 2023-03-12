@@ -6,16 +6,13 @@ import {
 } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { renameChannel } from '../../store/slices/channels/channelSlice';
-import Notification from '../notification/Notification';
+import { setNotificationProps } from '../../store/slices/notification/notificationSlice';
 import './styles.css';
 
 const RenameChannelModal = ({ channelId }) => {
   const [isShowModal, setIsShowModal] = useState(false);
   const [newChannelName, setNewChannelName] = useState('');
   const [formerror, setFormError] = useState('');
-  const [showNotification, setShowNotification] = useState(false);
-
-  const toggleShow = () => setShowNotification(!showNotification);
 
   const handleClose = () => setIsShowModal(false);
   const handleShow = () => setIsShowModal(true);
@@ -43,7 +40,11 @@ const RenameChannelModal = ({ channelId }) => {
       dispatch(renameChannel({ id: channelId, name: newChannelName }));
       setNewChannelName('');
       handleClose();
-      toggleShow();
+      dispatch(setNotificationProps({
+        variant: 'success',
+        text: t('notification'),
+        isShow: true,
+      }));
     }
   };
 
@@ -87,7 +88,6 @@ const RenameChannelModal = ({ channelId }) => {
           </Form>
         </Modal.Body>
       </Modal>
-      <Notification variant="success" text={t('notification')} show={showNotification} toggleShow={toggleShow} />
     </>
   );
 };

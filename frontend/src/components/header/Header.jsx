@@ -1,16 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, Dropdown } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { setNotificationProps } from '../../store/slices/notification/notificationSlice';
 import logOutImg from '../../assets/images/logout_icon.svg';
 import lngImg from '../../assets/images/language_icon.svg';
 import Notification from '../notification/Notification';
 import './styles.css';
 
 const Header = ({ withBackBtn }) => {
-  const [showNotification, setShowNotification] = useState(false);
+  const [isNotificationShow, setIsNotificationShow] = useState(false);
+  const { notificationProps } = useSelector((state) => state.notification);
+  const dispatch = useDispatch();
 
-  const toggleShow = () => setShowNotification(!showNotification);
+  useEffect(() => {
+    setIsNotificationShow(notificationProps.isShow);
+  }, [notificationProps]);
 
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
@@ -24,7 +30,11 @@ const Header = ({ withBackBtn }) => {
   const handleClick = (value) => {
     window.localStorage.setItem('language', value);
     i18n.changeLanguage(value);
-    toggleShow();
+    dispatch(setNotificationProps({
+      variant: 'info',
+      text: t('header.notification'),
+      isShow: true,
+    }));
   };
 
   return (
@@ -51,7 +61,14 @@ const Header = ({ withBackBtn }) => {
           </Dropdown.Menu>
         </Dropdown>
       </div>
-      <Notification variant="info" text={t('header.notification')} show={showNotification} toggleShow={toggleShow} />
+      {isNotificationShow && (
+      <Notification
+        type={notificationProps.type}
+        text={notificationProps.text}
+        isShow={notificationProps.isShow}
+        toggleShow={setIsNotificationShow}
+      />
+      )}
     </div>
   );
 };
