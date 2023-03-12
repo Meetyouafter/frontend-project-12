@@ -7,20 +7,20 @@ import {
 } from 'react-bootstrap';
 import { addChannel } from '../../store/slices/channels/channelSlice';
 import { setNotificationProps } from '../../store/slices/notification/notificationSlice';
+import swearsFilter from '../../services/swearsFilter/swearsFilter';
 import addIcon from '../../assets/images/add_icon.svg';
 import './styles.css';
-import swearsFilter from '../../services/swearsFilter/swearsFilter';
 
 const AddChannelModal = () => {
   const [isShowModal, setIsShowModal] = useState(false);
   const [newChannelName, setNewChannelName] = useState('');
   const [formerror, setFormError] = useState('');
 
-  const handleClose = () => setIsShowModal(false);
-  const handleShow = () => setIsShowModal(true);
-
   const { t } = useTranslation('translation', { keyPrefix: 'modal.addModal' });
   const dispatch = useDispatch();
+
+  const handleClose = () => setIsShowModal(false);
+  const handleShow = () => setIsShowModal(true);
 
   const validate = () => {
     let error = '';
@@ -29,13 +29,13 @@ const AddChannelModal = () => {
     } else if (newChannelName.length < 3 || newChannelName.length > 20) {
       error = t('length_error');
     }
+
     setFormError(error);
     return !error.length;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     if (validate()) {
       dispatch(addChannel({ name: swearsFilter(newChannelName) }));
       setNewChannelName('');

@@ -70,7 +70,7 @@
       },
       "removeModal": {
         "remove_link": "Remove",
-        "title": "Reemove channel",
+        "title": "Remove channel",
         "description": "Are you shure?",
         "escape_button": "Close",
         "success_button": "Remove",

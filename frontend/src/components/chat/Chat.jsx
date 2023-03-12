@@ -16,7 +16,7 @@ import Loader from '../loader/loader';
 import { addMessage, subscribeMessages } from '../../store/slices/messages/messageSlice';
 import chatEvents from '../../api/chatEvents';
 import { subscribeChannels, subscribeChannelsRename, subscribeChannelsRemove } from '../../store/slices/channels/channelSlice';
-import getMessageNameCount from './helper';
+import getMessageNameCount from './getMessageNameCount';
 import sendImage from '../../assets/images/send_icon.svg';
 import './styles.css';
 import swearsFilter from '../../services/swearsFilter/swearsFilter';

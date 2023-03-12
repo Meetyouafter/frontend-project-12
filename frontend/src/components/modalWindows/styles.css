@@ -1,38 +1,42 @@
 .modal_body {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 }
 
 .modal_button_group {
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-    column-gap: 10px;
-    align-items: flex-end;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  column-gap: 10px;
+  align-items: flex-end;
 }
 
 .modal-title.h4 {
-    font-size: 20px;
+  font-size: 20px;
 }
 
 .modal_primary_title {
-    padding-left: 10px;
-    margin-bottom: 0;
+  padding-left: 10px;
+  margin-bottom: 0;
+  height: 30px;
+}
+
+.modal_primary_title:hover {
+  background-color: lightgray;  
 }
 
 .modal_button.btn.btn-secondary .modal_button.btn.btn-primary .modal_button.btn.btn-danger {
-    width: auto;
-    height: 45px;
+  width: auto;
+  height: 45px;
 }
 
 .modal_image {
-    width: 30px;
-    cursor: pointer;
-    margin-right: 5%;
+  width: 30px;
+  cursor: pointer;
+  margin-right: 5%;
 }
 
 div.input-group {
-    padding-bottom: 10px;
+  padding-bottom: 10px;
 }
-

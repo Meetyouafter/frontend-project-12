@@ -9,12 +9,11 @@ import './styles.css';
 const RemoveChannelModal = ({ channelId }) => {
   const [show, setShow] = useState(false);
 
+  const { t } = useTranslation('translation', { keyPrefix: 'modal.removeModal' });
+  const dispatch = useDispatch();
+
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
-  const { t } = useTranslation('translation', { keyPrefix: 'modal.removeModal' });
-
-  const dispatch = useDispatch();
 
   const handleClick = () => {
     dispatch(removeChannel({ id: channelId }));

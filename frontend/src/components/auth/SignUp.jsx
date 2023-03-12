@@ -3,9 +3,9 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { Row, Button } from 'react-bootstrap';
 import { Formik, Form, Field } from 'formik';
+import { useTranslation } from 'react-i18next';
 import * as Yup from 'yup';
 import './style.css';
-import { useTranslation } from 'react-i18next';
 
 const SignUp = () => {
   const [nameError, setNameError] = useState('');

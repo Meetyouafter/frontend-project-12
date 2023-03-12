@@ -7,20 +7,19 @@ import {
 import { useDispatch } from 'react-redux';
 import { renameChannel } from '../../store/slices/channels/channelSlice';
 import { setNotificationProps } from '../../store/slices/notification/notificationSlice';
-import './styles.css';
 import swearsFilter from '../../services/swearsFilter/swearsFilter';
+import './styles.css';
 
 const RenameChannelModal = ({ channelId }) => {
   const [isShowModal, setIsShowModal] = useState(false);
   const [newChannelName, setNewChannelName] = useState('');
   const [formerror, setFormError] = useState('');
 
+  const { t } = useTranslation('translation', { keyPrefix: 'modal.renameModal' });
+  const dispatch = useDispatch();
+
   const handleClose = () => setIsShowModal(false);
   const handleShow = () => setIsShowModal(true);
-
-  const { t } = useTranslation('translation', { keyPrefix: 'modal.renameModal' });
-
-  const dispatch = useDispatch();
 
   const validate = () => {
     let error = '';
@@ -36,7 +35,6 @@ const RenameChannelModal = ({ channelId }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     if (validate()) {
       dispatch(renameChannel({ id: channelId, name: swearsFilter(newChannelName) }));
       setNewChannelName('');

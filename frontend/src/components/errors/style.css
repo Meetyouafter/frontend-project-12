@@ -3,12 +3,12 @@
 }
 
 .error_page_description {
-    text-align: center;
-    font-size: 32px;
-    font-weight: 600;
+  text-align: center;
+  font-size: 32px;
+  font-weight: 600;
 }
 
 #errorPage_button {
-    height: 50px;
-    width: 30%;
+  height: 50px;
+  width: 30%;
 }

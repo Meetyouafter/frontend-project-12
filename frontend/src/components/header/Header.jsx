@@ -12,14 +12,14 @@ import './styles.css';
 const Header = ({ withBackBtn }) => {
   const [isNotificationShow, setIsNotificationShow] = useState(false);
   const { notificationProps } = useSelector((state) => state.notification);
+
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { t, i18n } = useTranslation();
 
   useEffect(() => {
     setIsNotificationShow(notificationProps.isShow);
   }, [notificationProps]);
-
-  const navigate = useNavigate();
-  const { t, i18n } = useTranslation();
 
   const logout = () => {
     localStorage.removeItem('user');
