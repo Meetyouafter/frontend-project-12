@@ -21,14 +21,18 @@ const channelSlice = createSlice({
       state.currentChannel = action.payload;
     },
     addChannel: (state, action) => {
-      socket.emit(chatEvents.newChannel, (action.payload));
+      socket.emit(chatEvents.newChannel, (action.payload), (response) => {
+        console.log(response);
+      });
     },
     subscribeChannels: (state, action) => ({
       ...state,
       channels: [...state.channels, action.payload],
     }),
     renameChannel: (state, action) => {
-      socket.emit(chatEvents.renameChannel, action.payload);
+      socket.emit(chatEvents.renameChannel, action.payload, (response) => {
+        console.log(response);
+      });
     },
     subscribeChannelsRename: (state, action) => {
       const { id, name } = action.payload;
@@ -46,7 +50,9 @@ const channelSlice = createSlice({
       };
     },
     removeChannel: (state, action) => {
-      socket.emit(chatEvents.removeChannel, action.payload);
+      socket.emit(chatEvents.removeChannel, action.payload, (response) => {
+        console.log(response);
+      });
     },
     subscribeChannelsRemove: (state, action) => {
       const { id } = action.payload;
@@ -63,10 +69,12 @@ const channelSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(getInitialData.fulfilled, (state, action) => {
+        console.log('fulfilled', action.payload);
         state.isLoading = false;
         state.channels.push(...action.payload.channels);
       })
       .addCase(getInitialData.rejected, (state, action) => {
+        console.log('rejected', action);
         state.isLoading = false;
         state.channels = [];
         state.errors = action.error.message;

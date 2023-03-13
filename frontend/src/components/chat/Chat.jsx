@@ -57,6 +57,7 @@ const Chat = () => {
 
   useEffect(() => {
     socket.on(chatEvents.newChannel, (payload) => {
+      setActiveChannelIndex(payload.id);
       dispatch(subscribeChannels(payload));
     });
   }, [dispatch]);
