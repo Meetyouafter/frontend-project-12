@@ -43,6 +43,8 @@ const Chat = () => {
 
   const user = JSON.parse(localStorage.getItem('user'));
 
+  const messageNameCount = getMessageNameCount(getMessagesCount(activeChannelIndex, messages));
+
   useEffect(() => {
     dispatch(getInitialData());
   }, [dispatch]);
@@ -73,7 +75,7 @@ const Chat = () => {
 
   const handleClick = (e) => {
     e.preventDefault();
-    if (message.length > 0) {
+    if (message.trim().length > 0) {
       const newMessage = {
         body: swearsFilter(message), channelId: activeChannelIndex, username: user,
       };
@@ -89,8 +91,6 @@ const Chat = () => {
       <Loader />
     );
   }
-
-  const messageCount = getMessageNameCount(getMessagesCount(activeChannelIndex, messages));
 
   if (messagesError || channelsError) {
     if (messagesError.errors === 'Request failed with status code 401') return <Navigate to="/sign_up" />;
@@ -135,9 +135,9 @@ const Chat = () => {
               {getActiveChannelName(channels, activeChannelIndex)}
             </p>
             <p className="header_channel">
-              {getMessagesCount()}
+              {getMessagesCount(activeChannelIndex, messages)}
               {' '}
-              {t('message', { messageCount })}
+              {t('message', { messageCount: messageNameCount })}
             </p>
           </div>
           <div className="messages_container">
