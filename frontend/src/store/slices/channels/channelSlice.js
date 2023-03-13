@@ -1,9 +1,14 @@
+/* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
 import { io } from 'socket.io-client';
 import chatEvents from '../../../api/chatEvents';
+import getInitialData from '../initialData/getInitialData';
 
 const initialState = {
   channels: [],
+  currentChannel: 0,
+  isLoading: false,
+  errors: null,
 };
 
 const socket = io();
@@ -12,6 +17,9 @@ const channelSlice = createSlice({
   name: 'channels',
   initialState,
   reducers: {
+    currentChannel: (state, action) => {
+      state.currentChannel = action.payload;
+    },
     addChannel: (state, action) => {
       socket.emit(chatEvents.newChannel, (action.payload));
     },
@@ -24,10 +32,10 @@ const channelSlice = createSlice({
     },
     subscribeChannelsRename: (state, action) => {
       const { id } = action.payload;
-      state.channels.filter((channel) => channel.id !== id);
+      const fillteredState = state.channels.filter((channel) => channel.id !== id);
       return {
         ...state,
-        channels: [...state.channels, action.payload],
+        channels: [...fillteredState, action.payload],
       };
     },
     removeChannel: (state, action) => {
@@ -35,8 +43,27 @@ const channelSlice = createSlice({
     },
     subscribeChannelsRemove: (state, action) => {
       const { id } = action.payload;
-      state.channels.filter((channel) => channel.id !== id);
+      const fillteredState = state.channels.filter((channel) => channel.id !== id);
+      return {
+        ...state,
+        channels: [...fillteredState],
+      };
     },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(getInitialData.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getInitialData.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.channels.push(...action.payload.channels);
+      })
+      .addCase(getInitialData.rejected, (state, action) => {
+        state.isLoading = false;
+        state.channels = [];
+        state.errors = action.error.message;
+      });
   },
 });
 

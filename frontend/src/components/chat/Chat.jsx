@@ -31,15 +31,13 @@ const Chat = () => {
   const state = useSelector((state) => state);
   const initialData = useSelector((state) => state.initialData);
   const newMessages = useSelector((state) => state.messages.messages);
-  const newChannels = useSelector((state) => state.channels.channels);
+  const channels = useSelector((state) => state.channels.channels);
 
-  const channels = initialData?.initialData[0]?.channels || [];
   const messages = initialData?.initialData[0]?.messages || [];
 
   const { t } = useTranslation('translation', { keyPrefix: 'chat' });
 
   console.log(state);
-  console.log(channels.concat(newChannels));
 
   const getActiveChannelName = (channelsData, activeIndex) => {
     const activeChannelName = channelsData
@@ -80,19 +78,19 @@ const Chat = () => {
     socket.on(chatEvents.newChannel, (payload) => {
       dispatch(subscribeChannels(payload));
     });
-  }, [dispatch, newChannels]);
+  }, [dispatch]);
 
   useEffect(() => {
     socket.on(chatEvents.renameChannel, (payload) => {
       dispatch(subscribeChannelsRename(payload));
     });
-  }, [dispatch, newChannels]);
+  }, [dispatch]);
 
   useEffect(() => {
     socket.on(chatEvents.removeChannel, (payload) => {
       dispatch(subscribeChannelsRemove(payload));
     });
-  }, [dispatch, newChannels]);
+  }, [dispatch]);
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -153,14 +151,6 @@ const Chat = () => {
                 key={channel.id}
               />
             ))}
-            {newChannels.map((channel) => (
-              <ChannelItem
-                activeChannel={activeChannel}
-                setActiveChannel={() => setActiveChannel(channel.id)}
-                channelData={channel}
-                key={channel.id}
-              />
-            ))}
           </Col>
         </Row>
         <Row className="messages_wrapper">
@@ -168,7 +158,7 @@ const Chat = () => {
             <div className="messages_header">
               <p className="header_channel">
                 #
-                {getActiveChannelName(channels.concat(newChannels), activeChannel)}
+                {getActiveChannelName(channels, activeChannel)}
               </p>
               <p className="header_channel">
                 {getMessagesCount()}
