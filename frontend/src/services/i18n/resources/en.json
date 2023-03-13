@@ -56,6 +56,7 @@
         "success_button": "Add",
         "required_error": "This form is required",
         "length_error": "From 3 to 20 characters",
+        "unique_error": "Name must be unique",
         "notification": "Channel was added"
       },
       "renameModal": {

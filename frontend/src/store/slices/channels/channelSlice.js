@@ -31,11 +31,18 @@ const channelSlice = createSlice({
       socket.emit(chatEvents.renameChannel, action.payload);
     },
     subscribeChannelsRename: (state, action) => {
-      const { id } = action.payload;
-      const fillteredState = state.channels.filter((channel) => channel.id !== id);
+      const { id, name } = action.payload;
       return {
         ...state,
-        channels: [...fillteredState, action.payload],
+        channels: state.channels.map((channel) => {
+          if (channel.id === id) {
+            return {
+              ...channel,
+              name,
+            };
+          }
+          return channel;
+        }),
       };
     },
     removeChannel: (state, action) => {

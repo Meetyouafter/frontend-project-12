@@ -7,6 +7,9 @@ const token = (JSON.parse((localStorage.getItem('token'))));
 const getChannelData = () => axios
   .get(INITIAL_DATA_URL, { headers: { Authorization: `Bearer ${token}` } });
 
-const InitialServise = { getChannelData };
+const patchCurrentChannel = (channelId) => axios
+  .patch(INITIAL_DATA_URL, { currentChannelId: channelId }, { headers: { Authorization: `Bearer ${token}` } });
+
+const InitialServise = { getChannelData, patchCurrentChannel };
 
 export default InitialServise;

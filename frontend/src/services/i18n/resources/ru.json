@@ -56,6 +56,7 @@
         "success_button": "Добавить",
         "required_error": "Поле обязательно для заполнения",
         "length_error": "От 3 до 20 символов",
+        "unique_error": "Должно быть уникальным",
         "notification": "Канал успешно добавлен"
       },
       "renameModal": {

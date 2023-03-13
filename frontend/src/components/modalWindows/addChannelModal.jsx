@@ -1,7 +1,7 @@
 /* eslint-disable functional/no-let */
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   Button, InputGroup, Modal, Form,
 } from 'react-bootstrap';
@@ -18,8 +18,13 @@ const AddChannelModal = () => {
 
   const { t } = useTranslation('translation', { keyPrefix: 'modal.addModal' });
   const dispatch = useDispatch();
+  const channels = useSelector((state) => state.channels.channels);
+  const channelsNames = channels.map((channel) => channel.name);
 
-  const handleClose = () => setIsShowModal(false);
+  const handleClose = () => {
+    setIsShowModal(false);
+    setNewChannelName('');
+  };
   const handleShow = () => setIsShowModal(true);
 
   const validate = () => {
@@ -28,6 +33,8 @@ const AddChannelModal = () => {
       error = t('required_error');
     } else if (newChannelName.length < 3 || newChannelName.length > 20) {
       error = t('length_error');
+    } else if (channelsNames.includes(newChannelName)) {
+      error = t('unique_error');
     }
 
     setFormError(error);
