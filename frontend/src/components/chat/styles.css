@@ -20,7 +20,7 @@
 
 .channels_header {
   height: 15%;
-  min-height: 75px;
+  min-height: 60px;
   display: flex;
   align-items: center;
   border-bottom: 1px solid gray;
@@ -38,7 +38,7 @@
 }
 
 .messages_header {
-  height: calc(15% + 3px);
+  height: 15%;
   display: flex;
   border-bottom: 1px solid gray;
   background-color: #FFBB73;
@@ -60,6 +60,10 @@
   height: 100%;
   width: 65%;
   border-left: 1px solid gray;
+}
+
+.message {
+  word-wrap: break-word;
 }
 
 .messages_container {
@@ -120,8 +124,13 @@ div.dropdow-menu.show {
     padding-left: 5px;
     flex-wrap: wrap;
     justify-content: center;
-    min-height: 40px;
+    height: 60px;
     font-size: 14px;
+  }
+
+  .messages_header {
+    font-size: 14px;
+    height: 60px;
   }
 
   .modal_image {
@@ -133,4 +142,8 @@ div.dropdow-menu.show {
     width: 20px;
     height: 20px;
   }
+
+  .send_form {
+    margin-top: 10%;
+}
 }

@@ -31,6 +31,8 @@ const Chat = () => {
   const { messages } = appData.messages;
   const { channels } = appData.channels;
 
+  console.log(appData);
+
   const messagesLoading = appData.messages.isLoading;
   const channelsLoading = appData.channels.isLoading;
   const messagesError = appData.messages.error;
@@ -71,6 +73,7 @@ const Chat = () => {
   useEffect(() => {
     socket.on(chatEvents.removeChannel, (payload) => {
       dispatch(subscribeChannelsRemove(payload));
+      setActiveChannelIndex(1);
     });
   }, [dispatch]);
 

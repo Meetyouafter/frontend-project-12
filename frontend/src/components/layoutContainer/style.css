@@ -18,3 +18,9 @@
   display: flex;
   justify-content: center;
 }
+
+@media (min-width: 1200px) {
+  .layout_container {
+    width: 70%;
+  }
+}
