@@ -50,7 +50,7 @@ const SignUp = () => {
                 setNameError('');
                 localStorage.setItem('user', JSON.stringify(values.name));
                 localStorage.setItem('token', JSON.stringify(response.data.token));
-                navigate('/');
+                navigate('/chat');
               })
               .catch((error) => {
                 if (error.message === 'Request failed with status code 409') {
