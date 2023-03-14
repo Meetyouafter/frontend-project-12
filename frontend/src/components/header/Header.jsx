@@ -39,7 +39,7 @@ const Header = ({ withBackBtn }) => {
 
   return (
     <div className="primary_header">
-      <p className="header_content"> Chat by Meetyouafter</p>
+      <p className="header_content">{t('header.title')}</p>
       <div className="header_btn_container">
         {withBackBtn
         && (

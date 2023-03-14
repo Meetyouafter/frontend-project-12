@@ -2,6 +2,7 @@
   "translation": {
     "network_error": "Network error",
     "header": {
+      "title": "Hexlet Chat",
       "en": "En",
       "ru": "Ru",
       "button": "Logout",
