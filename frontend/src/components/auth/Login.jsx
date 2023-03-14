@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { Row, Button } from 'react-bootstrap';
 import { Formik, Form, Field } from 'formik';
 import { useTranslation } from 'react-i18next';
 import * as Yup from 'yup';
+import { setNotificationProps } from '../../store/slices/notification/notificationSlice';
 import './style.css';
 
 const Login = () => {
@@ -12,6 +14,7 @@ const Login = () => {
   const navigate = useNavigate();
 
   const { t } = useTranslation();
+  const dispatch = useDispatch();
 
   const LoginSchema = Yup.object().shape({
     name: Yup.string()
@@ -45,6 +48,12 @@ const Login = () => {
               .catch((error) => {
                 if (error.message === 'Request failed with status code 401') {
                   setNameError(t('login.errors.unregister'));
+                } else {
+                  dispatch(setNotificationProps({
+                    variant: 'error',
+                    text: t('error_notification'),
+                    isShow: true,
+                  }));
                 }
               });
           }}

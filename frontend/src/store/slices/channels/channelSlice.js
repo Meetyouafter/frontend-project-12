@@ -1,4 +1,3 @@
-/* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
 import { io } from 'socket.io-client';
 import chatEvents from '../../../api/chatEvents';

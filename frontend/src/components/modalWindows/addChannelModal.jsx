@@ -18,6 +18,7 @@ const AddChannelModal = () => {
 
   const { t } = useTranslation('translation', { keyPrefix: 'modal.addModal' });
   const dispatch = useDispatch();
+
   const channels = useSelector((state) => state.channels.channels);
   const channelsNames = channels.map((channel) => channel.name);
 
@@ -25,6 +26,7 @@ const AddChannelModal = () => {
     setIsShowModal(false);
     setNewChannelName('');
   };
+
   const handleShow = () => setIsShowModal(true);
 
   const validate = () => {

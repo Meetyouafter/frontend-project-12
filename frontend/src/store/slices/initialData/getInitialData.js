@@ -1,4 +1,3 @@
-/* eslint-disable no-param-reassign */
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import InitialServise from '../../../api/initialData';
 

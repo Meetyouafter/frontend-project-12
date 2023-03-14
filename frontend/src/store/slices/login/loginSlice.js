@@ -1,5 +1,3 @@
-/* eslint-disable import/no-named-as-default */
-/* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
 import postLogin from './postLogin';
 

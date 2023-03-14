@@ -1,4 +1,3 @@
-/* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
 import { io } from 'socket.io-client';
 import chatEvents from '../../../api/chatEvents';
@@ -30,12 +29,10 @@ const messageSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(getInitialData.fulfilled, (state, action) => {
-        console.log('fulfilled', action.payload);
         state.isLoading = false;
         state.messages.push(...action.payload.messages);
       })
       .addCase(getInitialData.rejected, (state, action) => {
-        console.log('rejected', action);
         state.isLoading = false;
         state.messages = [];
         state.errors = action.error.message;

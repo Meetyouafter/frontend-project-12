@@ -23,7 +23,7 @@ const Header = ({ withBackBtn }) => {
 
   const logout = () => {
     localStorage.removeItem('user');
-    localStorage.removeItem('tocken');
+    localStorage.removeItem('token');
     return navigate('/');
   };
 

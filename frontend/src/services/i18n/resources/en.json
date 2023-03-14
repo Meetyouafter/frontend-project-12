@@ -59,7 +59,8 @@
         "required_error": "This form is required",
         "length_error": "From 3 to 20 characters",
         "unique_error": "Name must be unique",
-        "notification": "Channel was added"
+        "notification": "Channel was added",
+        "error_notification": "Network error"
       },
       "renameModal": {
         "rename_link": "Rename",
@@ -69,7 +70,8 @@
         "success_button": "Rename",
         "required_error": "This form is required",
         "length_error": "From 3 to 20 characters",
-        "notification": "Channel was renamed"
+        "notification": "Channel was renamed",
+        "error_notification": "Network error"
       },
       "removeModal": {
         "remove_link": "Remove",
@@ -77,7 +79,8 @@
         "description": "Are you shure?",
         "escape_button": "Close",
         "success_button": "Remove",
-        "notification": "Channel was removed"
+        "notification": "Channel was removed",
+        "error_notification": "Network error"
       }
     }
   }

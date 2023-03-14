@@ -59,7 +59,8 @@
         "required_error": "Поле обязательно для заполнения",
         "length_error": "От 3 до 20 символов",
         "unique_error": "Должно быть уникальным",
-        "notification": "Канал создан"
+        "notification": "Канал создан",
+        "error_notification": "Ошибка соединения"
       },
       "renameModal": {
         "rename_link": "Переименовать",
@@ -69,7 +70,8 @@
         "success_button": "Переименовать",
         "required_error": "Поле обязательно для заполнения",
         "length_error": "От 3 до 20 символов",
-        "notification": "Канал переименован"
+        "notification": "Канал переименован",
+        "error_notification": "Ошибка соединения"
       },
       "removeModal": {
         "remove_link": "Удалить",
@@ -77,7 +79,8 @@
         "description": "Вы уверены?",
         "escape_button": "Отменить",
         "success_button": "Удалить",
-        "notification": "Канал удален"
+        "notification": "Канал удален",
+        "error_notification": "Ошибка соединения"
       }
     }
   }
