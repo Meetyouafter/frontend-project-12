@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { Row, Button } from 'react-bootstrap';
@@ -7,6 +6,7 @@ import { Formik, Form, Field } from 'formik';
 import { useTranslation } from 'react-i18next';
 import * as Yup from 'yup';
 import { setNotificationProps } from '../../store/slices/notification/notificationSlice';
+import LoginServise from '../../api/auth';
 import './style.css';
 
 const Login = () => {
@@ -38,7 +38,7 @@ const Login = () => {
           initialValues={initialForm}
           validationSchema={LoginSchema}
           onSubmit={(values) => {
-            axios.post('/api/v1/login', { username: values.name, password: values.password })
+            LoginServise.postLoginData({ username: values.name, password: values.password })
               .then((response) => {
                 setNameError('');
                 localStorage.setItem('user', JSON.stringify(values.name));
@@ -46,12 +46,13 @@ const Login = () => {
                 navigate('/chat');
               })
               .catch((error) => {
+                console.log(error);
                 if (error.message === 'Request failed with status code 401') {
                   setNameError(t('login.errors.unregister'));
                 } else {
                   dispatch(setNotificationProps({
                     variant: 'error',
-                    text: t('error_notification'),
+                    text: t('network_error'),
                     isShow: true,
                   }));
                 }

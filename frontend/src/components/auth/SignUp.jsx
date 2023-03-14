@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { Row, Button } from 'react-bootstrap';
 import { Formik, Form, Field } from 'formik';
 import { useTranslation } from 'react-i18next';
+import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
+import LoginServise from '../../api/auth';
+import { setNotificationProps } from '../../store/slices/notification/notificationSlice';
 import './style.css';
 
 const SignUp = () => {
@@ -12,6 +14,7 @@ const SignUp = () => {
   const navigate = useNavigate();
 
   const { t } = useTranslation();
+  const dispatch = useDispatch();
 
   const SignUpSchema = Yup.object().shape({
     name: Yup.string()
@@ -42,7 +45,7 @@ const SignUp = () => {
           initialValues={initialForm}
           validationSchema={SignUpSchema}
           onSubmit={(values) => {
-            axios.post('/api/v1/signup', { username: values.name, password: values.password })
+            LoginServise.postSignUpData({ username: values.name, password: values.password })
               .then((response) => {
                 setNameError('');
                 localStorage.setItem('user', JSON.stringify(values.name));
@@ -52,6 +55,12 @@ const SignUp = () => {
               .catch((error) => {
                 if (error.message === 'Request failed with status code 409') {
                   setNameError(t('sign_up.errors.user_not_uniq'));
+                } else {
+                  dispatch(setNotificationProps({
+                    variant: 'error',
+                    text: t('network_error'),
+                    isShow: true,
+                  }));
                 }
               });
           }}

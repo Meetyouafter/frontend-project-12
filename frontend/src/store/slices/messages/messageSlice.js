@@ -5,6 +5,8 @@ import getInitialData from '../initialData/getInitialData';
 
 const initialState = {
   messages: [],
+  isLoading: true,
+  errors: null,
 };
 
 const socket = io();
@@ -14,9 +16,7 @@ const messageSlice = createSlice({
   initialState,
   reducers: {
     addMessage: (state, action) => {
-      socket.emit(chatEvents.newMessage, (action.payload), (response) => {
-        console.log(response.status); // ok
-      });
+      socket.emit(chatEvents.newMessage, (action.payload));
     },
     subscribeMessages: (state, action) => ({
       ...state,
