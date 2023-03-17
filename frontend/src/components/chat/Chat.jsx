@@ -96,7 +96,7 @@ const Chat = () => {
   }
 
   if (messagesError || channelsError) {
-    if (messagesError.errors === 'Request failed with status code 401') return <Navigate to="/sign_up" />;
+    if (messagesError.errors === 'Request failed with status code 401') return <Navigate to="/signup" />;
     return (
       <div>
         <p>

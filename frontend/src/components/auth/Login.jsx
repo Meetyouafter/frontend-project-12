@@ -94,7 +94,7 @@ const Login = () => {
       </Row>
       <Row className="auth_footer">
         {t('login.pages_data.footer_description')}
-        <a href="/sign_up" className="link">{t('login.pages_data.footer_link')}</a>
+        <a href="/signup" className="link">{t('login.pages_data.footer_link')}</a>
       </Row>
     </div>
   );

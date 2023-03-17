@@ -21,7 +21,7 @@ const App = () => (
       <Provider store={store}>
         <BrowserRouter>
           <Routes>
-            <Route path="/sign_up" element={<SignUpPage />} />
+            <Route path="/signup" element={<SignUpPage />} />
             <Route exact path="/" element={<LoginPage />} />
             <Route path="/chat" element={<ChatPage />} />
             <Route path="*" element={<Error404 />} />
