@@ -40,8 +40,7 @@
         "required": "This form is required",
         "password_length": "Password must be more than 6 characters",
         "password_match": "Passwords must match",
-        "name_min_length": "Name must be shorted than 2 characters",
-        "name_max_length": "Name must be no more than 20 characters",
+        "name_length": "From 3 to 20 characters",
         "user_not_uniq": "Such a user already exist"
       }
     },

@@ -26,8 +26,8 @@ const SignUp = () => {
     },
     validationSchema: Yup.object().shape({
       name: Yup.string()
-        .min(2, t('sign_up.errors.name_min_length'))
-        .max(20, t('sign_up.errors.name_max_length'))
+        .min(3, t('sign_up.errors.name_length'))
+        .max(20, t('sign_up.errors.name_length'))
         .required(t('sign_up.errors.required')),
       password: Yup.string()
         .min(6, t('sign_up.errors.password_length'))
