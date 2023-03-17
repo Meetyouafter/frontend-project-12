@@ -65,7 +65,7 @@ const Login = () => {
                 name="name"
                 type="name"
                 placeholder={t('login.forms.name')}
-                text={t('login.forms.name')}
+                label={t('login.forms.name')}
                 className={errors.name || nameError ? 'form_input form_error' : 'form_input'}
               />
               {touched.name && errors.name && (
@@ -75,7 +75,7 @@ const Login = () => {
                 name="password"
                 type="password"
                 placeholder={t('login.forms.password')}
-                text={t('login.forms.password')}
+                label={t('login.forms.password')}
                 className={errors.name || nameError ? 'form_input form_error' : 'form_input'}
               />
               {touched.password && errors.password && (
