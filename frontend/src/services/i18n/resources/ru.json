@@ -12,8 +12,8 @@
       "pages_data": {
         "title": "Войти",
         "button": "Войти",
-        "footer_description": "Ещё нет аккаунта?",
-        "footer_link": "Зарегистрироваться"
+        "footer_description": "Нет аккаунта?",
+        "footer_link": "Регистрация"
       },
       "forms": {
         "name": "Ваш ник",
@@ -26,7 +26,7 @@
     },
     "sign_up": {
       "pages_data": {
-        "title": "Зарегистрироваться",
+        "title": "Регистрация",
         "button": "Регистрация",
         "footer_description": "Уже есть аккаунт?",
         "footer_link": "Войти"
