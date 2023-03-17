@@ -71,6 +71,7 @@ const SignUp = () => {
                 name="name"
                 type="name"
                 placeholder={t('sign_up.forms.name')}
+                text={t('sign_up.forms.name')}
                 className={`${errors.name ? 'form_input form_error' : 'form_input'}`}
               />
               {touched.name && errors.name && (
@@ -83,6 +84,7 @@ const SignUp = () => {
                 name="password"
                 type="password"
                 placeholder={t('sign_up.forms.password')}
+                text={t('sign_up.forms.password')}
                 className={`${errors.password ? 'form_input form_error' : 'form_input'}`}
               />
               {touched.password && errors.password && (
@@ -92,6 +94,7 @@ const SignUp = () => {
                 name="passwordConfirmation"
                 type="password"
                 placeholder={t('sign_up.forms.password_repeat')}
+                text={t('sign_up.forms.password_repeat')}
                 className={`${
                   errors.passwordConfirmation ? 'form_input form_error' : 'form_input '
                 }`}
