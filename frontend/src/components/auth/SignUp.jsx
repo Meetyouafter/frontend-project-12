@@ -7,7 +7,7 @@ import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
-import LoginServise from '../../api/auth';
+import AuthService from '../../api/auth';
 import { setNotificationProps } from '../../store/slices/notification/notificationSlice';
 import './style.css';
 
@@ -37,7 +37,7 @@ const SignUp = () => {
         .required(t('sign_up.errors.required')),
     }),
     onSubmit: (values) => {
-      LoginServise.postSignUpData({ username: values.name, password: values.password })
+      AuthService.postSignUpData({ username: values.name, password: values.password })
         .then((response) => {
           setNameError('');
           localStorage.setItem('user', JSON.stringify(values.name));

@@ -6,9 +6,8 @@ import {
 } from 'react-bootstrap';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
-import * as Yup from 'yup';
 import { setNotificationProps } from '../../store/slices/notification/notificationSlice';
-import LoginServise from '../../api/auth';
+import AuthService from '../../api/auth';
 import './style.css';
 
 const Login = () => {
@@ -23,31 +22,25 @@ const Login = () => {
       name: '',
       password: '',
     },
-    validationSchema: Yup.object().shape({
-      name: Yup.string()
-        .required(t('login.errors.required')),
-      password: Yup.string()
-        .required(t('login.errors.required')),
-    }),
     onSubmit: (values) => {
-      LoginServise.postLoginData({ username: values.name, password: values.password })
+      AuthService.postLoginData({ username: values.name, password: values.password })
         .then((response) => {
-          console.log(response)
-          try {
-            setNameError('');
-            localStorage.setItem('user', JSON.stringify(values.name));
-            localStorage.setItem('token', JSON.stringify(response.data.token));
-            navigate('/chat');
-          } catch (error) {
-            if (error.message === 'Request failed with status code 401') {
-              setNameError(t('login.errors.unregister'));
-            } else {
-              dispatch(setNotificationProps({
-                variant: 'error',
-                text: t('network_error'),
-                isShow: true,
-              }));
-            }
+          console.log('response', response);
+          setNameError('');
+          localStorage.setItem('user', JSON.stringify(values.name));
+          localStorage.setItem('token', JSON.stringify(response.data.token));
+          navigate('/chat');
+        })
+        .catch((error) => {
+          if (error.message === 'Request failed with status code 401') {
+            setNameError(t('login.errors.unregister'));
+            console.log(nameError);
+          } else {
+            dispatch(setNotificationProps({
+              variant: 'error',
+              text: t('network_error'),
+              isShow: true,
+            }));
           }
         });
     },
@@ -74,12 +67,12 @@ const Login = () => {
                 type="text"
                 required
                 placeholder={t('login.forms.name')}
-                isInvalid={!!formik.errors.name}
+                isInvalid={!!nameError}
                 onChange={formik.handleChange}
                 value={formik.values.name}
               />
               <Form.Control.Feedback type="invalid">
-                {formik.errors.name || nameError}
+                {nameError}
               </Form.Control.Feedback>
             </InputGroup>
           </Form.Group>
@@ -96,7 +89,7 @@ const Login = () => {
                 type="text"
                 required
                 placeholder={t('login.forms.password')}
-                isInvalid={!!formik.errors.name}
+                isInvalid={!!nameError}
                 onChange={formik.handleChange}
                 value={formik.values.password}
               />

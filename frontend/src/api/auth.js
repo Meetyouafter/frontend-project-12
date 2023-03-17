@@ -9,6 +9,6 @@ const postLoginData = (data) => axios
 const postSignUpData = (data) => axios
   .post(SIGN_UP_DATA_URL, { data }, { headers: { Authorization: `Bearer ${localStorage.token}` } });
 
-const LoginServise = { postLoginData, postSignUpData };
+const AuthService = { postLoginData, postSignUpData };
 
-export default LoginServise;
+export default AuthService;
