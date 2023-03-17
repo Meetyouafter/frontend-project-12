@@ -8,7 +8,7 @@ const Error404 = () => {
   const navigate = useNavigate();
 
   return (
-    <>
+    <div className="error_page_wrapper">
       <img src={errorImg} alt="404 error" className="error_image" />
       <p className="error_page_description">Страница не найдена</p>
       <Button
@@ -18,7 +18,7 @@ const Error404 = () => {
       >
         Вернуться на главную
       </Button>
-    </>
+    </div>
   );
 };
 

@@ -87,7 +87,7 @@ const Chat = () => {
     }
   };
 
-  if (!localStorage.token) return <Navigate to="/login" />;
+  if (!localStorage.token) return <Navigate to="/" />;
 
   if (messagesLoading && channelsLoading) {
     return (
