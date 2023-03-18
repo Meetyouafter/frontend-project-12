@@ -31,6 +31,7 @@ const ChannelItem = ({ activeChannel, channelData, setActiveChannel }) => (
   <div
     className={activeChannel === channelData.id ? 'chat active_chat' : 'chat'}
     onClick={setActiveChannel}
+    onKeyPress={setActiveChannel}
   >
     <p className="channel_name">
       #

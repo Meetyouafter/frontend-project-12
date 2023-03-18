@@ -27,9 +27,10 @@ const RemoveChannelModal = ({ channelId }) => {
 
   return (
     <>
-      <p onClick={handleShow} className="modal_primary_title">
+      <Button onClick={handleShow}>
         {t('remove_link')}
-      </p>
+        <span className="visually-hidden">{t('remove_link')}</span>
+      </Button>
 
       <Modal centered show={show} onHide={handleClose}>
         <Modal.Header closeButton>

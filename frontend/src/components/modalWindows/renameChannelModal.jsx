@@ -49,9 +49,11 @@ const RenameChannelModal = ({ channelId, channelName }) => {
 
   return (
     <>
-      <p onClick={handleShow} className="modal_primary_title">
+      <Button onClick={handleShow}>
         {t('rename_link')}
-      </p>
+        <span className="visually-hidden">{t('rename_link')}</span>
+      </Button>
+
       <Modal centered show={isShowModal} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>{t('title')}</Modal.Title>

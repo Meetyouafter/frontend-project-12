@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { Toast } from 'react-bootstrap';
+import { Toast, Button } from 'react-bootstrap';
 import { clearNotificationProps } from '../../store/slices/notification/notificationSlice';
 import getStylesForNotification from './getStylesForNotification';
 import closeImg from '../../assets/images/close_icon.svg';
@@ -33,7 +33,12 @@ const Notification = ({
           <img src={img} alt="notification info" />
           <p>{text}</p>
         </div>
-        <img src={closeImg} alt="close notification" onClick={closeNotification} style={{ cursor: 'pointer' }} />
+        <Button onClick={closeNotification}>
+          <img
+            src={closeImg}
+            alt="close notification"
+          />
+        </Button>
       </Toast.Body>
     </Toast>
   );
