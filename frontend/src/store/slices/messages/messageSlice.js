@@ -16,12 +16,16 @@ const messageSlice = createSlice({
   initialState,
   reducers: {
     addMessage: (state, action) => {
-      socket.emit(chatEvents.newMessage, (action.payload));
+      const newMessage = action.payload;
+      socket.emit(chatEvents.newMessage, newMessage);
     },
-    subscribeMessages: (state, action) => ({
-      ...state,
-      messages: [...state.messages, action.payload],
-    }),
+    subscribeMessages: (state, action) => {
+      const newMessage = action.payload;
+      return {
+        ...state,
+        messages: [...state.messages, newMessage],
+      };
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -32,7 +36,7 @@ const messageSlice = createSlice({
       .addCase(getInitialData.fulfilled, (state, action) => ({
         ...state,
         isLoading: false,
-        messages: state.messages.push(...action.payload.messages),
+        messages: [...state.messages, ...action.payload.messages],
       }))
       .addCase(getInitialData.rejected, (state, action) => ({
         ...state,

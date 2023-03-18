@@ -16,70 +16,61 @@ const channelSlice = createSlice({
   name: 'channels',
   initialState,
   reducers: {
-    currentChannel: (state, action) => ({
-      ...state,
-      currentChannel: action.payload,
-    }),
+    currentChannel: (state, action) => ({ ...state, currentChannel: action.payload }),
     addChannel: (state, action) => {
       socket.emit(chatEvents.newChannel, (action.payload), (response) => {
         console.log(response);
       });
+      return state;
     },
     subscribeChannels: (state, action) => ({
-      ...state,
-      channels: [...state.channels, action.payload],
+      ...state, channels: [...state.channels, action.payload],
     }),
     renameChannel: (state, action) => {
       socket.emit(chatEvents.renameChannel, action.payload, (response) => {
         console.log(response);
       });
+      return state;
     },
     subscribeChannelsRename: (state, action) => {
       const { id, name } = action.payload;
-      return {
-        ...state,
-        channels: state.channels.map((channel) => {
-          if (channel.id === id) {
-            return {
-              ...channel,
-              name,
-            };
-          }
-          return channel;
-        }),
-      };
+      const updatedChannels = state.channels.map((channel) => {
+        if (channel.id === id) {
+          return {
+            ...channel,
+            name,
+          };
+        }
+        return channel;
+      });
+      return { ...state, channels: updatedChannels };
     },
     removeChannel: (state, action) => {
       socket.emit(chatEvents.removeChannel, action.payload, (response) => {
         console.log(response);
       });
+      return state;
     },
     subscribeChannelsRemove: (state, action) => {
       const { id } = action.payload;
-      const fillteredState = state.channels.filter((channel) => channel.id !== id);
-      return {
-        ...state,
-        channels: [...fillteredState],
-      };
+      const updatedChannels = state.channels.filter((channel) => channel.id !== id);
+      return { ...state, channels: updatedChannels };
     },
   },
   extraReducers: (builder) => {
     builder
-      .addCase(getInitialData.pending, (state) => ({
-        ...state,
-        isLoading: true,
-      }))
-      .addCase(getInitialData.fulfilled, (state, action) => ({
-        ...state,
-        isLoading: false,
-        channels: state.channels.push(...action.payload.channels),
-      }))
-      .addCase(getInitialData.rejected, (state, action) => ({
-        ...state,
-        isLoading: false,
-        channels: [],
-        errors: action.error.message,
-      }));
+      .addCase(getInitialData.pending, (state) => ({ ...state, isLoading: true }))
+      .addCase(getInitialData.fulfilled, (state, action) => {
+        console.log('fulfilled', action.payload);
+        const updatedChannels = [...state.channels, ...action.payload.channels];
+        return { ...state, isLoading: false, channels: updatedChannels };
+      })
+      .addCase(getInitialData.rejected, (state, action) => {
+        console.log('rejected', action);
+        return {
+          ...state, isLoading: false, channels: [], errors: action.error.message,
+        };
+      });
   },
 });
 
