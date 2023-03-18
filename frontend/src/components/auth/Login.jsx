@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import {
@@ -24,7 +25,9 @@ const Login = () => {
     },
     onSubmit: async (values) => {
       try {
-        await AuthService.postLoginData({ username: values.name, password: values.password })
+        await axios
+          .post('/api/v1/login', { username: values.name, password: values.password }, { headers: { Authorization: `Bearer ${localStorage.token}` } })
+        // AuthService.postLoginData({ username: values.name, password: values.password })
           .then((response) => {
             console.log('response', response);
             if (!response.data.username) {
