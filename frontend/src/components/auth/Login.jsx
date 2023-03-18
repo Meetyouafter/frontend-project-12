@@ -11,7 +11,7 @@ import AuthService from '../../api/auth';
 import './style.css';
 
 const Login = () => {
-  const [nameError, setNameError] = useState('');
+  const [authError, setAuthError] = useState('');
   const navigate = useNavigate();
 
   const { t } = useTranslation();
@@ -26,15 +26,16 @@ const Login = () => {
       AuthService.postLoginData({ username: values.name, password: values.password })
         .then((response) => {
           console.log('response', response);
-          setNameError('');
+          setAuthError('');
           localStorage.setItem('user', JSON.stringify(values.name));
           localStorage.setItem('token', JSON.stringify(response.data.token));
           navigate('/chat');
         })
         .catch((error) => {
+          console.log('error', error);
           if (error.message === 'Request failed with status code 401') {
-            setNameError(t('login.errors.unregister'));
-            console.log(nameError);
+            setAuthError(t('login.errors.unregister'));
+            console.log(authError);
           } else {
             dispatch(setNotificationProps({
               variant: 'error',
@@ -67,13 +68,10 @@ const Login = () => {
                 type="text"
                 required
                 placeholder={t('login.forms.name')}
-                isInvalid={!!nameError}
+                isInvalid={!!authError}
                 onChange={formik.handleChange}
                 value={formik.values.name}
               />
-              <Form.Control.Feedback type="invalid">
-                {nameError}
-              </Form.Control.Feedback>
             </InputGroup>
           </Form.Group>
 
@@ -89,10 +87,13 @@ const Login = () => {
                 type="text"
                 required
                 placeholder={t('login.forms.password')}
-                isInvalid={!!nameError}
+                isInvalid={!!authError}
                 onChange={formik.handleChange}
                 value={formik.values.password}
               />
+              <Form.Control.Feedback type="invalid">
+                {authError}
+              </Form.Control.Feedback>
             </InputGroup>
           </Form.Group>
 
