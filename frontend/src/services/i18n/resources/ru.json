@@ -45,6 +45,7 @@
     },
     "chat": {
       "channels": "Каналы",
+      "label": "Управление каналом",
       "message_form": "Введите сообщение",
       "message_label": "Новое сообщение",
       "message": "{messageCount, plural, =0 {сообщений} =1 {сообщений} =2 {сообщения} other {сообщение}}"
@@ -52,6 +53,7 @@
     "modal": {
       "addModal": {
         "title": "Добавить канал",
+        "label": "Имя канала",
         "input_form": "Новый канал",
         "escape_button": "Отменить",
         "success_button": "Добавить",
@@ -75,10 +77,10 @@
       "removeModal": {
         "remove_link": "Удалить",
         "title": "Удалить канал",
-        "description": "Вы уверены?",
+        "description": "Уверены?",
         "escape_button": "Отменить",
         "success_button": "Удалить",
-        "notification": "Канал удален",
+        "notification": "Канал удалён",
         "error_notification": "Ошибка соединения"
       }
     }

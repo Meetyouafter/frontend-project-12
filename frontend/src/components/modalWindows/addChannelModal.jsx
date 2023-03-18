@@ -59,7 +59,10 @@ const AddChannelModal = () => {
 
   return (
     <>
-      <img className="modal_image" src={addIcon} alt="add channel" onClick={handleShow} />
+      <Button onClick={handleShow}>
+        <img className="modal_image" src={addIcon} alt="add channel" />
+        <span className="visually-hidden">+</span>
+      </Button>
       <Modal centered show={isShowModal} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>{t('title')}</Modal.Title>
@@ -82,6 +85,9 @@ const AddChannelModal = () => {
                 <Form.Control.Feedback type="invalid">
                   {formerror}
                 </Form.Control.Feedback>
+                <Form.Label visuallyHidden>
+                  {t('label')}
+                </Form.Label>
               </InputGroup>
             </Form.Group>
             <div className="modal_button_group">
