@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import {
@@ -7,7 +8,6 @@ import {
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import { setNotificationProps } from '../../store/slices/notification/notificationSlice';
-import AuthService from '../../api/auth';
 import './style.css';
 
 const Login = () => {
@@ -22,27 +22,34 @@ const Login = () => {
       name: '',
       password: '',
     },
-    onSubmit: async ({ name, password }) => {
+    onSubmit: async (values) => {
       try {
-        const { data } = await AuthService.postLoginData({ name, password });
-
-        if (data.token) {
-          setAuthError('');
-          localStorage.setItem('user', JSON.stringify(data.name));
-          localStorage.setItem('token', JSON.stringify(data.token));
-          navigate('/chat');
-        }
+        await axios
+          .post('/api/v1/login', { username: values.name, password: values.password }, { headers: { Authorization: `Bearer ${localStorage.token}` } })
+        // AuthService.postLoginData({ username: values.name, password: values.password })
+          .then((response) => {
+            console.log('response', response);
+            if (!response.data.username) {
+              setAuthError(t('login.errors.unregister'));
+              console.log(authError);
+            } else {
+              setAuthError('');
+              localStorage.setItem('user', JSON.stringify(response.data.username));
+              localStorage.setItem('token', JSON.stringify(response.data.token));
+              navigate('/chat');
+            }
+          });
       } catch (error) {
-        if (error.code === 'ERR_NETWORK') {
+        console.log('error', error);
+        if (error.message === 'Request failed with status code 401') {
+          setAuthError(t('login.errors.unregister'));
+          console.log(authError);
+        } else {
           dispatch(setNotificationProps({
             variant: 'error',
             text: t('network_error'),
             isShow: true,
           }));
-        }
-
-        if (error.response.status === 401) {
-          setAuthError(t('login.errors.unregister'));
         }
       }
     },

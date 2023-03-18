@@ -46,6 +46,7 @@
     "chat": {
       "channels": "Channels",
       "message_form": "Text your message",
+      "message_label": "New message",
       "message": "{messageCount, plural, =0 {messages} =5 {message} other {messages}}"
     },
     "modal": {

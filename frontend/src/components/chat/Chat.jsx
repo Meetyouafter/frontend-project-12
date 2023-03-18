@@ -161,7 +161,7 @@ const Chat = () => {
             <InputGroup className="mb-3 bb">
               <Form.Control
                 placeholder={t('message_form')}
-                aria-label={t('message_form')}
+                aria-label={t('message_label')}
                 aria-describedby="basic-addon2"
                 onChange={(e) => setMessage(e.target.value)}
                 value={message}

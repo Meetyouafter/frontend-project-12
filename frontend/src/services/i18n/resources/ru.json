@@ -45,7 +45,8 @@
     },
     "chat": {
       "channels": "Каналы",
-      "message_form": "Новое сообщение",
+      "message_form": "Введите сообщение",
+      "message_label": "Новое сообщение",
       "message": "{messageCount, plural, =0 {сообщений} =1 {сообщений} =2 {сообщения} other {сообщение}}"
     },
     "modal": {
