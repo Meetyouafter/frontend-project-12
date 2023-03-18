@@ -46,9 +46,11 @@ const Chat = () => {
 
   const messageNameCount = getMessageNameCount(getMessagesCount(activeChannelIndex, messages));
 
+  const token = (JSON.parse((localStorage.getItem('token'))));
+
   useEffect(() => {
-    dispatch(getInitialData());
-  }, [dispatch]);
+    dispatch(getInitialData(token));
+  }, [dispatch, token]);
 
   useEffect(() => {
     socket.on(chatEvents.newMessage, (payload) => {

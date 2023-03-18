@@ -3,8 +3,8 @@ import InitialServise from '../../../api/initialData';
 
 const getInitialData = createAsyncThunk(
   'api/v1/data',
-  async () => {
-    const response = await InitialServise.getChannelData();
+  async (token) => {
+    const response = await InitialServise.getChannelData(token);
     return response.data;
   },
 );

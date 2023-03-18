@@ -2,12 +2,10 @@ import axios from 'axios';
 
 const INITIAL_DATA_URL = '/api/v1/data';
 
-const token = (JSON.parse((localStorage.getItem('token'))));
-
-const getChannelData = () => axios
+const getChannelData = (token) => axios
   .get(INITIAL_DATA_URL, { headers: { Authorization: `Bearer ${token}` } });
 
-const patchCurrentChannel = (channelId) => axios
+const patchCurrentChannel = (channelId, token) => axios
   .patch(INITIAL_DATA_URL, { currentChannelId: channelId }, { headers: { Authorization: `Bearer ${token}` } });
 
 const InitialServise = { getChannelData, patchCurrentChannel };
