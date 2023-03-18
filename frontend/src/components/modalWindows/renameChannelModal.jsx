@@ -10,9 +10,9 @@ import { setNotificationProps } from '../../store/slices/notification/notificati
 import swearsFilter from '../../services/swearsFilter/swearsFilter';
 import './styles.css';
 
-const RenameChannelModal = ({ channelId }) => {
+const RenameChannelModal = ({ channelId, channelName }) => {
   const [isShowModal, setIsShowModal] = useState(false);
-  const [newChannelName, setNewChannelName] = useState('');
+  const [newChannelName, setNewChannelName] = useState(channelName);
   const [formerror, setFormError] = useState('');
 
   const { t } = useTranslation('translation', { keyPrefix: 'modal.renameModal' });
@@ -74,6 +74,9 @@ const RenameChannelModal = ({ channelId }) => {
                 <Form.Control.Feedback type="invalid">
                   {formerror}
                 </Form.Control.Feedback>
+                <Form.Label visuallyHidden>
+                  {t('label')}
+                </Form.Label>
               </InputGroup>
             </Form.Group>
             <div className="modal_button_group">

@@ -65,6 +65,7 @@
       },
       "renameModal": {
         "rename_link": "Rename",
+        "label": "Channel name",
         "title": "Rename channel",
         "input_form": "New channel name",
         "escape_button": "Close",

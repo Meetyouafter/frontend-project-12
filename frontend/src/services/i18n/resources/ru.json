@@ -65,6 +65,7 @@
       },
       "renameModal": {
         "rename_link": "Переименовать",
+        "label": "Имя канала",
         "title": "Переименовать канал",
         "input_form": "Новое имя",
         "escape_button": "Отменить",
