@@ -22,28 +22,34 @@ const Login = () => {
       name: '',
       password: '',
     },
-    onSubmit: (values) => {
-      AuthService.postLoginData({ username: values.name, password: values.password })
-        .then((response) => {
-          console.log('response', response);
-          setAuthError('');
-          localStorage.setItem('user', JSON.stringify(values.name));
-          localStorage.setItem('token', JSON.stringify(response.data.token));
-          navigate('/chat');
-        })
-        .catch((error) => {
-          console.log('error', error);
-          if (error.message === 'Request failed with status code 401') {
-            setAuthError(t('login.errors.unregister'));
-            console.log(authError);
-          } else {
-            dispatch(setNotificationProps({
-              variant: 'error',
-              text: t('network_error'),
-              isShow: true,
-            }));
-          }
-        });
+    onSubmit: async (values) => {
+      try {
+        await AuthService.postLoginData({ username: values.name, password: values.password })
+          .then((response) => {
+            console.log('response', response);
+            if (!response.data.username) {
+              setAuthError(t('login.errors.unregister'));
+              console.log(authError);
+            } else {
+              setAuthError('');
+              localStorage.setItem('user', JSON.stringify(response.data.username));
+              localStorage.setItem('token', JSON.stringify(response.data.token));
+              navigate('/chat');
+            }
+          });
+      } catch (error) {
+        console.log('error', error);
+        if (error.message === 'Request failed with status code 401') {
+          setAuthError(t('login.errors.unregister'));
+          console.log(authError);
+        } else {
+          dispatch(setNotificationProps({
+            variant: 'error',
+            text: t('network_error'),
+            isShow: true,
+          }));
+        }
+      }
     },
   });
 
