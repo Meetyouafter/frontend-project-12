@@ -16,9 +16,10 @@ const channelSlice = createSlice({
   name: 'channels',
   initialState,
   reducers: {
-    currentChannel: (state, action) => {
-      state.currentChannel = action.payload;
-    },
+    currentChannel: (state, action) => ({
+      ...state,
+      currentChannel: action.payload,
+    }),
     addChannel: (state, action) => {
       socket.emit(chatEvents.newChannel, (action.payload), (response) => {
         console.log(response);
@@ -64,20 +65,21 @@ const channelSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(getInitialData.pending, (state) => {
-        state.isLoading = true;
-      })
-      .addCase(getInitialData.fulfilled, (state, action) => {
-        console.log('fulfilled', action.payload);
-        state.isLoading = false;
-        state.channels.push(...action.payload.channels);
-      })
-      .addCase(getInitialData.rejected, (state, action) => {
-        console.log('rejected', action);
-        state.isLoading = false;
-        state.channels = [];
-        state.errors = action.error.message;
-      });
+      .addCase(getInitialData.pending, (state) => ({
+        ...state,
+        isLoading: true,
+      }))
+      .addCase(getInitialData.fulfilled, (state, action) => ({
+        ...state,
+        isLoading: false,
+        channels: state.channels.push(...action.payload.channels),
+      }))
+      .addCase(getInitialData.rejected, (state, action) => ({
+        ...state,
+        isLoading: false,
+        channels: [],
+        errors: action.error.message,
+      }));
   },
 });
 

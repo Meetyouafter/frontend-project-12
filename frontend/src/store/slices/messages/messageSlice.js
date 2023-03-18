@@ -25,18 +25,21 @@ const messageSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(getInitialData.pending, (state) => {
-        state.isLoading = true;
-      })
-      .addCase(getInitialData.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.messages.push(...action.payload.messages);
-      })
-      .addCase(getInitialData.rejected, (state, action) => {
-        state.isLoading = false;
-        state.messages = [];
-        state.errors = action.error.message;
-      });
+      .addCase(getInitialData.pending, (state) => ({
+        ...state,
+        isLoading: true,
+      }))
+      .addCase(getInitialData.fulfilled, (state, action) => ({
+        ...state,
+        isLoading: false,
+        messages: state.messages.push(...action.payload.messages),
+      }))
+      .addCase(getInitialData.rejected, (state, action) => ({
+        ...state,
+        isLoading: false,
+        messages: [],
+        errors: action.error.message,
+      }));
   },
 });
 

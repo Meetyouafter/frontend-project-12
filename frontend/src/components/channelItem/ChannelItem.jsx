@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { DropdownButton, Dropdown } from 'react-bootstrap';
+import { Dropdown } from 'react-bootstrap';
 import RenameChannelModal from '../modalWindows/renameChannelModal';
 import RemoveChannelModal from '../modalWindows/removeChannelModal';
 import addIcon from '../../assets/images/add_icon.svg';
