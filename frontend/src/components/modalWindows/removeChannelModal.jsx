@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { Button, Modal } from 'react-bootstrap';
-import { removeChannel } from '../../store/slices/channels/channelSlice';
 import { setNotificationProps } from '../../store/slices/notification/notificationSlice';
+import SocketService from '../../api/chatEvents';
 import './styles.css';
 
 const RemoveChannelModal = ({ channelId }) => {
@@ -16,7 +16,7 @@ const RemoveChannelModal = ({ channelId }) => {
   const handleShow = () => setShow(true);
 
   const handleClick = () => {
-    dispatch(removeChannel({ id: channelId }));
+    SocketService.removeCurrentChannel({ id: channelId });
     handleClose();
     dispatch(setNotificationProps({
       variant: 'success',

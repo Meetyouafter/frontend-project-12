@@ -5,9 +5,9 @@ import {
   Form, Button, Modal, InputGroup,
 } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { renameChannel } from '../../store/slices/channels/channelSlice';
 import { setNotificationProps } from '../../store/slices/notification/notificationSlice';
 import swearsFilter from '../../services/swearsFilter/swearsFilter';
+import SocketService from '../../api/chatEvents';
 import './styles.css';
 
 const RenameChannelModal = ({ channelId, channelName }) => {
@@ -41,7 +41,7 @@ const RenameChannelModal = ({ channelId, channelName }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validate()) {
-      dispatch(renameChannel({ id: channelId, name: swearsFilter(newChannelName) }));
+      SocketService.renameCurrentChannel({ id: channelId, name: swearsFilter(newChannelName) });
       setNewChannelName('');
       handleClose();
       dispatch(setNotificationProps({

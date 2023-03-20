@@ -5,20 +5,15 @@ import { useTranslation } from 'react-i18next';
 import {
   Row, InputGroup, Form, Col, Button,
 } from 'react-bootstrap';
-import { io } from 'socket.io-client';
 import getInitialData from '../../store/slices/initialData/getInitialData';
 import ChannelItem from '../channelItem/ChannelItem';
 import AddChannelModal from '../modalWindows/addChannelModal';
 import Loader from '../loader/loader';
-import { addMessage, subscribeMessages } from '../../store/slices/messages/messageSlice';
-import chatEvents from '../../api/chatEvents';
-import { subscribeChannels, subscribeChannelsRename, subscribeChannelsRemove } from '../../store/slices/channels/channelSlice';
 import { getMessageNameCount, getActiveChannelName, getMessagesCount } from './helper';
 import sendImage from '../../assets/images/send_icon.svg';
 import swearsFilter from '../../services/swearsFilter/swearsFilter';
 import './styles.css';
-
-const socket = io();
+import SocketService from '../../api/chatEvents';
 
 const Chat = () => {
   const [message, setMessage] = useState('');
@@ -35,16 +30,13 @@ const Chat = () => {
   const messagesError = appData.messages.errors;
   const channelsError = appData.channels.errors;
 
-  console.log(messagesError);
-
   const { currentChannel } = appData.channels;
-  const [activeChannelIndex, setActiveChannelIndex] = useState(currentChannel + 1);
 
   const { t } = useTranslation('translation', { keyPrefix: 'chat' });
 
   const user = JSON.parse(localStorage.getItem('user'));
 
-  const messageNameCount = getMessageNameCount(getMessagesCount(activeChannelIndex, messages));
+  const messageNameCount = getMessageNameCount(getMessagesCount(currentChannel, messages));
 
   const token = (JSON.parse((localStorage.getItem('token'))));
 
@@ -52,39 +44,13 @@ const Chat = () => {
     dispatch(getInitialData(token));
   }, [dispatch, token]);
 
-  useEffect(() => {
-    socket.on(chatEvents.newMessage, (payload) => {
-      dispatch(subscribeMessages(payload));
-    });
-  }, [dispatch]);
-
-  useEffect(() => {
-    socket.on(chatEvents.newChannel, (payload) => {
-      setActiveChannelIndex(payload.id);
-      dispatch(subscribeChannels(payload));
-    });
-  }, [dispatch]);
-
-  useEffect(() => {
-    socket.on(chatEvents.renameChannel, (payload) => {
-      dispatch(subscribeChannelsRename(payload));
-    });
-  }, [dispatch]);
-
-  useEffect(() => {
-    socket.on(chatEvents.removeChannel, (payload) => {
-      dispatch(subscribeChannelsRemove(payload));
-      setActiveChannelIndex(1);
-    });
-  }, [dispatch]);
-
   const handleClick = (e) => {
     e.preventDefault();
     if (message.trim().length > 0) {
       const newMessage = {
-        body: swearsFilter(message), channelId: activeChannelIndex, username: user,
+        body: swearsFilter(message), channelId: currentChannel, username: user,
       };
-      dispatch(addMessage(newMessage));
+      SocketService.addNewMessage(newMessage);
       setMessage('');
     }
   };
@@ -124,10 +90,9 @@ const Chat = () => {
           </div>
           {channels.map((channel) => (
             <ChannelItem
-              activeChannel={activeChannelIndex}
-              setActiveChannel={() => setActiveChannelIndex(channel.id)}
               channelData={channel}
               key={channel.id}
+              currentChannel={currentChannel}
             />
           ))}
         </Col>
@@ -137,17 +102,17 @@ const Chat = () => {
           <div className="messages_header">
             <p className="header_channel">
               #
-              {getActiveChannelName(channels, activeChannelIndex)}
+              {getActiveChannelName(channels, currentChannel)}
             </p>
             <p className="header_channel">
-              {getMessagesCount(activeChannelIndex, messages)}
+              {getMessagesCount(currentChannel, messages)}
               {' '}
               {t('message', { messageCount: messageNameCount })}
             </p>
           </div>
           <div className="messages_container">
             {messages
-              .filter((mess) => mess.channelId === activeChannelIndex)
+              .filter((mess) => mess.channelId === currentChannel)
               .map((mess) => (
                 <div key={mess.id}>
                   <span className="username">

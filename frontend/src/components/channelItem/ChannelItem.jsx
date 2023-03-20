@@ -1,10 +1,12 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { useDispatch } from 'react-redux';
 import { Dropdown } from 'react-bootstrap';
 import RenameChannelModal from '../modalWindows/renameChannelModal';
 import RemoveChannelModal from '../modalWindows/removeChannelModal';
 import './styles.css';
+import { changeCurrentChannel } from '../../store/slices/channels/channelSlice';
 
 const ChannelMenu = ({ channelId, channelName }) => {
   const { t } = useTranslation('translation', { keyPrefix: 'chat' });
@@ -25,20 +27,24 @@ const ChannelMenu = ({ channelId, channelName }) => {
   );
 };
 
-const ChannelItem = ({ activeChannel, channelData, setActiveChannel }) => (
-  <div
-    className={activeChannel === channelData.id ? 'chat active_chat' : 'chat'}
-    onClick={setActiveChannel}
-    onKeyPress={setActiveChannel}
-  >
-    <p className="channel_name">
-      #
-      {' '}
-      {channelData.name}
-    </p>
-    {channelData.removable
+const ChannelItem = ({ currentChannel, channelData }) => {
+  const dispatch = useDispatch();
+
+  return (
+    <div
+      className={currentChannel === channelData.id ? 'chat active_chat' : 'chat'}
+      onClick={() => dispatch(changeCurrentChannel(channelData.id))}
+      onKeyPress={() => dispatch(changeCurrentChannel(channelData.id))}
+    >
+      <p className="channel_name">
+        #
+        {' '}
+        {channelData.name}
+      </p>
+      {channelData.removable
       && <ChannelMenu channelId={channelData.id} channelName={channelData.name} />}
-  </div>
-);
+    </div>
+  );
+};
 
 export default ChannelItem;

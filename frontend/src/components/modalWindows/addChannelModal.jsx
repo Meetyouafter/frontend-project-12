@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   Button, InputGroup, Modal, Form,
 } from 'react-bootstrap';
-import { addChannel } from '../../store/slices/channels/channelSlice';
+import SocketService from '../../api/chatEvents';
 import { setNotificationProps } from '../../store/slices/notification/notificationSlice';
 import swearsFilter from '../../services/swearsFilter/swearsFilter';
 import addIcon from '../../assets/images/add_icon.svg';
@@ -46,7 +46,7 @@ const AddChannelModal = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validate()) {
-      dispatch(addChannel({ name: swearsFilter(newChannelName) }));
+      SocketService.addNewChannel({ name: swearsFilter(newChannelName) });
       setNewChannelName('');
       handleClose();
       dispatch(setNotificationProps({

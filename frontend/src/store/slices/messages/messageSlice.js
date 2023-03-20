@@ -1,6 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { io } from 'socket.io-client';
-import chatEvents from '../../../api/chatEvents';
 import getInitialData from '../initialData/getInitialData';
 
 const initialState = {
@@ -9,17 +7,11 @@ const initialState = {
   errors: null,
 };
 
-const socket = io();
-
 const messageSlice = createSlice({
   name: 'messages',
   initialState,
   reducers: {
     addMessage: (state, action) => {
-      const newMessage = action.payload;
-      socket.emit(chatEvents.newMessage, newMessage);
-    },
-    subscribeMessages: (state, action) => {
       const newMessage = action.payload;
       return {
         ...state,
@@ -47,5 +39,5 @@ const messageSlice = createSlice({
   },
 });
 
-export const { addMessage, subscribeMessages } = messageSlice.actions;
+export const { addMessage } = messageSlice.actions;
 export default messageSlice.reducer;

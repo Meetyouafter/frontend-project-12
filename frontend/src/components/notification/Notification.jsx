@@ -19,7 +19,7 @@ const Notification = ({
   useEffect(() => {
     const timer = setTimeout(() => {
       closeAlert();
-    }, 500000);
+    }, 5000);
     return () => clearTimeout(timer);
   }, [closeAlert]);
 
