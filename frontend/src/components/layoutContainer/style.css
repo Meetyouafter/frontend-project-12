@@ -25,3 +25,9 @@
     width: 80%;
   }
 }
+
+@media (max-width: 400px) {
+  .layout_container {
+    width: 100%;
+  }
+}

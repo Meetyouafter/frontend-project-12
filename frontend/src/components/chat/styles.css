@@ -15,18 +15,18 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  overflow-y: auto;
 }
 
 .channels_header {
   height: 15%;
   min-height: 60px;
   display: flex;
+  text-align: center;
   align-items: center;
   justify-content: space-between;
   border-bottom: 1px solid gray;
   background-color: #FFBB73;
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 600;
   padding-left: 15px;
   border-radius: 6px;
@@ -44,6 +44,7 @@
   margin: 0 !important;
   height: 100%;
   width: 35%;
+  min-width: 120px;
 }
 
 .messages_header {
@@ -69,6 +70,7 @@
   height: 100%;
   width: 65%;
   border-left: 1px solid gray;
+  min-width: 200px;
 }
 
 .message {
@@ -119,7 +121,22 @@ div.dropdow-menu.show {
     min-width: 100px;
 }
 
-@media (max-width: 400px) {
+@media (max-width: 600px) {
+  .channels_header .messages_header{
+    font-size: 18px;
+  }
+
+  .channel_name .chat {
+    font-size: 14px;
+    width: 70%;
+  }
+
+  input.form-control {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 450px) {
   .channel_name {
     font-size: 12px;
     width: 65%;
@@ -143,8 +160,8 @@ div.dropdow-menu.show {
   }
 
   .modal_image {
-    margin: 0;
     width: 20px;
+    margin-left: 10px;
   }
 
   #dropdown-basic-button {
