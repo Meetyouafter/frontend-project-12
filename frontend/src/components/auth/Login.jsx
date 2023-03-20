@@ -92,7 +92,7 @@ const Login = () => {
               </Form.Label>
               <Form.Control
                 name="password"
-                type="text"
+                type="password"
                 required
                 placeholder={t('login.forms.password')}
                 isInvalid={!!authError}

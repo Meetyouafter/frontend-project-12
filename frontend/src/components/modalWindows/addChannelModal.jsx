@@ -59,7 +59,7 @@ const AddChannelModal = () => {
 
   return (
     <>
-      <Button onClick={handleShow}>
+      <Button onClick={handleShow} variant="outline-light">
         <img className="modal_image" src={addIcon} alt="add channel" />
         <span className="visually-hidden">+</span>
       </Button>

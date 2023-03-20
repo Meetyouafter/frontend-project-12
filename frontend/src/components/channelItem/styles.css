@@ -29,11 +29,16 @@
   width: 10%;
 }
 
-#dropdown-basic-button {
+#dropdown-basic.dropdown-toggle.btn.btn-primary {
   width: 25px;
   padding: 0;
   height: 25px;
   background-color: #A65500;
+  margin: 0;
+}
+
+#dropdown-basic.dropdown-toggle.btn.btn-primary::after {
+  margin: 0;
 }
 
 .channel_name {

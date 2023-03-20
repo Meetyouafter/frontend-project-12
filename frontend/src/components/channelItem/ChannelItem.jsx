@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next';
 import { Dropdown } from 'react-bootstrap';
 import RenameChannelModal from '../modalWindows/renameChannelModal';
 import RemoveChannelModal from '../modalWindows/removeChannelModal';
-import addIcon from '../../assets/images/add_icon.svg';
 import './styles.css';
 
 const ChannelMenu = ({ channelId, channelName }) => {
@@ -12,8 +11,7 @@ const ChannelMenu = ({ channelId, channelName }) => {
 
   return (
     <Dropdown>
-      <Dropdown.Toggle variant="success" id="dropdown-basic">
-        <img className="modal_image" src={addIcon} alt="add channel" />
+      <Dropdown.Toggle id="dropdown-basic">
         <span className="visually-hidden">
           {t('label')}
         </span>
