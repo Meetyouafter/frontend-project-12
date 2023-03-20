@@ -17,7 +17,16 @@ jobs:
       - name: Check out Git repository
         uses: actions/checkout@v2
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: make install
+
       - name: Run linters
         uses: wearerequired/lint-action@v2
         with:
           eslint: true
+          prettier: true
