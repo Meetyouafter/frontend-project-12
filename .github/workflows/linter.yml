@@ -23,7 +23,7 @@ jobs:
           node-version: 18
 
       - name: Install dependencies
-        run: make install
+        run: cd frontend && npm ci
 
       - name: Run linters
         uses: wearerequired/lint-action@v2
