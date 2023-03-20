@@ -10,7 +10,6 @@ const Notification = ({
   variant, text, isShow, toggleShow,
 }) => {
   const dispatch = useDispatch();
-  const closeNotification = () => dispatch(clearNotificationProps());
 
   const closeAlert = useCallback(() => {
     toggleShow(false);
@@ -20,7 +19,7 @@ const Notification = ({
   useEffect(() => {
     const timer = setTimeout(() => {
       closeAlert();
-    }, 50000);
+    }, 500000);
     return () => clearTimeout(timer);
   }, [closeAlert]);
 
@@ -33,7 +32,7 @@ const Notification = ({
           <img src={img} alt="notification info" />
           <p>{text}</p>
         </div>
-        <Button onClick={closeNotification}>
+        <Button variant="outlined-warn" onClick={closeAlert}>
           <img
             src={closeImg}
             alt="close notification"

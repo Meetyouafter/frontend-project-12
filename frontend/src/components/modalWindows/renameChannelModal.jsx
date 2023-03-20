@@ -49,7 +49,7 @@ const RenameChannelModal = ({ channelId, channelName }) => {
 
   return (
     <>
-      <Button onClick={handleShow}>
+      <Button variant="outlined-light" onClick={handleShow}>
         {t('rename_link')}
         <span className="visually-hidden">{t('rename_link')}</span>
       </Button>

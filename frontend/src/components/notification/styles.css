@@ -22,3 +22,9 @@ div.toast-body {
   align-items: center;
   justify-content: space-between;
 }
+
+div.toast-body > .btn {
+  width: auto;
+  margin: 0;
+  padding: 0;
+}

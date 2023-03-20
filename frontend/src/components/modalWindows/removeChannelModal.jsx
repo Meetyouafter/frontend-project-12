@@ -27,7 +27,7 @@ const RemoveChannelModal = ({ channelId }) => {
 
   return (
     <>
-      <Button onClick={handleShow}>
+      <Button variant="outlined-light" onClick={handleShow}>
         {t('remove_link')}
         <span className="visually-hidden">{t('remove_link')}</span>
       </Button>
