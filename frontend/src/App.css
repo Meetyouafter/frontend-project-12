@@ -3,13 +3,21 @@
   right: 0;
   top: 3%;
 }
+/*
+.input-group {
+  height: 70px;
+}
 
-.btn.btn-primary .btn.btn-danger {
+.input-group > .form-control {
+  height: 60px;
+  border-radius: 6px;
+}
+*/
+
+.btn {
   width: 100%;
   border-radius: 8px;
-  height: 30%;
   font-size: 18px;
-  margin-top: 20px;
 }
 
 .primary_wrapper {

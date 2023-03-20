@@ -6,7 +6,7 @@ import Header from '../components/header/Header';
 const LoginPage = () => (
   <>
     <Header />
-    <LayoutContainerForAuth height="60%">
+    <LayoutContainerForAuth height="50%">
       <Login />
     </LayoutContainerForAuth>
   </>
