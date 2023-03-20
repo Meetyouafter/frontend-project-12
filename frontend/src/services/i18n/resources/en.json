@@ -71,6 +71,7 @@
         "escape_button": "Close",
         "success_button": "Rename",
         "required_error": "This form is required",
+        "unique_error": "Name must be unique",
         "length_error": "From 3 to 20 characters",
         "notification": "Channel was renamed",
         "error_notification": "Network error"

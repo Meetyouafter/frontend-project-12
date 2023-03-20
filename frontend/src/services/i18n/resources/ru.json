@@ -71,6 +71,7 @@
         "escape_button": "Отменить",
         "success_button": "Переименовать",
         "required_error": "Поле обязательно для заполнения",
+        "unique_error": "Должно быть уникальным",
         "length_error": "От 3 до 20 символов",
         "notification": "Канал переименован",
         "error_notification": "Ошибка соединения"

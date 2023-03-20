@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import {
   Form, Button, Modal, InputGroup,
 } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { renameChannel } from '../../store/slices/channels/channelSlice';
 import { setNotificationProps } from '../../store/slices/notification/notificationSlice';
 import swearsFilter from '../../services/swearsFilter/swearsFilter';
@@ -21,12 +21,17 @@ const RenameChannelModal = ({ channelId, channelName }) => {
   const handleClose = () => setIsShowModal(false);
   const handleShow = () => setIsShowModal(true);
 
+  const channels = useSelector((state) => state.channels.channels);
+  const channelsNames = channels.map((channel) => channel.name);
+
   const validate = () => {
     let error = '';
     if (!newChannelName) {
       error = t('required_error');
     } else if (newChannelName.length < 3 || newChannelName.length > 20) {
       error = t('length_error');
+    } else if (channelsNames.includes(newChannelName)) {
+      error = t('unique_error');
     }
 
     setFormError(error);
