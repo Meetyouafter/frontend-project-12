@@ -1,0 +1,12 @@
+name: lint-check
+on: push
+jobs:
+  unit_test-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: |
+              cd frontend
+              npm ci
+              npm run build
+              npx eslint
