@@ -7,13 +7,14 @@ import {
 } from 'react-bootstrap';
 import getInitialData from '../../store/slices/initialData/getInitialData';
 import ChannelItem from '../channelItem/ChannelItem';
-import AddChannelModal from '../modalWindows/addChannelModal';
-import Loader from '../loader/loader';
+import AddChannelModal from '../modalWindows/AddChannelModal';
+import Error from '../errors/Error';
+import Loader from '../loader/Loader';
 import { getMessageNameCount, getActiveChannelName, getMessagesCount } from './helper';
 import sendImage from '../../assets/images/send_icon.svg';
 import swearsFilter from '../../services/swearsFilter/swearsFilter';
-import './styles.css';
 import SocketService from '../../api/chatEvents';
+import './styles.css';
 
 const Chat = () => {
   const [message, setMessage] = useState('');
@@ -65,15 +66,7 @@ const Chat = () => {
 
   if (messagesError || channelsError) {
     if (messagesError.errors === 'Request failed with status code 401') return <Navigate to="/signup" />;
-    return (
-      <div>
-        <p>
-          Error:
-          {' '}
-          {messagesError || channelsError}
-        </p>
-      </div>
-    );
+    return <Error error={messagesError || channelsError} />;
   }
 
   return (

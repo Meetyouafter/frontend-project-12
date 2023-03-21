@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { Provider as RollbarProvider, ErrorBoundary, LEVEL_WARN } from '@rollbar/react';
-import Error404 from './components/errors/error404';
+import Error404 from './components/errors/Error404';
 import store from './store';
 import LoginPage from './pages/loginPage';
 import SignUpPage from './pages/signUpPage';

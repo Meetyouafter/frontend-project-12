@@ -3,8 +3,8 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { Dropdown } from 'react-bootstrap';
-import RenameChannelModal from '../modalWindows/renameChannelModal';
-import RemoveChannelModal from '../modalWindows/removeChannelModal';
+import RenameChannelModal from '../modalWindows/RenameChannelModal';
+import RemoveChannelModal from '../modalWindows/RemoveChannelModal';
 import './styles.css';
 import { changeCurrentChannel } from '../../store/slices/channels/channelSlice';
 
