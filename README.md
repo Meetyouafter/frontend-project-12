@@ -1,5 +1,5 @@
 ### Hexlet tests and linter status:
-[![Actions Status](https://github.com/Meetyouafter/frontend-project-12/workflows/hexlet-check/badge.svg)](https://github.com/Meetyouafter/frontend-project-12/actions) [![Maintainability](https://api.codeclimate.com/v1/badges/87ec7153b2ea5e4ea5ea/maintainability)](https://codeclimate.com/github/Meetyouafter/frontend-project-12/maintainability)
+[![Actions Status](https://github.com/Meetyouafter/frontend-project-12/workflows/hexlet-check/badge.svg)](https://github.com/Meetyouafter/frontend-project-12/actions) [![lint-check](https://github.com/Meetyouafter/frontend-project-12/actions/workflows/linter.yml/badge.svg)](https://github.com/Meetyouafter/frontend-project-12/actions/workflows/linter.yml) [![Maintainability](https://api.codeclimate.com/v1/badges/87ec7153b2ea5e4ea5ea/maintainability)](https://codeclimate.com/github/Meetyouafter/frontend-project-12/maintainability)
 
 ## Chat app
 ### You can looks it on Railway https://chat-meetyouafter.up.railway.app/

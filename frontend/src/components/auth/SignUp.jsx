@@ -67,7 +67,7 @@ const SignUp = () => {
       </Row>
       <Row>
         <Col>
-          <Form onSubmit={formik.handleSubmit}>
+          <Form onSubmit={formik.handleSubmit} className="form_container">
 
             <Form.Group controlId="name">
               <InputGroup hasValidation>
@@ -79,7 +79,6 @@ const SignUp = () => {
                 <Form.Control
                   name="name"
                   type="text"
-                  required
                   placeholder={t('sign_up.forms.name')}
                   isInvalid={!!formik.errors.name}
                   onChange={formik.handleChange}
@@ -101,7 +100,6 @@ const SignUp = () => {
                 <Form.Control
                   name="password"
                   type="password"
-                  required
                   placeholder={t('sign_up.forms.password')}
                   isInvalid={!!formik.errors.password}
                   onChange={formik.handleChange}
@@ -123,7 +121,6 @@ const SignUp = () => {
                 <Form.Control
                   name="passwordConfirmation"
                   type="password"
-                  required
                   placeholder={t('sign_up.forms.password_repeat')}
                   isInvalid={!!formik.errors.passwordConfirmation}
                   onChange={formik.handleChange}

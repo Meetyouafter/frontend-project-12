@@ -11,7 +11,7 @@ const LayoutContainer = ({ children }) => (
 const LayoutContainerForAuth = ({ children, height }) => (
   <Container className="layout_auth_wrapper" style={{ height: `${height}` }}>
     <Row>
-      <Col lg={6} md={9} sm={12} className="layout_auth_container">
+      <Col lg={6} md={8} sm={10} xs={10} className="layout_auth_container">
         {children}
       </Col>
     </Row>
