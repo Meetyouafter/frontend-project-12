@@ -7,7 +7,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { setNotificationProps } from '../../store/slices/notification/notificationSlice';
 import swearsFilter from '../../services/swearsFilter/swearsFilter';
-import SocketService from '../../api/chatEvents';
+import SocketService from '../../api/sockets/SocketService';
 import './styles.css';
 
 const RenameChannelModal = ({ channelId, channelName }) => {

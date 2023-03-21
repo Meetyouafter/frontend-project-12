@@ -1,22 +1,28 @@
 import { io } from 'socket.io-client';
-import store from '../store/index';
-import { addMessage } from '../store/slices/messages/messageSlice';
+import store from '../../store/index';
+import chatEvents from './chatEvents';
+import { addMessage } from '../../store/slices/messages/messageSlice';
 import {
-  addChannel, changeCurrentChannel, removeChannel, renameChannel,
-} from '../store/slices/channels/channelSlice';
+  addChannel, removeChannel, renameChannel, changeCurrentChannel,
+} from '../../store/slices/channels/channelSlice';
 
 const socket = io();
 const { dispatch } = store;
 
-const chatEvents = {
-  newMessage: 'newMessage',
-  newChannel: 'newChannel',
-  removeChannel: 'removeChannel',
-  renameChannel: 'renameChannel',
-};
-
 socket.on(chatEvents.newChannel, (channel) => {
   dispatch(addChannel(channel));
+});
+
+socket.on(chatEvents.renameChannel, (channel) => {
+  dispatch(renameChannel(channel));
+});
+
+socket.on(chatEvents.removeChannel, (id) => {
+  dispatch(removeChannel(id));
+});
+
+socket.on(chatEvents.newMessage, (message) => {
+  dispatch(addMessage(message));
 });
 
 const addNewChannel = (channel) => socket.emit(chatEvents.newChannel, channel, (response) => {
@@ -27,15 +33,7 @@ const addNewChannel = (channel) => socket.emit(chatEvents.newChannel, channel, (
   }
 });
 
-socket.on(chatEvents.renameChannel, (channel) => {
-  dispatch(renameChannel(channel));
-});
-
 const renameCurrentChannel = (channel) => socket.emit(chatEvents.renameChannel, channel);
-
-socket.on(chatEvents.removeChannel, (id) => {
-  dispatch(removeChannel(id));
-});
 
 const removeCurrentChannel = (channel) => socket.emit(
   chatEvents.removeChannel,
@@ -48,10 +46,6 @@ const removeCurrentChannel = (channel) => socket.emit(
     }
   },
 );
-
-socket.on(chatEvents.newMessage, (message) => {
-  dispatch(addMessage(message));
-});
 
 const addNewMessage = (message) => socket.emit(chatEvents.newMessage, message);
 

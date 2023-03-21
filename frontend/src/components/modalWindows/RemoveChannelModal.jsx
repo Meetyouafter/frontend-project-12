@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { Button, Modal } from 'react-bootstrap';
 import { setNotificationProps } from '../../store/slices/notification/notificationSlice';
-import SocketService from '../../api/chatEvents';
+import SocketService from '../../api/sockets/SocketService';
 import './styles.css';
 
 const RemoveChannelModal = ({ channelId }) => {

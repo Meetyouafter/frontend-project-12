@@ -13,7 +13,7 @@ import Loader from '../loader/Loader';
 import { getMessageNameCount, getActiveChannelName, getMessagesCount } from './helper';
 import sendImage from '../../assets/images/send_icon.svg';
 import swearsFilter from '../../services/swearsFilter/swearsFilter';
-import SocketService from '../../api/chatEvents';
+import SocketService from '../../api/sockets/SocketService';
 import './styles.css';
 
 const Chat = () => {
