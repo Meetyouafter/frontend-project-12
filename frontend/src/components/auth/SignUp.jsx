@@ -86,10 +86,10 @@ const SignUp = () => {
                       onChange={formik.handleChange}
                       value={formik.values.name}
                     />
-                    <Form.Control.Feedback type="invalid">
-                      {formik.errors.name || nameError}
-                    </Form.Control.Feedback>
                   </FloatingLabel>
+                  <Form.Control.Feedback type="invalid">
+                    {formik.errors.name || nameError}
+                  </Form.Control.Feedback>
                 </InputGroup>
               </Form.Group>
 
@@ -108,10 +108,10 @@ const SignUp = () => {
                       onChange={formik.handleChange}
                       value={formik.values.password}
                     />
-                    <Form.Control.Feedback type="invalid">
-                      {formik.errors.password}
-                    </Form.Control.Feedback>
                   </FloatingLabel>
+                  <Form.Control.Feedback type="invalid">
+                    {formik.errors.password}
+                  </Form.Control.Feedback>
                 </InputGroup>
               </Form.Group>
 
@@ -130,10 +130,10 @@ const SignUp = () => {
                       onChange={formik.handleChange}
                       value={formik.values.passwordConfirmation}
                     />
-                    <Form.Control.Feedback type="invalid">
-                      {formik.errors.passwordConfirmation}
-                    </Form.Control.Feedback>
                   </FloatingLabel>
+                  <Form.Control.Feedback type="invalid">
+                    {formik.errors.passwordConfirmation}
+                  </Form.Control.Feedback>
                 </InputGroup>
               </Form.Group>
 

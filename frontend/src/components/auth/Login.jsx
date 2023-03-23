@@ -84,6 +84,9 @@ const Login = () => {
                       onChange={formik.handleChange}
                       value={formik.values.name}
                     />
+                    <Form.Control.Feedback type="invalid">
+                      {formik.errors.name}
+                    </Form.Control.Feedback>
                   </FloatingLabel>
                   <Form.Control.Feedback type="invalid">
                     {formik.errors.name}
