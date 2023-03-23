@@ -12,45 +12,16 @@
   align-items: flex-end;
 }
 
-.modal_form.input-group.has-validation {
-  height: 55px;
-}
-
 .modal-title.h4 {
   font-size: 20px;
   font-weight: 800;
-}
-
-.modal_primary_title {
-  padding-left: 10px;
-  margin-bottom: 0;
-  height: 30px;
-}
-
-.modal_primary_title:hover {
-  background-color: lightgray;  
-}
-
-button.btn.btn-primary {
-  width: auto;
-  height: 40px;
-}
-
-button.btn.btn-secondary {
-  width: auto;
-  height: 40px;
-}
-
-button.btn.btn-danger {
-  width: auto;
-  height: 40px;
 }
 
 .modal-body {
   font-size: 16px;
 }
 
-button.btn.btn-outlined-light {
+.open_modal_button.btn.btn-outlined-light {
   width: 100%;
   height: 30px;
   border-radius: 0;
@@ -59,7 +30,7 @@ button.btn.btn-outlined-light {
   padding-left: 10px;
 }
 
-button.btn.btn-outlined-light:hover {
+.open_modal_button.btn.btn-outlined-light:hover {
   background-color: lightgray;
 }
 
@@ -69,6 +40,17 @@ button.btn.btn-outlined-light:hover {
   margin-right: 5%;
 }
 
-div.input-group {
-  padding-bottom: 10px;
+.modal_button.btn.btn-primary {
+  width: auto;
+  height: 40px;
+}
+
+.modal_button.btn.btn-secondary {
+  width: auto;
+  height: 40px;
+}
+
+.modal_button.btn.btn-danger {
+  width: auto;
+  height: 40px;
 }

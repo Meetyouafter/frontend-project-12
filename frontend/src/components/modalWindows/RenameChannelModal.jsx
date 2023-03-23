@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
-  Form, Button, Modal, InputGroup,
+  Form, Button, Modal, FloatingLabel,
 } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { setNotificationProps } from '../../store/slices/notification/notificationSlice';
@@ -54,7 +54,7 @@ const RenameChannelModal = ({ channelId, channelName }) => {
 
   return (
     <>
-      <Button variant="outlined-light" onClick={handleShow}>
+      <Button variant="outlined-light" onClick={handleShow} className="open_modal_button">
         {t('rename_link')}
         <span className="visually-hidden">{t('rename_link')}</span>
       </Button>
@@ -64,28 +64,27 @@ const RenameChannelModal = ({ channelId, channelName }) => {
           <Modal.Title>{t('title')}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form noValidate onSubmit={handleSubmit} className="modal_body">
-            <Form.Group controlId="validationChanelName">
-              <InputGroup hasValidation className="modal_form">
-                <Form.Control
-                  type="text"
-                  placeholder={t('input_form')}
-                  htmlFor="rename channel input"
-                  autoFocus
-                  required
-                  isInvalid={!!formerror}
-                  value={newChannelName}
-                  onChange={(e) => setNewChannelName(e.target.value)}
-                  aria-describedby="inputGroupPrepend"
-                />
-                <Form.Control.Feedback type="invalid">
-                  {formerror}
-                </Form.Control.Feedback>
-                <Form.Label visuallyHidden>
-                  {t('label')}
-                </Form.Label>
-              </InputGroup>
-            </Form.Group>
+          <Form onSubmit={handleSubmit} className="modal_body">
+            <FloatingLabel
+              controlId="floatingInput"
+              label={t('label')}
+              className="mb-3"
+            >
+              <Form.Control
+                type="text"
+                placeholder={t('input_form')}
+                htmlFor="rename channel input"
+                autoFocus
+                required
+                isInvalid={!!formerror}
+                value={newChannelName}
+                onChange={(e) => setNewChannelName(e.target.value)}
+                aria-describedby="inputGroupPrepend"
+              />
+              <Form.Control.Feedback type="invalid">
+                {formerror}
+              </Form.Control.Feedback>
+            </FloatingLabel>
             <div className="modal_button_group">
               <Button variant="secondary" className="modal_button" onClick={handleClose}>
                 {t('escape_button')}

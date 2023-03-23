@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  Button, InputGroup, Modal, Form,
+  Button, FloatingLabel, Modal, Form,
 } from 'react-bootstrap';
 import SocketService from '../../api/sockets/SocketService';
 import { setNotificationProps } from '../../store/slices/notification/notificationSlice';
@@ -59,7 +59,7 @@ const AddChannelModal = () => {
 
   return (
     <>
-      <Button onClick={handleShow} variant="outline-light">
+      <Button onClick={handleShow} variant="outline-light" className="open_modal_button">
         <img className="modal_image" src={addIcon} alt="add channel" />
         <span className="visually-hidden">+</span>
       </Button>
@@ -68,33 +68,32 @@ const AddChannelModal = () => {
           <Modal.Title>{t('title')}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form noValidate onSubmit={handleSubmit} className="modal_body">
-            <Form.Group controlId="validationChanelName">
-              <InputGroup hasValidation className="modal_form">
-                <Form.Control
-                  type="text"
-                  placeholder={t('input_form')}
-                  htmlFor="add channel input"
-                  autoFocus
-                  required
-                  isInvalid={!!formerror}
-                  value={newChannelName}
-                  onChange={(e) => setNewChannelName(e.target.value)}
-                  aria-describedby="inputGroupPrepend"
-                />
-                <Form.Control.Feedback type="invalid">
-                  {formerror}
-                </Form.Control.Feedback>
-                <Form.Label visuallyHidden>
-                  {t('label')}
-                </Form.Label>
-              </InputGroup>
-            </Form.Group>
+          <Form onSubmit={handleSubmit} className="modal_body">
+            <FloatingLabel
+              controlId="floatingInput"
+              label={t('label')}
+              className="mb-3"
+            >
+              <Form.Control
+                type="text"
+                placeholder={t('input_form')}
+                htmlFor="add channel input"
+                autoFocus
+                required
+                isInvalid={!!formerror}
+                value={newChannelName}
+                onChange={(e) => setNewChannelName(e.target.value)}
+                aria-describedby="inputGroupPrepend"
+              />
+              <Form.Control.Feedback type="invalid">
+                {formerror}
+              </Form.Control.Feedback>
+            </FloatingLabel>
             <div className="modal_button_group">
-              <Button variant="secondary" onClick={handleClose}>
+              <Button variant="secondary" className="modal_button" onClick={handleClose}>
                 {t('escape_button')}
               </Button>
-              <Button variant="primary" type="submit">
+              <Button variant="primary" className="modal_button" type="submit">
                 {t('success_button')}
               </Button>
             </div>
