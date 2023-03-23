@@ -30,10 +30,8 @@ const Login = () => {
           .post('/api/v1/login', { username: values.name, password: values.password }, { headers: { Authorization: `Bearer ${localStorage.token}` } })
         // AuthService.postLoginData({ username: values.name, password: values.password })
           .then((response) => {
-            console.log('response', response);
             if (!response.data.username) {
               setAuthError(t('login.errors.unregister'));
-              console.log(authError);
             } else {
               setAuthError('');
               localStorage.setItem('user', JSON.stringify(response.data.username));
@@ -42,10 +40,8 @@ const Login = () => {
             }
           });
       } catch (error) {
-        console.log('error', error);
         if (error.message === 'Request failed with status code 401') {
           setAuthError(t('login.errors.unregister'));
-          console.log(authError);
         } else {
           dispatch(setNotificationProps({
             variant: 'error',

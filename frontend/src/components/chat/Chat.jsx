@@ -26,8 +26,6 @@ const Chat = () => {
   const { messages } = appData.messages;
   const { channels } = appData.channels;
 
-  console.log(appData);
-
   const messagesLoading = appData.messages.isLoading;
   const channelsLoading = appData.channels.isLoading;
   const messagesError = appData.messages.errors;
