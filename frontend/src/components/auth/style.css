@@ -11,25 +11,6 @@
   margin-bottom: 10px;
 }
 
-.input-group.has-validation {
-  height: 80px;
-}
-
-.input-group.has-validation > #password {
-  height: 60px;
-  border-radius: 0;
-}
-
-.input-group.has-validation > #passwordConfirmation {
-  height: 60px;
-  border-radius: 0;
-}
-
-.input-group.has-validation > #name {
-  height: 60px;
-  border-radius: 0;
-}
-
 .auth_footer {
   display: flex;
   justify-content: center;
@@ -41,9 +22,5 @@
 
 .auth_footer > a {
   width: auto;
-  margin: 0;
-}
-
-.login_container > .row {
   margin: 0;
 }

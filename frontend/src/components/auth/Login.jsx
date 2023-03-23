@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import {
-  Row, Col, Button, Form, InputGroup, FloatingLabel, Container,
+  Row, Col, Button, Form, FloatingLabel, Container,
 } from 'react-bootstrap';
 import Header from '../header/Header';
 import AuthService from '../../api/auth';
@@ -69,52 +69,41 @@ const Login = () => {
         <Row>
           <Col lg={6} md={8} sm={10} xs={10}>
             <Form onSubmit={formik.handleSubmit}>
-              <Form.Group controlId="name">
-                <InputGroup hasValidation>
-                  <FloatingLabel
-                    controlId="floatingInput"
-                    label={t('login.forms.name')}
-                    className="mb-3"
-                  >
-                    <Form.Control
-                      name="name"
-                      type="text"
-                      placeholder={t('login.forms.name')}
-                      isInvalid={!!authError || !!formik.errors.name}
-                      onChange={formik.handleChange}
-                      value={formik.values.name}
-                    />
-                    <Form.Control.Feedback type="invalid">
-                      {formik.errors.name}
-                    </Form.Control.Feedback>
-                  </FloatingLabel>
-                  <Form.Control.Feedback type="invalid">
-                    {formik.errors.name}
-                  </Form.Control.Feedback>
-                </InputGroup>
-              </Form.Group>
+              <FloatingLabel
+                controlId="floatingInput"
+                label={t('login.forms.name')}
+                className="mb-3"
+              >
+                <Form.Control
+                  name="name"
+                  type="text"
+                  placeholder={t('login.forms.name')}
+                  isInvalid={!!authError || !!formik.errors.name}
+                  onChange={formik.handleChange}
+                  value={formik.values.name}
+                />
+                <Form.Control.Feedback type="invalid">
+                  {formik.errors.name}
+                </Form.Control.Feedback>
+              </FloatingLabel>
 
-              <Form.Group controlId="password">
-                <InputGroup hasValidation>
-                  <FloatingLabel
-                    controlId="floatingInput"
-                    label={t('login.forms.password')}
-                    className="mb-3"
-                  >
-                    <Form.Control
-                      name="password"
-                      type="password"
-                      placeholder={t('login.forms.password')}
-                      isInvalid={!!authError || !!formik.errors.password}
-                      onChange={formik.handleChange}
-                      value={formik.values.password}
-                    />
-                    <Form.Control.Feedback type="invalid">
-                      {authError || formik.errors.password}
-                    </Form.Control.Feedback>
-                  </FloatingLabel>
-                </InputGroup>
-              </Form.Group>
+              <FloatingLabel
+                controlId="floatingInput"
+                label={t('login.forms.password')}
+                className="mb-3"
+              >
+                <Form.Control
+                  name="password"
+                  type="password"
+                  placeholder={t('login.forms.password')}
+                  isInvalid={!!authError || !!formik.errors.password}
+                  onChange={formik.handleChange}
+                  value={formik.values.password}
+                />
+                <Form.Control.Feedback type="invalid">
+                  {authError || formik.errors.password}
+                </Form.Control.Feedback>
+              </FloatingLabel>
 
               <Button
                 type="submit"
