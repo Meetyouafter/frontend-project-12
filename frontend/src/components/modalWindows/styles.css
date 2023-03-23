@@ -12,6 +12,10 @@
   align-items: flex-end;
 }
 
+.modal_form.input-group.has-validation {
+  height: 55px;
+}
+
 .modal-title.h4 {
   font-size: 20px;
   font-weight: 800;

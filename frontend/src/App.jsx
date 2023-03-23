@@ -4,9 +4,9 @@ import { Provider } from 'react-redux';
 import { Provider as RollbarProvider, ErrorBoundary, LEVEL_WARN } from '@rollbar/react';
 import Error404 from './components/errors/Error404';
 import store from './store';
-import LoginPage from './pages/loginPage';
-import SignUpPage from './pages/signUpPage';
-import ChatPage from './pages/chatPage';
+import Login from './components/auth/Login';
+import SignUp from './components/auth/SignUp';
+import Chat from './components/chat/Chat';
 import './services/i18n/initial';
 import './App.css';
 
@@ -21,9 +21,9 @@ const App = () => (
       <Provider store={store}>
         <BrowserRouter>
           <Routes>
-            <Route path="/signup" element={<SignUpPage />} />
-            <Route exact path="/" element={<LoginPage />} />
-            <Route path="/chat" element={<ChatPage />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route exact path="/" element={<Login />} />
+            <Route path="/chat" element={<Chat />} />
             <Route path="*" element={<Error404 />} />
           </Routes>
         </BrowserRouter>

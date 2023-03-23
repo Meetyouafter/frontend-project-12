@@ -9,6 +9,8 @@ import getInitialData from '../../store/slices/initialData/getInitialData';
 import ChannelItem from '../channelItem/ChannelItem';
 import AddChannelModal from '../modalWindows/AddChannelModal';
 import Error from '../errors/Error';
+import Header from '../header/Header';
+import LayoutContainer from '../layoutContainer/LayoutContainer';
 import Loader from '../loader/Loader';
 import { getMessageNameCount, getActiveChannelName, getMessagesCount } from './helper';
 import sendImage from '../../assets/images/send_icon.svg';
@@ -70,76 +72,81 @@ const Chat = () => {
   }
 
   return (
-    <div className="chat_wrapper">
-      <Row className="channels_wrapper">
-        <Col className="channels_container">
-          <div className="channels_header">
-            {t('channels')}
-            {' '}
-            (
-            {channels.length}
-            )
-            <AddChannelModal />
-          </div>
-          {channels.map((channel) => (
-            <ChannelItem
-              channelData={channel}
-              key={channel.id}
-              currentChannel={currentChannel}
-            />
-          ))}
-        </Col>
-      </Row>
-      <Row className="messages_wrapper">
-        <Col className="channels_container messages_box">
-          <div className="messages_header">
-            <p className="header_channel">
-              #
-              {getActiveChannelName(channels, currentChannel)}
-            </p>
-            <p className="header_channel">
-              {getMessagesCount(currentChannel, messages)}
-              {' '}
-              {t('message', { messageCount: messageNameCount })}
-            </p>
-          </div>
-          <div className="messages_container">
-            {messages
-              .filter((mess) => mess.channelId === currentChannel)
-              .map((mess) => (
-                <div key={mess.id}>
-                  <span className="username">
-                    {mess.username}
-                    :
-                    {' '}
-                  </span>
-                  <span className="message">{mess.body}</span>
-                </div>
+    <>
+      <Header withBackBtn />
+      <LayoutContainer>
+        <div className="chat_wrapper">
+          <Row className="channels_wrapper">
+            <Col className="channels_container">
+              <div className="channels_header">
+                {t('channels')}
+                {' '}
+                (
+                {channels.length}
+                )
+                <AddChannelModal />
+              </div>
+              {channels.map((channel) => (
+                <ChannelItem
+                  channelData={channel}
+                  key={channel.id}
+                  currentChannel={currentChannel}
+                />
               ))}
-          </div>
-          <form onSubmit={handleClick} className="send_form">
-            <InputGroup className="mb-3 bb">
-              <Form.Control
-                placeholder={t('message_form')}
-                aria-label={t('message_label')}
-                aria-describedby="basic-addon2"
-                onChange={(e) => setMessage(e.target.value)}
-                value={message}
-              />
-              <Button
-                variant="outline-secondary"
-                id="button-addon2"
-                className="send_message_button"
-                type="submit"
-                disabled={!message}
-              >
-                <img src={sendImage} alt="send message" />
-              </Button>
-            </InputGroup>
-          </form>
-        </Col>
-      </Row>
-    </div>
+            </Col>
+          </Row>
+          <Row className="messages_wrapper">
+            <Col className="channels_container messages_box">
+              <div className="messages_header">
+                <p className="header_channel">
+                  #
+                  {getActiveChannelName(channels, currentChannel)}
+                </p>
+                <p className="header_channel">
+                  {getMessagesCount(currentChannel, messages)}
+                  {' '}
+                  {t('message', { messageCount: messageNameCount })}
+                </p>
+              </div>
+              <div className="messages_container">
+                {messages
+                  .filter((mess) => mess.channelId === currentChannel)
+                  .map((mess) => (
+                    <div key={mess.id}>
+                      <span className="username">
+                        {mess.username}
+                        :
+                        {' '}
+                      </span>
+                      <span className="message">{mess.body}</span>
+                    </div>
+                  ))}
+              </div>
+              <form onSubmit={handleClick} className="send_form">
+                <InputGroup className="mb-3 bb">
+                  <Form.Control
+                    placeholder={t('message_form')}
+                    aria-label={t('message_label')}
+                    aria-describedby="basic-addon2"
+                    onChange={(e) => setMessage(e.target.value)}
+                    value={message}
+                  />
+                  <Button
+                    variant="outline-secondary"
+                    id="button-addon2"
+                    className="send_message_button"
+                    type="submit"
+                    disabled={!message}
+                  >
+                    <img src={sendImage} alt="send message" />
+                  </Button>
+                </InputGroup>
+              </form>
+            </Col>
+          </Row>
+        </div>
+      </LayoutContainer>
+    </>
   );
 };
 

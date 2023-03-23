@@ -12,8 +12,14 @@ const notificationSlice = createSlice({
   name: 'notification',
   initialState,
   reducers: {
-    setNotificationProps: (state, action) => ({ notificationProps: { ...action.payload } }),
-    clearNotificationProps: () => ({ notificationProps: { isShow: false } }),
+    setNotificationProps: (state, action) => ({
+      ...state,
+      notificationProps: { ...action.payload },
+    }),
+    clearNotificationProps: (state, action) => ({
+      ...state,
+      notificationProps: { ...action.payload },
+    }),
   },
 });
 

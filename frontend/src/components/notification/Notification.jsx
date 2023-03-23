@@ -13,7 +13,7 @@ const Notification = ({
 
   const closeAlert = useCallback(() => {
     toggleShow(false);
-    dispatch(clearNotificationProps());
+    dispatch(clearNotificationProps({ isShow: false }));
   }, [dispatch, toggleShow]);
 
   useEffect(() => {

@@ -70,7 +70,7 @@ const AddChannelModal = () => {
         <Modal.Body>
           <Form noValidate onSubmit={handleSubmit} className="modal_body">
             <Form.Group controlId="validationChanelName">
-              <InputGroup hasValidation>
+              <InputGroup hasValidation className="modal_form">
                 <Form.Control
                   type="text"
                   placeholder={t('input_form')}
