@@ -5,7 +5,7 @@ import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import {
-  Row, Button, Form, InputGroup, Container, Col, FloatingLabel,
+  Row, Button, Form, Container, Col, FloatingLabel,
 } from 'react-bootstrap';
 import Header from '../header/Header';
 import AuthService from '../../api/auth';
@@ -71,71 +71,59 @@ const SignUp = () => {
         <Row>
           <Col lg={6} md={8} sm={10} xs={10}>
             <Form onSubmit={formik.handleSubmit}>
-              <Form.Group controlId="name">
-                <InputGroup hasValidation>
-                  <FloatingLabel
-                    controlId="floatingInput"
-                    label={t('sign_up.forms.name')}
-                    className="mb-3"
-                  >
-                    <Form.Control
-                      name="name"
-                      type="text"
-                      placeholder={t('sign_up.forms.name')}
-                      isInvalid={!!formik.errors.name}
-                      onChange={formik.handleChange}
-                      value={formik.values.name}
-                    />
-                  </FloatingLabel>
-                  <Form.Control.Feedback type="invalid">
-                    {formik.errors.name || nameError}
-                  </Form.Control.Feedback>
-                </InputGroup>
-              </Form.Group>
+              <FloatingLabel
+                controlId="floatingInput"
+                label={t('sign_up.forms.name')}
+                className="mb-3"
+              >
+                <Form.Control
+                  name="name"
+                  type="text"
+                  placeholder={t('sign_up.forms.name')}
+                  isInvalid={!!formik.errors.name}
+                  onChange={formik.handleChange}
+                  value={formik.values.name}
+                />
+                <Form.Control.Feedback type="invalid">
+                  {formik.errors.name || nameError}
+                </Form.Control.Feedback>
+              </FloatingLabel>
 
-              <Form.Group controlId="password">
-                <InputGroup hasValidation>
-                  <FloatingLabel
-                    controlId="floatingInput"
-                    label={t('sign_up.forms.password')}
-                    className="mb-3"
-                  >
-                    <Form.Control
-                      name="password"
-                      type="password"
-                      placeholder={t('sign_up.forms.password')}
-                      isInvalid={!!formik.errors.password}
-                      onChange={formik.handleChange}
-                      value={formik.values.password}
-                    />
-                  </FloatingLabel>
-                  <Form.Control.Feedback type="invalid">
-                    {formik.errors.password}
-                  </Form.Control.Feedback>
-                </InputGroup>
-              </Form.Group>
+              <FloatingLabel
+                controlId="floatingInput"
+                label={t('sign_up.forms.password')}
+                className="mb-3"
+              >
+                <Form.Control
+                  name="password"
+                  type="password"
+                  placeholder={t('sign_up.forms.password')}
+                  isInvalid={!!formik.errors.password}
+                  onChange={formik.handleChange}
+                  value={formik.values.password}
+                />
+                <Form.Control.Feedback type="invalid">
+                  {formik.errors.password}
+                </Form.Control.Feedback>
+              </FloatingLabel>
 
-              <Form.Group controlId="passwordConfirmation">
-                <InputGroup hasValidation>
-                  <FloatingLabel
-                    controlId="floatingInput"
-                    label={t('sign_up.forms.password_repeat')}
-                    className="mb-3"
-                  >
-                    <Form.Control
-                      name="passwordConfirmation"
-                      type="password"
-                      placeholder={t('sign_up.forms.password_repeat')}
-                      isInvalid={!!formik.errors.passwordConfirmation}
-                      onChange={formik.handleChange}
-                      value={formik.values.passwordConfirmation}
-                    />
-                  </FloatingLabel>
-                  <Form.Control.Feedback type="invalid">
-                    {formik.errors.passwordConfirmation}
-                  </Form.Control.Feedback>
-                </InputGroup>
-              </Form.Group>
+              <FloatingLabel
+                controlId="floatingInput"
+                label={t('sign_up.forms.password_repeat')}
+                className="mb-3"
+              >
+                <Form.Control
+                  name="passwordConfirmation"
+                  type="password"
+                  placeholder={t('sign_up.forms.password_repeat')}
+                  isInvalid={!!formik.errors.passwordConfirmation}
+                  onChange={formik.handleChange}
+                  value={formik.values.passwordConfirmation}
+                />
+                <Form.Control.Feedback type="invalid">
+                  {formik.errors.passwordConfirmation}
+                </Form.Control.Feedback>
+              </FloatingLabel>
 
               <Button
                 type="submit"
