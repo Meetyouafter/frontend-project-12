@@ -67,47 +67,60 @@ const Login = () => {
         <Row>
           <Col lg={5} md={7} sm={9} xs={9}>
             <Form onSubmit={formik.handleSubmit}>
-              <FloatingLabel
-                controlId="floatingInput"
-                label={t('login.forms.name')}
-                className="mb-3"
-              >
-                <Form.Control
-                  name="name"
-                  type="text"
-                  placeholder={t('login.forms.name')}
-                  isInvalid={!!authError || !!formik.errors.name}
-                  onChange={formik.handleChange}
-                  value={formik.values.name}
-                />
-                <Form.Control.Feedback type="invalid">
-                  {formik.errors.name}
-                </Form.Control.Feedback>
-              </FloatingLabel>
-              <FloatingLabel
-                controlId="floatingInput"
-                label={t('login.forms.password')}
-                className="mb-3"
-              >
-                <Form.Control
-                  name="password"
-                  type="password"
-                  placeholder={t('login.forms.password')}
-                  isInvalid={!!authError || !!formik.errors.password}
-                  onChange={formik.handleChange}
-                  value={formik.values.password}
-                />
-                <Form.Control.Feedback type="invalid">
-                  {authError || formik.errors.password}
-                </Form.Control.Feedback>
-              </FloatingLabel>
-              <Button
-                type="submit"
-                variant="primary"
-                className="auth_button"
-              >
-                {t('login.pages_data.button')}
-              </Button>
+              <fieldset disabled={formik.isSubmitting}>
+                <Form.Group className="mb-3">
+                  <FloatingLabel
+                    controlId="name"
+                    label={t('login.forms.name')}
+                    className="mb-3"
+                  >
+                    <Form.Control
+                      name="name"
+                      type="text"
+                      placeholder={t('login.forms.name')}
+                      isInvalid={!!authError || !!formik.errors.name}
+                      onChange={formik.handleChange}
+                      value={formik.values.name}
+                      onBlur={formik.handleBlur}
+                      autoComplete="off"
+                      required
+                    />
+                    <Form.Control.Feedback type="invalid">
+                      {formik.errors.name}
+                    </Form.Control.Feedback>
+                  </FloatingLabel>
+                </Form.Group>
+
+                <Form.Group className="mb-3">
+                  <FloatingLabel
+                    controlId="password"
+                    label={t('login.forms.password')}
+                    className="mb-3"
+                  >
+                    <Form.Control
+                      name="password"
+                      type="password"
+                      placeholder={t('login.forms.name')}
+                      isInvalid={!!authError || !!formik.errors.password}
+                      onChange={formik.handleChange}
+                      value={formik.values.password}
+                      onBlur={formik.handleBlur}
+                      autoComplete="off"
+                      required
+                    />
+                    <Form.Control.Feedback type="invalid">
+                      {authError || formik.errors.password}
+                    </Form.Control.Feedback>
+                  </FloatingLabel>
+                </Form.Group>
+                <Button
+                  type="submit"
+                  variant="primary"
+                  className="auth_button"
+                >
+                  {t('login.pages_data.button')}
+                </Button>
+              </fieldset>
             </Form>
           </Col>
         </Row>
