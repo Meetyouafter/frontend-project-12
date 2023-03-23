@@ -15,7 +15,6 @@ import './style.css';
 const Login = () => {
   const [authError, setAuthError] = useState('');
   const navigate = useNavigate();
-
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
@@ -61,13 +60,12 @@ const Login = () => {
       <Header />
       <Container>
         <Row>
-          <Col lg={6} md={8} sm={10} xs={10} className="auth_header">
+          <Col lg={5} md={7} sm={9} xs={9} className="auth_header">
             {t('login.pages_data.title')}
           </Col>
         </Row>
-
         <Row>
-          <Col lg={6} md={8} sm={10} xs={10}>
+          <Col lg={5} md={7} sm={9} xs={9}>
             <Form onSubmit={formik.handleSubmit}>
               <FloatingLabel
                 controlId="floatingInput"
@@ -86,7 +84,6 @@ const Login = () => {
                   {formik.errors.name}
                 </Form.Control.Feedback>
               </FloatingLabel>
-
               <FloatingLabel
                 controlId="floatingInput"
                 label={t('login.forms.password')}
@@ -104,7 +101,6 @@ const Login = () => {
                   {authError || formik.errors.password}
                 </Form.Control.Feedback>
               </FloatingLabel>
-
               <Button
                 type="submit"
                 variant="primary"
@@ -116,7 +112,7 @@ const Login = () => {
           </Col>
         </Row>
         <Row>
-          <Col lg={6} md={8} sm={10} xs={10} className="auth_footer">
+          <Col lg={5} md={7} sm={9} xs={9} className="auth_footer">
             {t('login.pages_data.footer_description')}
             <a href="/signup" className="link">{t('login.pages_data.footer_link')}</a>
           </Col>

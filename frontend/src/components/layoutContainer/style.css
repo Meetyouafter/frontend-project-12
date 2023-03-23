@@ -10,16 +10,6 @@
   min-height: 300px;
 }
 
-.layout_auth_container {
-  background-color: #61B4CF;
-  border-radius: 6px;
-}
-
-.layout_auth_wrapper {
-  display: flex;
-  justify-content: center;
-}
-
 @media (min-width: 1200px) {
   .layout_container {
     width: 80%;
