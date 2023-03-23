@@ -3,14 +3,13 @@ import { Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import {
-  Row, InputGroup, Form, Col, Button,
+  Row, InputGroup, Form, Col, Button, Container,
 } from 'react-bootstrap';
 import getInitialData from '../../store/slices/initialData/getInitialData';
 import ChannelItem from '../channelItem/ChannelItem';
 import AddChannelModal from '../modalWindows/AddChannelModal';
 import Error from '../errors/Error';
 import Header from '../header/Header';
-import LayoutContainer from '../layoutContainer/LayoutContainer';
 import Loader from '../loader/Loader';
 import { getMessageNameCount, getActiveChannelName, getMessagesCount } from './helper';
 import sendImage from '../../assets/images/send_icon.svg';
@@ -32,14 +31,12 @@ const Chat = () => {
   const channelsError = appData.channels.errors;
 
   const { currentChannel } = appData.channels;
-
   const { t } = useTranslation('translation', { keyPrefix: 'chat' });
 
   const user = JSON.parse(localStorage.getItem('user'));
+  const token = (JSON.parse((localStorage.getItem('token'))));
 
   const messageNameCount = getMessageNameCount(getMessagesCount(currentChannel, messages));
-
-  const token = (JSON.parse((localStorage.getItem('token'))));
 
   useEffect(() => {
     dispatch(getInitialData(token));
@@ -72,18 +69,18 @@ const Chat = () => {
   return (
     <>
       <Header withBackBtn />
-      <LayoutContainer>
-        <div className="chat_wrapper">
-          <Row className="channels_wrapper">
-            <Col className="channels_container">
-              <div className="channels_header">
-                {t('channels')}
-                {' '}
-                (
-                {channels.length}
-                )
-                <AddChannelModal />
-              </div>
+      <Container className="layout_container">
+        <Row className="channels_wrapper">
+          <Col>
+            <div className="channels_header">
+              {t('channels')}
+              {' '}
+              (
+              {channels.length}
+              )
+              <AddChannelModal />
+            </div>
+            <div className="channels_container">
               {channels.map((channel) => (
                 <ChannelItem
                   channelData={channel}
@@ -91,21 +88,23 @@ const Chat = () => {
                   currentChannel={currentChannel}
                 />
               ))}
-            </Col>
-          </Row>
-          <Row className="messages_wrapper">
-            <Col className="channels_container messages_box">
-              <div className="messages_header">
-                <p className="header_channel">
-                  #
-                  {getActiveChannelName(channels, currentChannel)}
-                </p>
-                <p className="header_channel">
-                  {getMessagesCount(currentChannel, messages)}
-                  {' '}
-                  {t('message', { messageCount: messageNameCount })}
-                </p>
-              </div>
+            </div>
+          </Col>
+        </Row>
+        <Row className="messages_wrapper">
+          <Col>
+            <div className="messages_header">
+              <p className="header_channel">
+                #
+                {getActiveChannelName(channels, currentChannel)}
+              </p>
+              <p className="header_channel">
+                {getMessagesCount(currentChannel, messages)}
+                {' '}
+                {t('message', { messageCount: messageNameCount })}
+              </p>
+            </div>
+            <div className="messages_form_container">
               <div className="messages_container">
                 {messages
                   .filter((mess) => mess.channelId === currentChannel)
@@ -121,7 +120,7 @@ const Chat = () => {
                   ))}
               </div>
               <form onSubmit={handleClick} className="send_form">
-                <InputGroup className="mb-3 bb">
+                <InputGroup className="bb">
                   <Form.Control
                     placeholder={t('message_form')}
                     aria-label={t('message_label')}
@@ -140,10 +139,11 @@ const Chat = () => {
                   </Button>
                 </InputGroup>
               </form>
-            </Col>
-          </Row>
-        </div>
-      </LayoutContainer>
+            </div>
+
+          </Col>
+        </Row>
+      </Container>
     </>
   );
 };
