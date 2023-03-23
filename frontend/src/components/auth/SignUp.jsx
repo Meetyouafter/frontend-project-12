@@ -121,7 +121,7 @@ const SignUp = () => {
                 <Form.Group className="mb-3">
                   <FloatingLabel
                     controlId="passwordConfirmation"
-                    label={t('sign_up.forms.password')}
+                    label={t('sign_up.forms.password_repeat')}
                     className="mb-3"
                   >
                     <Form.Control
