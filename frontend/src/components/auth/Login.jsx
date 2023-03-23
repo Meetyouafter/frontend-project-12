@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
@@ -23,6 +24,12 @@ const Login = () => {
       name: '',
       password: '',
     },
+    validationSchema: Yup.object().shape({
+      name: Yup.string()
+        .required(t('sign_up.errors.required')),
+      password: Yup.string()
+        .required(t('sign_up.errors.required')),
+    }),
     onSubmit: async (values) => {
       AuthService.postLoginData({ username: values.name, password: values.password })
         .then((response) => {
@@ -74,11 +81,14 @@ const Login = () => {
                       type="text"
                       required
                       placeholder={t('login.forms.name')}
-                      isInvalid={!!authError}
+                      isInvalid={!!authError || !!formik.errors.name}
                       onChange={formik.handleChange}
                       value={formik.values.name}
                     />
                   </FloatingLabel>
+                  <Form.Control.Feedback type="invalid">
+                    {formik.errors.name}
+                  </Form.Control.Feedback>
                 </InputGroup>
               </Form.Group>
 
@@ -94,12 +104,12 @@ const Login = () => {
                       type="password"
                       required
                       placeholder={t('login.forms.password')}
-                      isInvalid={!!authError}
+                      isInvalid={!!authError || !!formik.errors.password}
                       onChange={formik.handleChange}
                       value={formik.values.password}
                     />
                     <Form.Control.Feedback type="invalid">
-                      {authError}
+                      {authError || formik.errors.password}
                     </Form.Control.Feedback>
                   </FloatingLabel>
                 </InputGroup>
