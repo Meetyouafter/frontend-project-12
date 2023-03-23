@@ -79,7 +79,6 @@ const Login = () => {
                     <Form.Control
                       name="name"
                       type="text"
-                      required
                       placeholder={t('login.forms.name')}
                       isInvalid={!!authError || !!formik.errors.name}
                       onChange={formik.handleChange}
@@ -102,7 +101,6 @@ const Login = () => {
                     <Form.Control
                       name="password"
                       type="password"
-                      required
                       placeholder={t('login.forms.password')}
                       isInvalid={!!authError || !!formik.errors.password}
                       onChange={formik.handleChange}
@@ -125,9 +123,11 @@ const Login = () => {
             </Form>
           </Col>
         </Row>
-        <Row className="auth_footer">
-          {t('login.pages_data.footer_description')}
-          <a href="/signup" className="link">{t('login.pages_data.footer_link')}</a>
+        <Row>
+          <Col lg={6} md={8} sm={10} xs={10} className="auth_footer">
+            {t('login.pages_data.footer_description')}
+            <a href="/signup" className="link">{t('login.pages_data.footer_link')}</a>
+          </Col>
         </Row>
       </Container>
     </>

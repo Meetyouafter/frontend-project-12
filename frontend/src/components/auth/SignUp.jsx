@@ -5,10 +5,9 @@ import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import {
-  Row, Button, Form, InputGroup, Container, Col,
+  Row, Button, Form, InputGroup, Container, Col, FloatingLabel,
 } from 'react-bootstrap';
 import Header from '../header/Header';
-import LayoutContainer from '../layoutContainer/LayoutContainer';
 import AuthService from '../../api/auth';
 import { setNotificationProps } from '../../store/slices/notification/notificationSlice';
 import './style.css';
@@ -63,24 +62,22 @@ const SignUp = () => {
   return (
     <>
       <Header />
-      <LayoutContainer auth height="70%">
-        <Container>
-          <Row>
-            <Col className="auth_header">
-              {t('sign_up.pages_data.title')}
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <Form onSubmit={formik.handleSubmit} className="form_container">
-
-                <Form.Group controlId="name">
-                  <InputGroup hasValidation>
-                    <Form.Label
-                      visuallyHidden
-                    >
-                      {t('sign_up.forms.name')}
-                    </Form.Label>
+      <Container>
+        <Row>
+          <Col lg={6} md={8} sm={10} xs={10} className="auth_header">
+            {t('sign_up.pages_data.title')}
+          </Col>
+        </Row>
+        <Row>
+          <Col lg={6} md={8} sm={10} xs={10}>
+            <Form onSubmit={formik.handleSubmit}>
+              <Form.Group controlId="name">
+                <InputGroup hasValidation>
+                  <FloatingLabel
+                    controlId="floatingInput"
+                    label={t('sign_up.forms.name')}
+                    className="mb-3"
+                  >
                     <Form.Control
                       name="name"
                       type="text"
@@ -92,16 +89,17 @@ const SignUp = () => {
                     <Form.Control.Feedback type="invalid">
                       {formik.errors.name || nameError}
                     </Form.Control.Feedback>
-                  </InputGroup>
-                </Form.Group>
+                  </FloatingLabel>
+                </InputGroup>
+              </Form.Group>
 
-                <Form.Group controlId="password">
-                  <InputGroup hasValidation>
-                    <Form.Label
-                      visuallyHidden
-                    >
-                      {t('sign_up.forms.password')}
-                    </Form.Label>
+              <Form.Group controlId="password">
+                <InputGroup hasValidation>
+                  <FloatingLabel
+                    controlId="floatingInput"
+                    label={t('sign_up.forms.password')}
+                    className="mb-3"
+                  >
                     <Form.Control
                       name="password"
                       type="password"
@@ -113,16 +111,17 @@ const SignUp = () => {
                     <Form.Control.Feedback type="invalid">
                       {formik.errors.password}
                     </Form.Control.Feedback>
-                  </InputGroup>
-                </Form.Group>
+                  </FloatingLabel>
+                </InputGroup>
+              </Form.Group>
 
-                <Form.Group controlId="passwordConfirmation">
-                  <InputGroup hasValidation>
-                    <Form.Label
-                      visuallyHidden
-                    >
-                      {t('sign_up.forms.password_repeat')}
-                    </Form.Label>
+              <Form.Group controlId="passwordConfirmation">
+                <InputGroup hasValidation>
+                  <FloatingLabel
+                    controlId="floatingInput"
+                    label={t('sign_up.forms.password_repeat')}
+                    className="mb-3"
+                  >
                     <Form.Control
                       name="passwordConfirmation"
                       type="password"
@@ -134,26 +133,27 @@ const SignUp = () => {
                     <Form.Control.Feedback type="invalid">
                       {formik.errors.passwordConfirmation}
                     </Form.Control.Feedback>
-                  </InputGroup>
-                </Form.Group>
+                  </FloatingLabel>
+                </InputGroup>
+              </Form.Group>
 
-                <Button
-                  type="submit"
-                  variant="primary"
-                >
-                  {t('sign_up.pages_data.button')}
-                </Button>
-              </Form>
-            </Col>
-          </Row>
-          <Row>
-            <Col className="auth_footer">
-              {t('sign_up.pages_data.footer_description')}
-              <a href="/" className="link">{t('sign_up.pages_data.footer_link')}</a>
-            </Col>
-          </Row>
-        </Container>
-      </LayoutContainer>
+              <Button
+                type="submit"
+                variant="primary"
+                className="auth_button"
+              >
+                {t('sign_up.pages_data.button')}
+              </Button>
+            </Form>
+          </Col>
+        </Row>
+        <Row>
+          <Col className="auth_footer">
+            {t('sign_up.pages_data.footer_description')}
+            <a href="/" className="link">{t('sign_up.pages_data.footer_link')}</a>
+          </Col>
+        </Row>
+      </Container>
     </>
   );
 };
