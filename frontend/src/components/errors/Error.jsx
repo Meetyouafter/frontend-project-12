@@ -11,7 +11,6 @@ const Error = ({ error }) => {
       <p className="error_page_description">{error}</p>
       <Button
         id="errorPage_button"
-        className="primary_button"
         onClick={() => navigate('/')}
       >
         Вернуться на главную

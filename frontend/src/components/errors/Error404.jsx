@@ -13,7 +13,6 @@ const Error404 = () => {
       <p className="error_page_description">Страница не найдена</p>
       <Button
         id="errorPage_button"
-        className="primary_button"
         onClick={() => navigate('/')}
       >
         Вернуться на главную

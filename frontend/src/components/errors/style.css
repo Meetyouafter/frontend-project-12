@@ -19,3 +19,19 @@
   height: 50px;
   width: 30%;
 }
+
+@media (max-width: 600px) {
+  #errorPage_button {
+    font-size: 14px;
+    height: 40px;
+    width: 40%;
+  }
+
+  .error_page_description {
+    font-size: 18px;
+  }
+
+  .error_image {
+    width: 70%;
+  }
+}
