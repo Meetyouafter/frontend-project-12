@@ -3,6 +3,7 @@
 
 ## Chat app
 ### You can looks it on Railway https://chat-meetyouafter.up.railway.app/
+### You can looks it on Netlify https://quiet-axolotl-822095.netlify.app/
 
 This app is simple chat builded on the local server.
 You can use it with different accounts, after sign up or login authentication.
