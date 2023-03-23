@@ -1,54 +1,32 @@
-.container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  row-gap: 10px;
-}
-
 .auth_header {
-  width: 100%;
-  height: 15%;
-  display: flex;
-  align-content: center;
-  justify-content: center;
-  align-items: center;
-  font-size: 32px;
+  text-align: center;
+  font-size: 36px;
   font-weight: 600;
   padding-bottom: 10px;
 }
 
-.container > .row {
-  margin: 0;
-}
-
-.form_container > .btn.btn-primary {
+.auth_button.btn.btn-primary {
   width: 100%;
   height: 50px;
   margin-bottom: 10px;
 }
 
-.form_container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
 .input-group.has-validation {
-  height: 70px;
+  height: 80px;
 }
 
 .input-group.has-validation > #password {
-  height: 50px;
+  height: 60px;
   border-radius: 0;
 }
 
 .input-group.has-validation > #passwordConfirmation {
-  height: 50px;
+  height: 60px;
   border-radius: 0;
 }
 
 .input-group.has-validation > #name {
-  height: 50px;
+  height: 60px;
   border-radius: 0;
 }
 
