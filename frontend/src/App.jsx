@@ -9,6 +9,7 @@ import SignUp from './components/auth/SignUp';
 import Chat from './components/chat/Chat';
 import './services/i18n/initial';
 import './App.css';
+import RouteService from './api/routes';
 
 const rollbarConfig = {
   accessToken: '492b63050c0c42bd949cf4e492c7b6c7',
@@ -21,10 +22,10 @@ const App = () => (
       <Provider store={store}>
         <BrowserRouter>
           <Routes>
-            <Route path="/signup" element={<SignUp />} />
-            <Route exact path="/" element={<Login />} />
-            <Route path="/chat" element={<Chat />} />
-            <Route path="*" element={<Error404 />} />
+            <Route path={RouteService.signUp} element={<SignUp />} />
+            <Route exact path={RouteService.logIn} element={<Login />} />
+            <Route path={RouteService.root} element={<Chat />} />
+            <Route path={RouteService.notFound} element={<Error404 />} />
           </Routes>
         </BrowserRouter>
       </Provider>

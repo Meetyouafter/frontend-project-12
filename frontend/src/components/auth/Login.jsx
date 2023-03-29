@@ -10,6 +10,7 @@ import {
 import Header from '../header/Header';
 import AuthService from '../../api/auth';
 import { setNotificationProps } from '../../store/slices/notification/notificationSlice';
+import RouteService from '../../api/routes';
 import './style.css';
 
 const Login = () => {
@@ -23,6 +24,8 @@ const Login = () => {
       name: '',
       password: '',
     },
+    validateOnChange: false,
+    validateOnBlur: false,
     validationSchema: Yup.object().shape({
       name: Yup.string()
         .required(t('sign_up.errors.required')),
@@ -38,7 +41,7 @@ const Login = () => {
             setAuthError('');
             localStorage.setItem('user', JSON.stringify(response.data.username));
             localStorage.setItem('token', JSON.stringify(response.data.token));
-            navigate('/chat');
+            navigate(RouteService.root);
           }
         })
         .catch((error) => {
@@ -72,7 +75,6 @@ const Login = () => {
                   <FloatingLabel
                     controlId="name"
                     label={t('login.forms.name')}
-                    className="mb-3"
                   >
                     <Form.Control
                       name="name"
@@ -82,10 +84,8 @@ const Login = () => {
                       onChange={formik.handleChange}
                       value={formik.values.name}
                       onBlur={formik.handleBlur}
-                      autoComplete="off"
-                      required
                     />
-                    <Form.Control.Feedback type="invalid">
+                    <Form.Control.Feedback type="invalid" tooltip={!!formik.errors.name}>
                       {formik.errors.name}
                     </Form.Control.Feedback>
                   </FloatingLabel>
@@ -95,7 +95,6 @@ const Login = () => {
                   <FloatingLabel
                     controlId="password"
                     label={t('login.forms.password')}
-                    className="mb-3"
                   >
                     <Form.Control
                       name="password"
@@ -105,10 +104,8 @@ const Login = () => {
                       onChange={formik.handleChange}
                       value={formik.values.password}
                       onBlur={formik.handleBlur}
-                      autoComplete="off"
-                      required
                     />
-                    <Form.Control.Feedback type="invalid">
+                    <Form.Control.Feedback type="invalid" tooltip>
                       {authError || formik.errors.password}
                     </Form.Control.Feedback>
                   </FloatingLabel>

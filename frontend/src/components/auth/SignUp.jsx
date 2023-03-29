@@ -9,6 +9,7 @@ import {
 } from 'react-bootstrap';
 import Header from '../header/Header';
 import AuthService from '../../api/auth';
+import RouteService from '../../api/routes';
 import { setNotificationProps } from '../../store/slices/notification/notificationSlice';
 import './style.css';
 
@@ -45,7 +46,7 @@ const SignUp = () => {
           setNameError('');
           localStorage.setItem('user', JSON.stringify(values.name));
           localStorage.setItem('token', JSON.stringify(response.data.token));
-          navigate('/chat');
+          navigate(RouteService.root);
         })
         .catch((error) => {
           if (error.message === 'Request failed with status code 409') {
@@ -96,7 +97,6 @@ const SignUp = () => {
                   </FloatingLabel>
 
                 </Form.Group>
-
                 <Form.Group className="mb-4">
                   <FloatingLabel
                     controlId="password"

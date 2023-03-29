@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
+import RouteService from '../../api/routes';
 import './style.css';
 
 const Error = ({ error }) => {
@@ -11,7 +12,7 @@ const Error = ({ error }) => {
       <p className="error_page_description">{error}</p>
       <Button
         id="errorPage_button"
-        onClick={() => navigate('/')}
+        onClick={() => navigate(RouteService.root)}
       >
         Вернуться на главную
       </Button>

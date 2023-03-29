@@ -7,6 +7,7 @@ import { setNotificationProps } from '../../store/slices/notification/notificati
 import logOutImg from '../../assets/images/logout_icon.svg';
 import lngImg from '../../assets/images/language_icon.svg';
 import Notification from '../notification/Notification';
+import RouteService from '../../api/routes';
 import './styles.css';
 
 const Header = ({ withBackBtn }) => {
@@ -24,7 +25,7 @@ const Header = ({ withBackBtn }) => {
   const logout = () => {
     localStorage.removeItem('user');
     localStorage.removeItem('token');
-    return navigate('/');
+    return navigate(RouteService.root);
   };
 
   const handleClick = (value) => {

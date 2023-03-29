@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 import errorImg from '../../assets/images/errorImg.png';
+import RouteService from '../../api/routes';
 import './style.css';
 
 const Error404 = () => {
@@ -13,7 +14,7 @@ const Error404 = () => {
       <p className="error_page_description">Страница не найдена</p>
       <Button
         id="errorPage_button"
-        onClick={() => navigate('/')}
+        onClick={() => navigate(RouteService.root)}
       >
         Вернуться на главную
       </Button>

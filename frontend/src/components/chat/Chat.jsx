@@ -16,6 +16,7 @@ import sendImage from '../../assets/images/send_icon.svg';
 import swearsFilter from '../../services/swearsFilter/swearsFilter';
 import SocketService from '../../api/sockets/SocketService';
 import './styles.css';
+import RouteService from '../../api/routes';
 
 const Chat = () => {
   const [message, setMessage] = useState('');
@@ -33,8 +34,20 @@ const Chat = () => {
   const { currentChannel } = appData.channels;
   const { t } = useTranslation('translation', { keyPrefix: 'chat' });
 
-  const user = JSON.parse(localStorage.getItem('user'));
-  const token = (JSON.parse((localStorage.getItem('token'))));
+  const getDataFromStorage = () => {
+    const userData = localStorage.getItem('user') || null;
+    const tokenData = localStorage.getItem('token') || null;
+    if (userData) {
+      const user = JSON.parse(userData);
+      const token = JSON.parse(tokenData);
+      return { user, token };
+    }
+    const user = null;
+    const token = null;
+    return { user, token };
+  };
+
+  const { user, token } = getDataFromStorage();
 
   const messageNameCount = getMessageNameCount(getMessagesCount(currentChannel, messages));
 
@@ -53,7 +66,7 @@ const Chat = () => {
     }
   };
 
-  if (!localStorage.token) return <Navigate to="/" />;
+  if (!localStorage.token) return <Navigate to={RouteService.logIn} />;
 
   if (messagesLoading && channelsLoading) {
     return (
@@ -62,7 +75,7 @@ const Chat = () => {
   }
 
   if (messagesError || channelsError) {
-    if (messagesError.errors === 'Request failed with status code 401') return <Navigate to="/signup" />;
+    if (messagesError.errors === 'Request failed with status code 401') return <Navigate to={RouteService.signUp} />;
     return <Error error={messagesError || channelsError} />;
   }
 
