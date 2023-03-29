@@ -12,7 +12,7 @@ import './App.css';
 import RouteService from './api/routes';
 
 const rollbarConfig = {
-  accessToken: '492b63050c0c42bd949cf4e492c7b6c7',
+  accessToken: process.env.ROLLBAR_KEY,
   environment: 'production',
 };
 
