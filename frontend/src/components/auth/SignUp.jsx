@@ -37,6 +37,8 @@ const SignUp = () => {
         .oneOf([Yup.ref('password')], t('sign_up.errors.password_match'))
         .required(t('sign_up.errors.required')),
     }),
+    validateOnChange: false,
+    validateOnBlur: false,
     onSubmit: (values) => {
       AuthService.postSignUpData({ username: values.name, password: values.password })
         .then((response) => {
@@ -72,34 +74,33 @@ const SignUp = () => {
           <Col lg={5} md={7} sm={9} xs={9}>
             <Form onSubmit={formik.handleSubmit}>
               <fieldset disabled={formik.isSubmitting}>
-                <Form.Group className="mb-3">
+
+                <Form.Group className="mb-4">
                   <FloatingLabel
                     controlId="name"
                     label={t('sign_up.forms.name')}
-                    className="mb-3"
                   >
                     <Form.Control
                       name="name"
                       type="text"
+                      aria-describedby="inputGroupPrepend"
                       placeholder={t('sign_up.forms.name')}
                       isInvalid={!!formik.errors.name}
                       onChange={formik.handleChange}
                       value={formik.values.name}
                       onBlur={formik.handleBlur}
-                      autoComplete="off"
-                      required
                     />
-                    <Form.Control.Feedback type="invalid">
+                    <Form.Control.Feedback type="invalid" tooltip>
                       {formik.errors.name || nameError}
                     </Form.Control.Feedback>
                   </FloatingLabel>
+
                 </Form.Group>
 
-                <Form.Group className="mb-3">
+                <Form.Group className="mb-4">
                   <FloatingLabel
                     controlId="password"
                     label={t('sign_up.forms.password')}
-                    className="mb-3"
                   >
                     <Form.Control
                       name="password"
@@ -109,20 +110,17 @@ const SignUp = () => {
                       onChange={formik.handleChange}
                       value={formik.values.password}
                       onBlur={formik.handleBlur}
-                      autoComplete="off"
-                      required
                     />
-                    <Form.Control.Feedback type="invalid">
+                    <Form.Control.Feedback type="invalid" tooltip>
                       {formik.errors.password}
                     </Form.Control.Feedback>
                   </FloatingLabel>
                 </Form.Group>
 
-                <Form.Group className="mb-3">
+                <Form.Group className="mb-4">
                   <FloatingLabel
                     controlId="passwordConfirmation"
                     label={t('sign_up.forms.password_repeat')}
-                    className="mb-3"
                   >
                     <Form.Control
                       name="passwordConfirmation"
@@ -132,10 +130,8 @@ const SignUp = () => {
                       onChange={formik.handleChange}
                       value={formik.values.passwordConfirmation}
                       onBlur={formik.handleBlur}
-                      autoComplete="off"
-                      required
                     />
-                    <Form.Control.Feedback type="invalid">
+                    <Form.Control.Feedback type="invalid" tooltip>
                       {formik.errors.passwordConfirmation}
                     </Form.Control.Feedback>
                   </FloatingLabel>

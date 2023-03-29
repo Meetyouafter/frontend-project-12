@@ -3,7 +3,6 @@
 
 ## Chat app
 ### You can looks it on Railway https://chat-meetyouafter.up.railway.app/
-### You can looks it on Netlify https://quiet-axolotl-822095.netlify.app/
 
 This app is simple chat builded on the local server.
 You can use it with different accounts, after sign up or login authentication.
@@ -18,7 +17,7 @@ Also, in this app realized:
 <b>For local build app:</b>
 - Install the last version of Node.js (more than 18.2);
 - clone this repository; 
-- for install dependencies use **make install** command;
+- for install dependencies use **npm ci** command;
 - for start the app use **make start** command.
 
 ***Stack: React, Redux, WebSocket, Bootstrap.***
