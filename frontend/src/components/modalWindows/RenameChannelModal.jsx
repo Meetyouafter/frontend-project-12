@@ -68,20 +68,18 @@ const RenameChannelModal = ({ channelId, channelName }) => {
             <FloatingLabel
               controlId="floatingInput"
               label={t('label')}
-              className="mb-3"
             >
               <Form.Control
                 type="text"
                 placeholder={t('input_form')}
                 htmlFor="rename channel input"
                 autoFocus
-                required
                 isInvalid={!!formerror}
                 value={newChannelName}
                 onChange={(e) => setNewChannelName(e.target.value)}
                 aria-describedby="inputGroupPrepend"
               />
-              <Form.Control.Feedback type="invalid">
+              <Form.Control.Feedback type="invalid" tooltip>
                 {formerror}
               </Form.Control.Feedback>
             </FloatingLabel>

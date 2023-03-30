@@ -72,14 +72,12 @@ const AddChannelModal = () => {
             <FloatingLabel
               controlId="floatingInput"
               label={t('label')}
-              className="mb-3"
             >
               <Form.Control
                 type="text"
                 placeholder={t('input_form')}
                 htmlFor="add channel input"
                 autoFocus
-                required
                 isInvalid={!!formerror}
                 value={newChannelName}
                 onChange={(e) => setNewChannelName(e.target.value)}

@@ -1,6 +1,6 @@
-import infoImg from '../../assets/images/info_icon.svg';
-import successImg from '../../assets/images/success_icon.svg';
-import errorImg from '../../assets/images/error_icon.svg';
+import infoImg from '../assets/images/info_icon.svg';
+import successImg from '../assets/images/success_icon.svg';
+import errorImg from '../assets/images/error_icon.svg';
 
 const getStylesForNotification = (variant) => {
   switch (variant) {
