@@ -5,7 +5,7 @@ import { addMessage } from '../../store/slices/messages/messageSlice';
 import {
   addChannel, removeChannel, renameChannel, changeCurrentChannel,
 } from '../../store/slices/channels/channelSlice';
-import scrollToBottom from '../../utils/scrollToBottom';
+import { scrollToBottom } from '../../components/chat/functions';
 
 const socket = io();
 const { dispatch } = store;

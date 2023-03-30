@@ -2,7 +2,7 @@ import React, { useCallback, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Toast, Button } from 'react-bootstrap';
 import { clearNotificationProps } from '../../store/slices/notification/notificationSlice';
-import getStylesForNotification from '../../utils/getStylesForNotification';
+import getStylesForNotification from './getStylesForNotification';
 import closeImg from '../../assets/images/close_icon.svg';
 import './styles.css';
 

@@ -11,10 +11,9 @@ import AddChannelModal from '../modalWindows/AddChannelModal';
 import Error from '../errors/Error';
 import Header from '../header/Header';
 import Loader from '../loader/Loader';
-import getMessageNameCount from '../../utils/getMessageNameCount';
-import getActiveChannelName from '../../utils/getActiveChannelName';
-import scrollToBottom from '../../utils/scrollToBottom';
-import getMessagesCount from '../../utils/getMessagesCount';
+import {
+  getMessageNameCount, getActiveChannelName, getMessagesCount, scrollToBottom,
+} from './functions';
 import sendImage from '../../assets/images/send_icon.svg';
 import swearsFilter from '../../services/swearsFilter/swearsFilter';
 import SocketService from '../../api/sockets/SocketService';
