@@ -85,7 +85,7 @@ const AddChannelModal = () => {
                 onChange={(e) => setNewChannelName(e.target.value)}
                 aria-describedby="inputGroupPrepend"
               />
-              <Form.Control.Feedback type="invalid">
+              <Form.Control.Feedback type="invalid" tooltip>
                 {formerror}
               </Form.Control.Feedback>
             </FloatingLabel>

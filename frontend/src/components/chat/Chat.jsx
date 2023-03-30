@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+/* eslint-disable no-param-reassign */
+import React, { useEffect, useState, useRef } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
@@ -11,12 +12,14 @@ import AddChannelModal from '../modalWindows/AddChannelModal';
 import Error from '../errors/Error';
 import Header from '../header/Header';
 import Loader from '../loader/Loader';
-import { getMessageNameCount, getActiveChannelName, getMessagesCount } from './helper';
+import {
+  getMessageNameCount, getActiveChannelName, getMessagesCount, scrollToBottom,
+} from './helper';
 import sendImage from '../../assets/images/send_icon.svg';
 import swearsFilter from '../../services/swearsFilter/swearsFilter';
 import SocketService from '../../api/sockets/SocketService';
-import './styles.css';
 import RouteService from '../../api/routes';
+import './styles.css';
 
 const Chat = () => {
   const [message, setMessage] = useState('');
@@ -33,6 +36,13 @@ const Chat = () => {
 
   const { currentChannel } = appData.channels;
   const { t } = useTranslation('translation', { keyPrefix: 'chat' });
+
+  const channelsRef = useRef(null);
+  const messagesRef = useRef(null);
+
+  useEffect(() => {
+    scrollToBottom(messagesRef);
+  }, [messages]);
 
   const getDataFromStorage = () => {
     const userData = localStorage.getItem('user') || null;
@@ -93,7 +103,7 @@ const Chat = () => {
               )
               <AddChannelModal />
             </div>
-            <div className="channels_container">
+            <div className="channels_container" ref={channelsRef}>
               {channels.map((channel) => (
                 <ChannelItem
                   channelData={channel}
@@ -118,7 +128,7 @@ const Chat = () => {
               </p>
             </div>
             <div className="messages_form_container">
-              <div className="messages_container">
+              <div className="messages_container" ref={messagesRef}>
                 {messages
                   .filter((mess) => mess.channelId === currentChannel)
                   .map((mess) => (
