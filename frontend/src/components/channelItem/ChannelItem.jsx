@@ -37,8 +37,6 @@ const ChannelItem = ({ currentChannel, channelData }) => {
       onKeyPress={() => dispatch(changeCurrentChannel(channelData.id))}
     >
       <p className="channel_name">
-        #
-        {' '}
         {channelData.name}
       </p>
       {channelData.removable

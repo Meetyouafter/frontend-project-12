@@ -25,7 +25,7 @@ const Header = ({ withBackBtn }) => {
   const logout = () => {
     localStorage.removeItem('user');
     localStorage.removeItem('token');
-    return navigate(RouteService.root);
+    return navigate(RouteService.logIn);
   };
 
   const handleClick = (value) => {
@@ -39,7 +39,7 @@ const Header = ({ withBackBtn }) => {
   };
 
   return (
-    <div className="primary_header">
+    <div className="header_wrapper">
       <a className="header_content" href={useLocation().pathname}>{t('header.title')}</a>
       <div className="header_btn_container">
         {withBackBtn

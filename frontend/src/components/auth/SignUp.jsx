@@ -76,7 +76,7 @@ const SignUp = () => {
             <Form onSubmit={formik.handleSubmit}>
               <fieldset disabled={formik.isSubmitting}>
 
-                <Form.Group className="mb-4">
+                <Form.Group className="mb-3">
                   <FloatingLabel
                     controlId="name"
                     label={t('sign_up.forms.name')}
@@ -97,7 +97,7 @@ const SignUp = () => {
                   </FloatingLabel>
 
                 </Form.Group>
-                <Form.Group className="mb-4">
+                <Form.Group className="mb-3">
                   <FloatingLabel
                     controlId="password"
                     label={t('sign_up.forms.password')}
@@ -117,7 +117,7 @@ const SignUp = () => {
                   </FloatingLabel>
                 </Form.Group>
 
-                <Form.Group className="mb-4">
+                <Form.Group className="mb-3">
                   <FloatingLabel
                     controlId="passwordConfirmation"
                     label={t('sign_up.forms.password_repeat')}

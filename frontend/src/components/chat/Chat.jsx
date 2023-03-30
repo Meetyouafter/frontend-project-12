@@ -1,4 +1,3 @@
-/* eslint-disable no-param-reassign */
 import React, { useEffect, useState, useRef } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -61,6 +60,13 @@ const Chat = () => {
   const { user, token } = getDataFromStorage();
 
   const messageNameCount = getMessageNameCount(getMessagesCount(currentChannel, messages));
+
+  const getStyleForMessage = (name) => {
+    if (name === user) {
+      return 'username message_author';
+    }
+    return 'username';
+  };
 
   useEffect(() => {
     dispatch(getInitialData(token));
@@ -134,7 +140,7 @@ const Chat = () => {
                   .filter((mess) => mess.channelId === currentChannel)
                   .map((mess) => (
                     <div key={mess.id}>
-                      <span className="username">
+                      <span className={`${getStyleForMessage(mess.username)}`}>
                         {mess.username}
                         :
                         {' '}

@@ -29,7 +29,7 @@
   width: 10%;
 }
 
-#dropdown-basic.dropdown-toggle.btn.btn-primary {
+.chat #dropdown-basic.dropdown-toggle.btn.btn-primary {
   width: 25px;
   padding: 0;
   height: 25px;
@@ -37,7 +37,7 @@
   margin: 0;
 }
 
-#dropdown-basic.dropdown-toggle.btn.btn-primary::after {
+.chat #dropdown-basic.dropdown-toggle.btn.btn-primary::after {
   margin: 0;
 }
 
@@ -46,4 +46,8 @@
   padding: 0;
   margin: 0;
   word-wrap: break-word;
+}
+
+.channel_name::before {
+  content: '# '
 }

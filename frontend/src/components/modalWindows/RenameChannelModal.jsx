@@ -68,6 +68,7 @@ const RenameChannelModal = ({ channelId, channelName }) => {
             <FloatingLabel
               controlId="floatingInput"
               label={t('label')}
+              className="mb-3"
             >
               <Form.Control
                 type="text"
