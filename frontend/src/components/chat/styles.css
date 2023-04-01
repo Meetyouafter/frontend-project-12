@@ -15,7 +15,7 @@
   flex-direction: column;
   align-items: center;
   margin: 0;
-  width: 25%;
+  width: 20%;
 }
 
 .channels_wrapper.row .col {
@@ -31,7 +31,7 @@
   justify-content: space-between;
   border-bottom: 1px solid gray;
   background-color: #FFBB73;
-  font-size: 22px;
+  font-size: 18px;
   font-weight: 600;
   padding-left: 15px;
   border-radius: 8px 0px 8px 8px;
@@ -53,7 +53,7 @@
 .messages_wrapper.row {
   margin: 0;
   padding: 0;
-  width: 75%;
+  width: 80%;
   border-left: 1px solid gray;
 }
 
@@ -136,9 +136,27 @@
   word-wrap: break-word;
 }
 
-@media (min-width: 768px) {
+@media (max-width: 1012px) {
+  .channels_wrapper.row {
+    width: 25%;
+  }
+  .messages_wrapper.row {
+    width: 75%;
+  }
   .layout_container.container {
     min-width: 90%;
+  }
+  .channels_header > span {
+    width: auto;
+  }
+  .btn.btn-outline-light {
+    margin: 0;
+  }
+}
+
+@media (min-width: 768px) {
+  .layout_container.container {
+    width: 90%;
   }
 }
 
