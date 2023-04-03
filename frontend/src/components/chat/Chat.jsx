@@ -6,7 +6,7 @@ import {
   Row, InputGroup, Form, Col, Button, Container,
 } from 'react-bootstrap';
 import getInitialData from '../../store/getInitialData';
-import ChannelItem from '../channelItem/ChannelItem';
+import Channel from '../channel/Channel';
 import AddChannelModal from '../modalWindows/AddChannelModal';
 import Error from '../errors/Error';
 import Header from '../header/Header';
@@ -47,8 +47,8 @@ const Chat = () => {
   }, [messages]);
 
   const getDataFromStorage = () => {
-    const userData = localStorage.getItem('user');
-    const tokenData = localStorage.getItem('token');
+    const userData = localStorage.getItem('user') || null;
+    const tokenData = localStorage.getItem('token') || null;
     if (userData) {
       const user = JSON.parse(userData);
       const token = JSON.parse(tokenData);
@@ -118,7 +118,7 @@ const Chat = () => {
             </div>
             <div className="channels_container" ref={channelsRef}>
               {channels.map((channel) => (
-                <ChannelItem
+                <Channel
                   channelData={channel}
                   key={channel.id}
                   currentChannel={currentChannel}
