@@ -5,15 +5,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   Button, FloatingLabel, Modal, Form,
 } from 'react-bootstrap';
-<<<<<<< HEAD
-import SocketService from '../../api/SocketService';
-import { setNotificationProps } from '../../store/slices/notificationSlice';
-import { swearsFilter } from '../../services/textService';
-=======
 import SocketService from '../../api/sockets/SocketService';
 import { setNotificationProps } from '../../store/slices/notification/notificationSlice';
-import swearsFilter from '../../services/swearsFilter/swearsFilter';
->>>>>>> parent of 3144111 (refactoring api)
+import swearsFilter from '../../services/swearsFilter/swearsfilter';
 import addIcon from '../../assets/images/add_icon.svg';
 import './styles.css';
 

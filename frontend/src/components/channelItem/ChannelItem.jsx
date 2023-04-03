@@ -5,12 +5,11 @@ import { useDispatch } from 'react-redux';
 import { Dropdown } from 'react-bootstrap';
 import RenameChannelModal from '../modalWindows/RenameChannelModal';
 import RemoveChannelModal from '../modalWindows/RemoveChannelModal';
-import { changeCurrentChannel } from '../../store/slices/channelSlice';
+import { changeCurrentChannel } from '../../store/slices/channels/channelSlice';
 import './styles.css';
 
 const ChannelMenu = ({ channelId, channelName }) => {
   const { t } = useTranslation('translation', { keyPrefix: 'chat' });
-  //  <Dropdown onClick={(e) => e.stopPropagation()}>
 
   return (
     <Dropdown>

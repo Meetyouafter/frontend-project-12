@@ -2,13 +2,8 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { Button, Modal } from 'react-bootstrap';
-<<<<<<< HEAD
-import { setNotificationProps } from '../../store/slices/notificationSlice';
-import SocketService from '../../api/SocketService';
-=======
 import { setNotificationProps } from '../../store/slices/notification/notificationSlice';
 import SocketService from '../../api/sockets/SocketService';
->>>>>>> parent of 3144111 (refactoring api)
 import './styles.css';
 
 const RemoveChannelModal = ({ channelId }) => {
