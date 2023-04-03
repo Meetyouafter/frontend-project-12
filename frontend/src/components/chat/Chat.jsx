@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import {
   Row, InputGroup, Form, Col, Button, Container,
 } from 'react-bootstrap';
-import getInitialData from '../../store/slices/initialData/getInitialData';
+import getInitialData from '../../store/getInitialData';
 import ChannelItem from '../channelItem/ChannelItem';
 import AddChannelModal from '../modalWindows/AddChannelModal';
 import Error from '../errors/Error';

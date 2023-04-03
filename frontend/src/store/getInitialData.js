@@ -1,10 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import InitialServise from '../../../api/InitialServise';
+import InitialService from '../api/InitialService';
 
 const getInitialData = createAsyncThunk(
   'api/v1/data',
   async (token) => {
-    const response = await InitialServise.getChannelData(token);
+    const response = await InitialService.getChannelData(token);
     return response.data;
   },
 );

@@ -1,9 +1,9 @@
 import { io } from 'socket.io-client';
 import store from '../store/index';
-import { addMessage } from '../store/slices/messages/messageSlice';
+import { addMessage } from '../store/slices/messageSlice';
 import {
   addChannel, removeChannel, renameChannel, changeCurrentChannel,
-} from '../store/slices/channels/channelSlice';
+} from '../store/slices/channelSlice';
 import { scrollToBottom } from '../components/chat/functions';
 
 const chatEvents = {

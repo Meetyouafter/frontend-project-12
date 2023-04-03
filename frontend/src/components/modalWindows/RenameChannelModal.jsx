@@ -5,7 +5,7 @@ import {
   Form, Button, Modal, FloatingLabel,
 } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { setNotificationProps } from '../../store/slices/notification/notificationSlice';
+import { setNotificationProps } from '../../store/slices/notificationSlice';
 import swearsFilter from '../../services/swearsFilter/swearsfilter';
 import SocketService from '../../api/SocketService';
 import './styles.css';

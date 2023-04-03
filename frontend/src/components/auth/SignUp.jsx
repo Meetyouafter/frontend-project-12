@@ -10,7 +10,7 @@ import {
 import Header from '../header/Header';
 import AuthService from '../../api/AuthService';
 import RouteService from '../../api/RouteService';
-import { setNotificationProps } from '../../store/slices/notification/notificationSlice';
+import { setNotificationProps } from '../../store/slices/notificationSlice';
 import './style.css';
 
 const SignUp = () => {

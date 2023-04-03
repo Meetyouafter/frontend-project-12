@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { Dropdown } from 'react-bootstrap';
 import RenameChannelModal from '../modalWindows/RenameChannelModal';
 import RemoveChannelModal from '../modalWindows/RemoveChannelModal';
-import { changeCurrentChannel } from '../../store/slices/channels/channelSlice';
+import { changeCurrentChannel } from '../../store/slices/channelSlice';
 import './styles.css';
 
 const ChannelMenu = ({ channelId, channelName }) => {
