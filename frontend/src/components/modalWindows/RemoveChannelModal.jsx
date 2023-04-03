@@ -16,7 +16,6 @@ const RemoveChannelModal = ({ channelId }) => {
   const handleShow = () => setShow(true);
 
   const handleClick = () => {
-    console.log('modal', { id: channelId })
     SocketService.removeCurrentChannel({ id: channelId });
     handleClose();
     dispatch(setNotificationProps({
@@ -25,7 +24,6 @@ const RemoveChannelModal = ({ channelId }) => {
       isShow: true,
     }));
   };
-
 
   return (
     <>

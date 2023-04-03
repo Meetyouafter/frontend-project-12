@@ -12,7 +12,7 @@ import Error from '../errors/Error';
 import Header from '../header/Header';
 import Loader from '../loader/Loader';
 import {
-  getMessageNameCount, getActiveChannelName, getMessagesCount, scrollToBottom,
+  getActiveChannelName, getMessagesCount, scrollToBottom,
 } from './functions';
 import sendImage from '../../assets/images/send_icon.svg';
 import swearsFilter from '../../services/swearsFilter/swearsFilter';
@@ -62,7 +62,7 @@ const Chat = () => {
   const { user, token } = getDataFromStorage();
 
   //  const messageNameCount = getMessageNameCount(getMessagesCount(currentChannel, messages));
-  const messageNameCount = getMessagesCount(currentChannel, messages);
+  // const messageNameCount = getMessagesCount(currentChannel, messages);
 
   const getStyleForMessage = (name) => {
     if (name === user) {

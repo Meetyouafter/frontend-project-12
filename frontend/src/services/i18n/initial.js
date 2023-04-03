@@ -1,5 +1,5 @@
 import i18n from 'i18next';
-import ICU from 'i18next-icu';
+//  import ICU from 'i18next-icu';
 import { initReactI18next } from 'react-i18next';
 import ru from './resources/ru.json';
 import en from './resources/en.json';
