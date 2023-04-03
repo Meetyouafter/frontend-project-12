@@ -16,8 +16,8 @@ import {
 } from './functions';
 import sendImage from '../../assets/images/send_icon.svg';
 import swearsFilter from '../../services/swearsFilter/swearsFilter';
-import SocketService from '../../api/sockets/SocketService';
-import RouteService from '../../api/routes';
+import SocketService from '../../api/SocketService';
+import RouteService from '../../api/RouteService';
 import './styles.css';
 
 const Chat = () => {

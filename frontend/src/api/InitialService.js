@@ -5,6 +5,6 @@ const INITIAL_DATA_URL = '/api/v1/data';
 const getChannelData = (token) => axios
   .get(INITIAL_DATA_URL, { headers: { Authorization: `Bearer ${token}` } });
 
-const InitialServise = { getChannelData };
+const InitialService = { getChannelData };
 
-export default InitialServise;
+export default InitialService;

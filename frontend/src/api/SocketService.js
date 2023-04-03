@@ -1,11 +1,17 @@
 import { io } from 'socket.io-client';
-import store from '../../store/index';
-import chatEvents from './chatEvents';
-import { addMessage } from '../../store/slices/messages/messageSlice';
+import store from '../store/index';
+import { addMessage } from '../store/slices/messages/messageSlice';
 import {
   addChannel, removeChannel, renameChannel, changeCurrentChannel,
-} from '../../store/slices/channels/channelSlice';
-import { scrollToBottom } from '../../components/chat/functions';
+} from '../store/slices/channels/channelSlice';
+import { scrollToBottom } from '../components/chat/functions';
+
+const chatEvents = {
+  newMessage: 'newMessage',
+  newChannel: 'newChannel',
+  removeChannel: 'removeChannel',
+  renameChannel: 'renameChannel',
+};
 
 const socket = io();
 const { dispatch } = store;
@@ -29,11 +35,7 @@ socket.on(chatEvents.renameChannel, (channel) => {
 });
 
 socket.on(chatEvents.removeChannel, (id) => {
-  console.log('socket on', getCurrentChannel(), id, getCurrentChannel() === id, getCurrentChannel() === { id });
-
   dispatch(removeChannel(id));
-  // dispatch(changeCurrentChannel(2));
-
   if (getCurrentChannel() === id.id) {
     dispatch(changeCurrentChannel(initialActiveChannelId));
   }
@@ -58,8 +60,6 @@ const removeCurrentChannel = (id) => socket.emit(
   id,
   (response) => {
     if (response.status === 'ok') {
-      console.log('socket emit', getCurrentChannel(), id, id.id, getCurrentChannel() === id, getCurrentChannel() === { id });
-
       if (getCurrentChannel() === id.id) {
         dispatch(changeCurrentChannel(initialActiveChannelId));
       }
