@@ -1,4 +1,5 @@
 import { io } from 'socket.io-client';
+<<<<<<< HEAD:frontend/src/api/SocketService.js
 import store from '../store/index';
 import { addMessage } from '../store/slices/messageSlice';
 import {
@@ -12,6 +13,15 @@ const chatEvents = {
   removeChannel: 'removeChannel',
   renameChannel: 'renameChannel',
 };
+=======
+import store from '../../store/index';
+import chatEvents from './chatEvents';
+import { addMessage } from '../../store/slices/messages/messageSlice';
+import {
+  addChannel, removeChannel, renameChannel, changeCurrentChannel,
+} from '../../store/slices/channels/channelSlice';
+import { scrollToBottom } from '../../components/chat/functions';
+>>>>>>> parent of 3144111 (refactoring api):frontend/src/api/sockets/SocketService.js
 
 const socket = io();
 const { dispatch } = store;
@@ -36,10 +46,20 @@ socket.on(chatEvents.renameChannel, (channel) => {
 });
 
 socket.on(chatEvents.removeChannel, (id) => {
+  console.log('socket on', getCurrentChannel(), id, getCurrentChannel() === id, getCurrentChannel() === { id });
+
   dispatch(removeChannel(id));
+<<<<<<< HEAD:frontend/src/api/SocketService.js
   //  if (getCurrentChannel() === id.id) {
   //  dispatch(changeCurrentChannel(initialActiveChannelId));
   //  }
+=======
+  // dispatch(changeCurrentChannel(2));
+
+  if (getCurrentChannel() === id.id) {
+    dispatch(changeCurrentChannel(initialActiveChannelId));
+  }
+>>>>>>> parent of 3144111 (refactoring api):frontend/src/api/sockets/SocketService.js
 });
 
 socket.on(chatEvents.newMessage, (message) => {
@@ -61,9 +81,17 @@ const removeCurrentChannel = (channel) => socket.emit(
   channel,
   (response) => {
     if (response.status === 'ok') {
+<<<<<<< HEAD:frontend/src/api/SocketService.js
       //  if (getCurrentChannel() === id.id) {
       //    dispatch(changeCurrentChannel(initialActiveChannelId));
       //  }
+=======
+      console.log('socket emit', getCurrentChannel(), id, id.id, getCurrentChannel() === id, getCurrentChannel() === { id });
+
+      if (getCurrentChannel() === id.id) {
+        dispatch(changeCurrentChannel(initialActiveChannelId));
+      }
+>>>>>>> parent of 3144111 (refactoring api):frontend/src/api/sockets/SocketService.js
     } else {
       throw new Error(response.status);
     }
