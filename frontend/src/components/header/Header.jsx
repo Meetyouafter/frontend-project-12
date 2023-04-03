@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Dropdown } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setNotificationProps } from '../../store/slices/notificationSlice';
 import logOutImg from '../../assets/images/logout_icon.svg';

@@ -7,7 +7,7 @@ import {
 } from 'react-bootstrap';
 import SocketService from '../../api/SocketService';
 import { setNotificationProps } from '../../store/slices/notificationSlice';
-import swearsFilter from '../../services/swearsFilter/swearsfilter';
+import { swearsFilter } from '../../services/textService';
 import addIcon from '../../assets/images/add_icon.svg';
 import './styles.css';
 
