@@ -15,15 +15,16 @@ const chatEvents = {
 
 const socket = io();
 const { dispatch } = store;
-const initialActiveChannelId = 1;
+//  const initialActiveChannelId = 1;
 
+/*
 const getCurrentChannel = () => {
   const { currentChannel } = store.getState().channels;
   return currentChannel;
 };
 
 store.subscribe(getCurrentChannel);
-
+*/
 socket.on(chatEvents.newChannel, (channel) => {
   dispatch(addChannel(channel));
   const channels = document.querySelector('.channels_container');
@@ -36,9 +37,9 @@ socket.on(chatEvents.renameChannel, (channel) => {
 
 socket.on(chatEvents.removeChannel, (id) => {
   dispatch(removeChannel(id));
-  if (getCurrentChannel() === id.id) {
-    dispatch(changeCurrentChannel(initialActiveChannelId));
-  }
+  //  if (getCurrentChannel() === id.id) {
+  //  dispatch(changeCurrentChannel(initialActiveChannelId));
+  //  }
 });
 
 socket.on(chatEvents.newMessage, (message) => {
@@ -60,9 +61,9 @@ const removeCurrentChannel = (id) => socket.emit(
   id,
   (response) => {
     if (response.status === 'ok') {
-      if (getCurrentChannel() === id.id) {
-        dispatch(changeCurrentChannel(initialActiveChannelId));
-      }
+      //  if (getCurrentChannel() === id.id) {
+      //    dispatch(changeCurrentChannel(initialActiveChannelId));
+      //  }
     } else {
       throw new Error(response.status);
     }

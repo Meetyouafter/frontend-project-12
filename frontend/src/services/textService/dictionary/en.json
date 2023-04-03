@@ -48,9 +48,8 @@
       "label": "Channel settings",
       "message_form": "Text your message",
       "message_label": "New message",
-      "messagesCount_zero": "messages", 
-      "messagesCount_one": "message", 
-      "messagesCount_many": "messages"
+      "messageCount_one": "{{count}} message",
+      "messageCount_other": "{{count}} messages"
     },
     "modal": {
       "addModal": {

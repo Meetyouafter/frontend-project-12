@@ -1,6 +1,6 @@
 import filter from 'leo-profanity';
 import i18n from 'i18next';
-//  import ICU from 'i18next-icu';
+import ICU from 'i18next-icu';
 import { initReactI18next } from 'react-i18next';
 import ru from './dictionary/ru.json';
 import en from './dictionary/en.json';
@@ -13,6 +13,7 @@ const resources = {
 const language = localStorage.getItem('language') || 'ru';
 
 i18n
+  .use(ICU)
   .use(initReactI18next)
   .init({
     resources,

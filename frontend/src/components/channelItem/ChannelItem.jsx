@@ -10,9 +10,10 @@ import './styles.css';
 
 const ChannelMenu = ({ channelId, channelName }) => {
   const { t } = useTranslation('translation', { keyPrefix: 'chat' });
+  //  <Dropdown onClick={(e) => e.stopPropagation()}>
 
   return (
-    <Dropdown onClick={(e) => e.stopPropagation()}>
+    <Dropdown>
       <Dropdown.Toggle id="dropdown-basic">
         <span className="visually-hidden">
           {t('label')}

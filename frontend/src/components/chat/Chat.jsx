@@ -47,8 +47,8 @@ const Chat = () => {
   }, [messages]);
 
   const getDataFromStorage = () => {
-    const userData = localStorage.getItem('user');
-    const tokenData = localStorage.getItem('token');
+    const userData = localStorage.getItem('user') || null;
+    const tokenData = localStorage.getItem('token') || null;
     if (userData) {
       const user = JSON.parse(userData);
       const token = JSON.parse(tokenData);
@@ -138,7 +138,7 @@ const Chat = () => {
               <p className="header_channel">
                 {getMessagesCount(currentChannel, messages)}
                 {' '}
-                {t('messagesCount', { messagesCount: getMessagesCount(currentChannel, messages) })}
+                {t('messagesCount', { count: getMessagesCount(currentChannel, messages) })}
               </p>
             </div>
             <div className="messages_form_container">

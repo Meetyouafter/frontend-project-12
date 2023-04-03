@@ -48,7 +48,9 @@
       "label": "Управление каналом",
       "message_form": "Введите сообщение",
       "message_label": "Новое сообщение",
-      "message": "{messageCount, plural, =0 {сообщений} =1 {сообщений} =2 {сообщения} other {сообщение}}"
+      "messageCount_one": "{{count}} сообщение",
+      "messageCount_few": "{{count}} сообщения",
+      "messageCount_many": "{{count}} сообщений"
     },
     "modal": {
       "addModal": {
