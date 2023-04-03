@@ -23,6 +23,7 @@
   width: 15%;
   height: 39px;
   justify-content: flex-end;
+  align-items: center;
 }
 
 .header_btn_container .btn {
@@ -30,6 +31,9 @@
   height: 40px;
   background-color: white;
   border: 1px solid gray;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
 
 .header_btn_container .dropdown {
