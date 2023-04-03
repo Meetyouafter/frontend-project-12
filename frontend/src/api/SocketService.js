@@ -1,11 +1,17 @@
 import { io } from 'socket.io-client';
-import store from '../../store/index';
-import chatEvents from './chatEvents';
-import { addMessage } from '../../store/slices/messages/messageSlice';
+import store from '../store/index';
+import { addMessage } from '../store/slices/messages/messageSlice';
 import {
   addChannel, removeChannel, renameChannel, changeCurrentChannel,
-} from '../../store/slices/channels/channelSlice';
-import { scrollToBottom } from '../../components/chat/functions';
+} from '../store/slices/channels/channelSlice';
+import { scrollToBottom } from '../components/chat/functions';
+
+const chatEvents = {
+  newMessage: 'newMessage',
+  newChannel: 'newChannel',
+  removeChannel: 'removeChannel',
+  renameChannel: 'renameChannel',
+};
 
 const socket = io();
 const { dispatch } = store;

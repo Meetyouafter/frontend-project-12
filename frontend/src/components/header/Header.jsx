@@ -7,7 +7,7 @@ import { setNotificationProps } from '../../store/slices/notification/notificati
 import logOutImg from '../../assets/images/logout_icon.svg';
 import lngImg from '../../assets/images/language_icon.svg';
 import Notification from '../notification/Notification';
-import RouteService from '../../api/routes';
+import RouteService from '../../api/RouteService';
 import './styles.css';
 
 const Header = ({ withBackBtn }) => {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
-import RouteService from '../../api/routes';
+import RouteService from '../../api/RouteService';
 import './style.css';
 
 const Error = ({ error }) => {

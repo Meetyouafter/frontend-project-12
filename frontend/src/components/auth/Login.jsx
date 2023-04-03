@@ -8,9 +8,9 @@ import {
   Row, Col, Button, Form, FloatingLabel, Container,
 } from 'react-bootstrap';
 import Header from '../header/Header';
-import AuthService from '../../api/auth';
+import AuthService from '../../api/AuthService';
 import { setNotificationProps } from '../../store/slices/notification/notificationSlice';
-import RouteService from '../../api/routes';
+import RouteService from '../../api/RouteService';
 import './style.css';
 
 const Login = () => {

@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import InitialServise from '../../../api/initialData';
+import InitialServise from '../../../api/InitialServise';
 
 const getInitialData = createAsyncThunk(
   'api/v1/data',

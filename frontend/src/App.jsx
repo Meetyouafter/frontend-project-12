@@ -9,7 +9,7 @@ import SignUp from './components/auth/SignUp';
 import Chat from './components/chat/Chat';
 import './services/i18n/initial';
 import './App.css';
-import RouteService from './api/routes';
+import RouteService from './api/RouteService';
 
 const rollbarConfig = {
   accessToken: process.env.ROLLBAR_KEY,
