@@ -47,8 +47,8 @@ const Chat = () => {
   }, [messages]);
 
   const getDataFromStorage = () => {
-    const userData = localStorage.getItem('user') || null;
-    const tokenData = localStorage.getItem('token') || null;
+    const userData = localStorage.getItem('user');
+    const tokenData = localStorage.getItem('token');
     if (userData) {
       const user = JSON.parse(userData);
       const token = JSON.parse(tokenData);
