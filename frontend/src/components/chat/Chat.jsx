@@ -5,19 +5,19 @@ import { useTranslation } from 'react-i18next';
 import {
   Row, InputGroup, Form, Col, Button, Container,
 } from 'react-bootstrap';
-import { getInitialData } from '../../store/slices/channelSlice';
+import getInitialData from '../../store/slices/initialData/getInitialData';
 import ChannelItem from '../channelItem/ChannelItem';
 import AddChannelModal from '../modalWindows/AddChannelModal';
 import Error from '../errors/Error';
 import Header from '../header/Header';
 import Loader from '../loader/Loader';
 import {
-  getActiveChannelName, getMessagesCount, scrollToBottom,
+  getMessageNameCount, getActiveChannelName, getMessagesCount, scrollToBottom,
 } from './functions';
 import sendImage from '../../assets/images/send_icon.svg';
-import { swearsFilter } from '../../services/textService';
-import SocketService from '../../api/SocketService';
-import RouteService from '../../api/RouteService';
+import swearsFilter from '../../services/swearsFilter/swearsFilter';
+import SocketService from '../../api/sockets/SocketService';
+import RouteService from '../../api/routes';
 import './styles.css';
 
 const Chat = () => {
@@ -61,8 +61,7 @@ const Chat = () => {
 
   const { user, token } = getDataFromStorage();
 
-  //  const messageNameCount = getMessageNameCount(getMessagesCount(currentChannel, messages));
-  // const messageNameCount = getMessagesCount(currentChannel, messages);
+  const messageNameCount = getMessageNameCount(getMessagesCount(currentChannel, messages));
 
   const getStyleForMessage = (name) => {
     if (name === user) {
@@ -138,7 +137,7 @@ const Chat = () => {
               <p className="header_channel">
                 {getMessagesCount(currentChannel, messages)}
                 {' '}
-                {t('messagesCount', { count: getMessagesCount(currentChannel, messages) })}
+                {t('message', { messageCount: messageNameCount })}
               </p>
             </div>
             <div className="messages_form_container">

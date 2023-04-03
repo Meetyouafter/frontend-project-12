@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import getInitialData from '../getInitialData';
+import getInitialData from '../initialData/getInitialData';
 
 const initialState = {
   messages: [],

@@ -23,21 +23,3 @@ body {
   flex-wrap: wrap;
   justify-content: center;
 }
-
-.fade.toast.show {
-  position: absolute;
-  right: 0;
-  top: 3%;
-}
-
-.btn {
-  width: 100%;
-  border-radius: 8px;
-  font-size: 18px;
-}
-
-.primary_wrapper {
-  text-align: center;
-  width: 100%;
-  height: 100%;
-}

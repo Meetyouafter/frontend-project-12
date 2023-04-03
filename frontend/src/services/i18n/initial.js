@@ -1,9 +1,8 @@
-import filter from 'leo-profanity';
 import i18n from 'i18next';
 import ICU from 'i18next-icu';
 import { initReactI18next } from 'react-i18next';
-import ru from './dictionary/ru.json';
-import en from './dictionary/en.json';
+import ru from './resources/ru.json';
+import en from './resources/en.json';
 
 const resources = {
   ru,
@@ -23,10 +22,4 @@ i18n
     },
   });
 
-filter.add(filter.getDictionary('en'));
-filter.add(filter.getDictionary('ru'));
-
-const swearsFilter = (word) => filter.clean(word);
-
 export default i18n;
-export { swearsFilter };
