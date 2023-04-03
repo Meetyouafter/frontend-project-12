@@ -1,6 +1,5 @@
 .chat {
   cursor: pointer;
-  padding-left: 15px;
   font-size: 18px;
   height: auto;
   min-height: 40px;
@@ -26,7 +25,10 @@
 }
 
 .dropdown {
-  width: 10%;
+  width: 25%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .chat #dropdown-basic.dropdown-toggle.btn.btn-primary {
@@ -45,7 +47,10 @@
   width: 75%;
   padding: 0;
   margin: 0;
-  word-wrap: break-word;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .channel_name::before {

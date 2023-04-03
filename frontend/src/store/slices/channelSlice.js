@@ -1,3 +1,4 @@
+/* eslint-disable arrow-body-style */
 import { createSlice } from '@reduxjs/toolkit';
 import getInitialData from '../getInitialData';
 
@@ -39,8 +40,8 @@ const channelSlice = createSlice({
     builder
       .addCase(getInitialData.pending, (state) => ({ ...state, isLoading: true }))
       .addCase(getInitialData.fulfilled, (state, action) => {
-        const updatedChannels = [...state.channels, ...action.payload.channels];
-        return { ...state, isLoading: false, channels: updatedChannels };
+        //  const updatedChannels = [...state.channels, ...action.payload.channels];
+        return { ...state, isLoading: false, channels: action.payload.channels };
       })
       .addCase(getInitialData.rejected, (state, action) => ({
         ...state, isLoading: false, channels: [], errors: action.error.message,
