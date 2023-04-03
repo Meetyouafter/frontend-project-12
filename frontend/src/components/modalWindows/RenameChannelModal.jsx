@@ -78,7 +78,6 @@ const RenameChannelModal = ({ channelId, channelName }) => {
                 isInvalid={!!formerror}
                 value={newChannelName}
                 onChange={(e) => setNewChannelName(e.target.value)}
-                onFocus={(e) => e.target.select()}
                 aria-describedby="inputGroupPrepend"
               />
               <Form.Control.Feedback type="invalid" tooltip>

@@ -19,6 +19,7 @@ const ChannelMenu = ({ channelId, channelName }) => {
           {t('label')}
         </span>
       </Dropdown.Toggle>
+
       <Dropdown.Menu>
         <RemoveChannelModal channelId={channelId} />
         <RenameChannelModal channelId={channelId} channelName={channelName} />

@@ -56,9 +56,9 @@ const addNewChannel = (channel) => socket.emit(chatEvents.newChannel, channel, (
 
 const renameCurrentChannel = (channel) => socket.emit(chatEvents.renameChannel, channel);
 
-const removeCurrentChannel = (id) => socket.emit(
+const removeCurrentChannel = (channel) => socket.emit(
   chatEvents.removeChannel,
-  id,
+  channel,
   (response) => {
     if (response.status === 'ok') {
       //  if (getCurrentChannel() === id.id) {
