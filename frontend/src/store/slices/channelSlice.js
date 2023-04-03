@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import getInitialData from '../initialData/getInitialData';
+import getInitialData from '../getInitialData';
 
 const initialState = {
   channels: [],
@@ -52,4 +52,5 @@ export const {
   addChannel, renameChannel,
   removeChannel, changeCurrentChannel,
 } = channelSlice.actions;
+export { getInitialData };
 export default channelSlice.reducer;

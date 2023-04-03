@@ -3,7 +3,7 @@ import { Button, Dropdown } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { setNotificationProps } from '../../store/slices/notification/notificationSlice';
+import { setNotificationProps } from '../../store/slices/notificationSlice';
 import logOutImg from '../../assets/images/logout_icon.svg';
 import lngImg from '../../assets/images/language_icon.svg';
 import Notification from '../notification/Notification';

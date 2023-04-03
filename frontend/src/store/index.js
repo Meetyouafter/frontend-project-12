@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
-import channels from './slices/channels/channelSlice';
-import messages from './slices/messages/messageSlice';
-import notification from './slices/notification/notificationSlice';
+import channels from './slices/channelSlice';
+import messages from './slices/messageSlice';
+import notification from './slices/notificationSlice';
 
 const store = configureStore({
   reducer: {

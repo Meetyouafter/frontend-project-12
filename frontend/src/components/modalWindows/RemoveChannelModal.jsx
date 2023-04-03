@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { Button, Modal } from 'react-bootstrap';
-import { setNotificationProps } from '../../store/slices/notification/notificationSlice';
+import { setNotificationProps } from '../../store/slices/notificationSlice';
 import SocketService from '../../api/SocketService';
 import './styles.css';
 

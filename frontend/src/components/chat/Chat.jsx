@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import {
   Row, InputGroup, Form, Col, Button, Container,
 } from 'react-bootstrap';
-import getInitialData from '../../store/slices/initialData/getInitialData';
+import { getInitialData } from '../../store/slices/channelSlice';
 import ChannelItem from '../channelItem/ChannelItem';
 import AddChannelModal from '../modalWindows/AddChannelModal';
 import Error from '../errors/Error';
@@ -15,7 +15,7 @@ import {
   getActiveChannelName, getMessagesCount, scrollToBottom,
 } from './functions';
 import sendImage from '../../assets/images/send_icon.svg';
-import swearsFilter from '../../services/swearsFilter/swearsFilter';
+import { swearsFilter } from '../../services/textService';
 import SocketService from '../../api/SocketService';
 import RouteService from '../../api/RouteService';
 import './styles.css';

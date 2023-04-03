@@ -8,8 +8,7 @@ import Login from './components/auth/Login';
 import SignUp from './components/auth/SignUp';
 import Chat from './components/chat/Chat';
 import RouteService from './api/RouteService';
-import './services/i18n/initial';
-import './App.css';
+import './services/textService/index';
 
 const rollbarConfig = {
   accessToken: process.env.ROLLBAR_KEY,
