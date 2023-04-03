@@ -54,9 +54,7 @@ const Chat = () => {
       const token = JSON.parse(tokenData);
       return { user, token };
     }
-    const user = null;
-    const token = null;
-    return { user, token };
+    return { user: userData, token: tokenData };
   };
 
   const { user, token } = getDataFromStorage();
