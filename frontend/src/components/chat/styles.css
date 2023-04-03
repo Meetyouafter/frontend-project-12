@@ -28,12 +28,12 @@
   display: flex;
   text-align: center;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   border-bottom: 1px solid gray;
   background-color: #FFBB73;
   font-size: 18px;
-  font-weight: 600;
   padding-left: 15px;
+  font-weight: 600;
   border-radius: 8px 0px 8px 8px;
 }
 
@@ -41,8 +41,12 @@
   background: none;
   border: none;
   width: auto;
-  padding: 0;
-  margin-right: 10px;
+  padding: 0 0 0 15px;
+}
+
+.channels_header > span {
+  width: auto;
+  margin: 0;
 }
 
 .channels_container {
@@ -95,8 +99,13 @@
   overflow-y: auto;
 }
 
-.header_channel {
+.messages_header > p {
   margin: 0;
+
+}
+
+.header_channel::before {
+  content: '# '
 }
 
 .send_message_button {
@@ -137,27 +146,15 @@
   word-wrap: break-word;
 }
 
-@media (max-width: 1012px) {
-  .channels_wrapper.row {
-    width: 25%;
-  }
-  .messages_wrapper.row {
-    width: 75%;
-  }
+@media (min-width: 576px) and (max-width: 767px) {
   .layout_container.container {
-    min-width: 90%;
-  }
-  .channels_header > span {
-    width: auto;
-  }
-  .btn.btn-outline-light {
-    margin: 0;
+    max-width: 650px;
   }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 768px) and (max-width: 991px) {
   .layout_container.container {
-    width: 90%;
+    max-width: 820px;
   }
 }
 
@@ -166,13 +163,20 @@
     min-width: 100%;
   }
 
+  .channels_wrapper.row {
+    width: 30%;
+  }
+
+  .messages_wrapper.row {
+    width: 70%;
+  }
+
   input.form-control {
     font-size: 12px;
   }
 
   .channel_name {
     font-size: 12px;
-    width: 70%;
   }
 
   #dropdown-basic.dropdown-toggle.btn.btn-primary {
@@ -209,5 +213,11 @@
 
   .open_modal_button {
     margin-left: 10px;
+  }
+}
+
+@media (min-width: 800px) {
+  .layout_container.container {
+    width: 90%;
   }
 }

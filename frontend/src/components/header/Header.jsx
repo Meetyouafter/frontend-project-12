@@ -40,7 +40,7 @@ const Header = ({ withBackBtn }) => {
 
   return (
     <div className="header_wrapper">
-      <a className="header_content" href={useLocation().pathname}>{t('header.title')}</a>
+      <a className="header_content" href={RouteService.root}>{t('header.title')}</a>
       <div className="header_btn_container">
         {withBackBtn
         && (
