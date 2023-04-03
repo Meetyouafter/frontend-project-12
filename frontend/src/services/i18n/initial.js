@@ -12,10 +12,10 @@ const resources = {
 const language = localStorage.getItem('language') || 'ru';
 
 i18n
-  .use(ICU)
   .use(initReactI18next)
   .init({
     resources,
+    debug: false,
     lng: language,
     interpolation: {
       escapeValue: false,

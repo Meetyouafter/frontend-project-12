@@ -47,8 +47,8 @@ const Chat = () => {
   }, [messages]);
 
   const getDataFromStorage = () => {
-    const userData = localStorage.getItem('user') || null;
-    const tokenData = localStorage.getItem('token') || null;
+    const userData = localStorage.getItem('user');
+    const tokenData = localStorage.getItem('token');
     if (userData) {
       const user = JSON.parse(userData);
       const token = JSON.parse(tokenData);
@@ -61,7 +61,8 @@ const Chat = () => {
 
   const { user, token } = getDataFromStorage();
 
-  const messageNameCount = getMessageNameCount(getMessagesCount(currentChannel, messages));
+  //  const messageNameCount = getMessageNameCount(getMessagesCount(currentChannel, messages));
+  const messageNameCount = getMessagesCount(currentChannel, messages);
 
   const getStyleForMessage = (name) => {
     if (name === user) {
@@ -137,7 +138,7 @@ const Chat = () => {
               <p className="header_channel">
                 {getMessagesCount(currentChannel, messages)}
                 {' '}
-                {t('message', { messageCount: messageNameCount })}
+                {t('messagesCount', { messagesCount: getMessagesCount(currentChannel, messages) })}
               </p>
             </div>
             <div className="messages_form_container">

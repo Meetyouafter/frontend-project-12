@@ -12,13 +12,12 @@ const ChannelMenu = ({ channelId, channelName }) => {
   const { t } = useTranslation('translation', { keyPrefix: 'chat' });
 
   return (
-    <Dropdown>
+    <Dropdown onClick={(e) => e.stopPropagation()}>
       <Dropdown.Toggle id="dropdown-basic">
         <span className="visually-hidden">
           {t('label')}
         </span>
       </Dropdown.Toggle>
-
       <Dropdown.Menu>
         <RemoveChannelModal channelId={channelId} />
         <RenameChannelModal channelId={channelId} channelName={channelName} />
