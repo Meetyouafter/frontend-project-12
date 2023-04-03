@@ -30,11 +30,8 @@ const Chat = () => {
 
   const messagesLoading = appData.messages.isLoading;
   const channelsLoading = appData.channels.isLoading;
-  const appLoading = messagesLoading && channelsLoading;
-
   const messagesError = appData.messages.errors;
   const channelsError = appData.channels.errors;
-  const appError = messagesError || channelsError;
 
   const { currentChannel } = appData.channels;
   const { t } = useTranslation('translation', { keyPrefix: 'chat' });
@@ -88,17 +85,15 @@ const Chat = () => {
 
   if (!localStorage.token) return <Navigate to={RouteService.logIn} />;
 
-  if (appLoading) {
+  if (messagesLoading && channelsLoading) {
     return (
       <Loader />
     );
   }
 
-  if (appError) {
-    if (appError === 'Request failed with status code 401') {
-      return <Navigate to={RouteService.logIn} />;
-    }
-    return <Error error={appError} />;
+  if (messagesError || channelsError) {
+    if (messagesError.errors === 'Request failed with status code 401') return <Navigate to={RouteService.signUp} />;
+    return <Error error={messagesError || channelsError} />;
   }
 
   return (
@@ -108,13 +103,11 @@ const Chat = () => {
         <Row className="channels_wrapper">
           <Col>
             <div className="channels_header">
-              <span>
-                {t('channels')}
-                {' '}
-                (
-                {channels.length}
-                )
-              </span>
+              {t('channels')}
+              {' '}
+              (
+              {channels.length}
+              )
               <AddChannelModal />
             </div>
             <div className="channels_container" ref={channelsRef}>

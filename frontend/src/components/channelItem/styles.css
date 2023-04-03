@@ -44,7 +44,7 @@
 }
 
 .channel_name {
-  width: 75%;
+  width: 80%;
   padding: 0;
   margin: 0;
   text-overflow: ellipsis;
@@ -55,11 +55,4 @@
 
 .channel_name::before {
   content: '# '
-}
-
-@media (max-width: 576px) {
-  .chat #dropdown-basic.dropdown-toggle.btn.btn-primary {
-    width: 15px;
-    height: 21px;
-  }
 }
