@@ -8,7 +8,7 @@ import RemoveChannelModal from '../modalWindows/RemoveChannelModal';
 import { changeCurrentChannel } from '../../store/slices/channelSlice';
 import './styles.css';
 
-const Menu = ({ channelId, channelName }) => {
+const ChannelMenu = ({ channelId, channelName }) => {
   const { t } = useTranslation('translation', { keyPrefix: 'chat' });
 
   return (
@@ -27,7 +27,7 @@ const Menu = ({ channelId, channelName }) => {
   );
 };
 
-const Channel = ({ currentChannel, channelData }) => {
+const ChannelItem = ({ currentChannel, channelData }) => {
   const dispatch = useDispatch();
 
   return (
@@ -40,9 +40,9 @@ const Channel = ({ currentChannel, channelData }) => {
         {channelData.name}
       </p>
       {channelData.removable
-      && <Menu channelId={channelData.id} channelName={channelData.name} />}
+      && <ChannelMenu channelId={channelData.id} channelName={channelData.name} />}
     </div>
   );
 };
 
-export default Channel;
+export default ChannelItem;

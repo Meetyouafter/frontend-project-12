@@ -131,9 +131,10 @@ const Chat = () => {
           <Col>
             <div className="messages_header">
               <p className="header_channel">
+                #
                 {getActiveChannelName(channels, currentChannel)}
               </p>
-              <p>
+              <p className="header_channel">
                 {getMessagesCount(currentChannel, messages)}
                 {' '}
                 {t('message', { messageCount: messageNameCount })}

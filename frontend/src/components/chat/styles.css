@@ -6,6 +6,7 @@
   height: 80%;
   padding: 0;
 }
+
 .channels_wrapper.row {
   height: 100%;
   margin: 0;
@@ -16,10 +17,12 @@
   margin: 0;
   width: 20%;
 }
+
 .channels_wrapper.row .col {
   padding: 0;
   height: 100%;
 }
+
 .channels_header {
   height: 15%;
   display: flex;
@@ -46,18 +49,21 @@
   height: 85%;
   overflow-y: auto;
 }
+
 .messages_wrapper.row {
   margin: 0;
   padding: 0;
   width: 80%;
   border-left: 1px solid gray;
 }
+
 .messages_wrapper > .col {
   padding: 0;
   height: 100%;
   display: flex;
   flex-direction: column;
 }
+
 .messages_header {
   height: 15%;
   display: flex;
@@ -71,12 +77,14 @@
   flex-direction: column;
   justify-content: center;
 }
+
 .messages_form_container {
   height: 85%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
+
 .messages_container {
   height: 90%;
   display: flex;
@@ -91,14 +99,11 @@
   margin: 0;
 }
 
-.header_channel::before {
-  content: '# '
-}
-
 .send_message_button {
   width: 20%;
   max-width: 50px;
 }
+
 .send_form {
   display: flex;
   justify-content: center;
@@ -107,22 +112,27 @@
   margin-top: 10px;
   margin-bottom: 10px;
 }
+
 .send_form .bb.input-group {
   width: 90%;
   height: 7%;
   margin: 0;
   padding: 0;
 }
+
 .send_form .bb.input-group img {
   width: 20px;
   height: 20px;
 }
+
 .username {
   font-weight: 600;
 }
+
 .message_author {
   color: #dc3545;
 }
+
 .message {
   word-wrap: break-word;
 }
@@ -165,14 +175,16 @@
     width: 70%;
   }
 
-  #dropdown-basic.dropdown-toggle.btn.btn-primary { 
+  #dropdown-basic.dropdown-toggle.btn.btn-primary {
     width: 20px;
     height: 20px;
 }
+
   .chat {
     padding-left: 5px;
     font-size: 12px;
   }
+
   .channels_header {
     padding-left: 5px;
     flex-wrap: wrap;
@@ -180,17 +192,21 @@
     height: 60px;
     font-size: 14px;
   }
+
   .messages_header {
     font-size: 14px;
     height: 60px;
   }
+
   .messages_container {
     padding-left: 5px;
     padding-right: 5px;
   }
+
   .modal_image {
     width: 20px;
   }
+
   .open_modal_button {
     margin-left: 10px;
   }
