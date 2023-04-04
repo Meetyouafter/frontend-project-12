@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Dropdown } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
-import { useNavigate, Link } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setNotificationProps } from '../../store/slices/notificationSlice';
 import logOutImg from '../../assets/images/logout_icon.svg';
@@ -40,7 +40,10 @@ const Header = ({ withBackBtn }) => {
 
   return (
     <div className="header_wrapper">
-      <Link className="header_content" to="/">{t('header.title')}</Link>
+      <a className="header_content" href={useLocation().pathname}>{t('header.title')}</a>
+      {/*
+        <Link className="header_content" to={RouteService.root}>{t('header.title')}</Link>
+       */}
       <div className="header_btn_container">
         {withBackBtn
         && (
