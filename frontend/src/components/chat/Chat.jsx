@@ -101,7 +101,7 @@ const Chat = () => {
   return (
     <>
       <Header withBackBtn />
-      <Container className="layout_container">
+      <Container className="layout_container p-0" fluid="md">
         <Row className="channels_wrapper">
           <Col>
             <div className="channels_header">

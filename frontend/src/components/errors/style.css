@@ -16,11 +16,12 @@
 }
 
 #errorPage_button {
-  height: 50px;
+  min-height: 50px;
+  height: auto;
   width: 30%;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 560px) {
   #errorPage_button {
     font-size: 14px;
     height: 40px;

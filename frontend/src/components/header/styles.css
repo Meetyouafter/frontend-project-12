@@ -32,8 +32,9 @@
   background-color: white;
   border: 1px solid gray;
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
+  padding: 0;
 }
 
 .header_btn_container .dropdown {
@@ -48,6 +49,7 @@
 .header_btn_container img {
   width: 20px;
   height: 20px;
+  margin: 0;
 }
 
 @media (max-width: 900px) {
@@ -60,33 +62,34 @@
   }
 }
 
-@media (max-width: 576px) {
+@media (max-width: 500px) {
   .header_content {
     width: 70%;
-    font-size: 20px;
+    font-size: 24px;
   }
 
   .header_btn_container {
     width: 30%;
   }
+
+  .header_btn_container .btn {
+    width: 45px;
+    height: 30px;
+  }
 }
 
-@media (max-width: 450px) {
+@media (max-width: 300px) {
+  .header_btn_container img {
+    width: 15px;
+    height: 15px;
+  }
+
   .header_content {
     width: 60%;
+    text-align: center;
   }
 
   .header_btn_container {
     width: 40%;
-  }
-}
-
-@media (max-width: 350px) {
-  .header_content {
-    width: 50%;
-  }
-
-  .header_btn_container {
-    width: 50%;
   }
 }

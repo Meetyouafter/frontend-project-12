@@ -37,6 +37,9 @@
   height: 25px;
   background-color: #A65500;
   margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .chat #dropdown-basic.dropdown-toggle.btn.btn-primary::after {
@@ -56,9 +59,15 @@
   content: '# '
 }
 
-@media (max-width: 576px) {
+@media (max-width: 500px) {
   .chat #dropdown-basic.dropdown-toggle.btn.btn-primary {
     width: 15px;
-    height: 21px;
+    height: 15px;
+    font-size: 14px;
+    border-radius: 0;
   }
+
+  .chat {
+    min-height: 30px;
+}
 }
