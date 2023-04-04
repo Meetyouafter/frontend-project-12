@@ -40,7 +40,7 @@ const Header = ({ withBackBtn }) => {
 
   return (
     <div className="header_wrapper">
-      <Link className="header_content" to={RouteService.root}>{t('header.title')}</Link>
+      <Link className="header_content" to="/">{t('header.title')}</Link>
       <div className="header_btn_container">
         {withBackBtn
         && (
