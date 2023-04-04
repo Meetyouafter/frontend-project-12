@@ -6,7 +6,7 @@ import {
 } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { setNotificationProps } from '../../store/slices/notificationSlice';
-import { swearsFilter } from '../../services/textService';
+import { swearsFilter } from '../../textService';
 import SocketService from '../../api/SocketService';
 import './styles.css';
 

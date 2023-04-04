@@ -37,13 +37,20 @@ const channelSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(getInitialData.pending, (state) => ({ ...state, isLoading: true }))
-      .addCase(getInitialData.fulfilled, (state, action) => {
-        const updatedChannels = [...state.channels, ...action.payload.channels];
-        return { ...state, isLoading: false, channels: updatedChannels };
-      })
+      .addCase(getInitialData.pending, (state) => ({
+        ...state,
+        isLoading: true,
+      }))
+      .addCase(getInitialData.fulfilled, (state, action) => ({
+        ...state,
+        isLoading: false,
+        channels: [...action.payload.channels],
+      }))
       .addCase(getInitialData.rejected, (state, action) => ({
-        ...state, isLoading: false, channels: [], errors: action.error.message,
+        ...state,
+        isLoading: false,
+        channels: [],
+        errors: action.error.message,
       }));
   },
 });

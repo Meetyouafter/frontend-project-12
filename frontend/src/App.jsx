@@ -7,7 +7,7 @@ import store from './store';
 import Login from './components/auth/Login';
 import SignUp from './components/auth/SignUp';
 import Chat from './components/chat/Chat';
-import './services/textService/index';
+import './textService/index';
 import RouteService from './api/RouteService';
 
 const rollbarConfig = {

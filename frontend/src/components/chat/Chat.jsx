@@ -15,7 +15,7 @@ import {
   getActiveChannelName, getMessagesCount, scrollToBottom,
 } from './functions';
 import sendImage from '../../assets/images/send_icon.svg';
-import { swearsFilter } from '../../services/textService';
+import { swearsFilter } from '../../textService';
 import SocketService from '../../api/SocketService';
 import RouteService from '../../api/RouteService';
 import './styles.css';

@@ -28,7 +28,7 @@ const messageSlice = createSlice({
       .addCase(getInitialData.fulfilled, (state, action) => ({
         ...state,
         isLoading: false,
-        messages: [...state.messages, ...action.payload.messages],
+        messages: [...action.payload.messages],
       }))
       .addCase(getInitialData.rejected, (state, action) => ({
         ...state,

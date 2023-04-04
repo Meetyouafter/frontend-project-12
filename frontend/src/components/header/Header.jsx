@@ -43,7 +43,7 @@ const Header = ({ withBackBtn }) => {
       <a className="header_content" href={useLocation().pathname}>{t('header.title')}</a>
       {/*
         <Link className="header_content" to={RouteService.root}>{t('header.title')}</Link>
-       */}
+      */}
       <div className="header_btn_container">
         {withBackBtn
         && (
