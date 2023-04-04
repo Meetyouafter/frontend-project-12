@@ -1,9 +1,8 @@
 import i18n from 'i18next';
-import ICU from 'i18next-icu';
 import { initReactI18next } from 'react-i18next';
 import filter from 'leo-profanity';
-import ru from './dictionary/ru.json';
-import en from './dictionary/en.json';
+import ru from './dictionary/ru';
+import en from './dictionary/en';
 
 const resources = {
   ru,
@@ -13,14 +12,11 @@ const resources = {
 const language = localStorage.getItem('language') || 'ru';
 
 i18n
-  .use(ICU)
   .use(initReactI18next)
   .init({
     resources,
     lng: language,
-    interpolation: {
-      escapeValue: false,
-    },
+    debug: false,
   });
 
 filter.add(filter.getDictionary('en'));

@@ -12,7 +12,7 @@ import Error from '../errors/Error';
 import Header from '../header/Header';
 import Loader from '../loader/Loader';
 import {
-  getMessageNameCount, getActiveChannelName, getMessagesCount, scrollToBottom,
+  getActiveChannelName, getMessagesCount, scrollToBottom,
 } from './functions';
 import sendImage from '../../assets/images/send_icon.svg';
 import { swearsFilter } from '../../services/textService';
@@ -59,7 +59,7 @@ const Chat = () => {
 
   const { user, token } = getDataFromStorage();
 
-  const messageNameCount = getMessageNameCount(getMessagesCount(currentChannel, messages));
+  const messagesCount = getMessagesCount(currentChannel, messages);
 
   const getStyleForMessage = (name) => {
     if (name === user) {
@@ -133,9 +133,7 @@ const Chat = () => {
                 {getActiveChannelName(channels, currentChannel)}
               </p>
               <p className="header_channel">
-                {getMessagesCount(currentChannel, messages)}
-                {' '}
-                {t('message', { messageCount: messageNameCount })}
+                {t('countMessages.message', { count: messagesCount })}
               </p>
             </div>
             <div className="messages_form_container">
