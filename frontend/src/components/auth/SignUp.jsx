@@ -13,7 +13,7 @@ import RouteService from '../../api/RouteService';
 import './style.css';
 
 const SignUp = () => {
-  const [nameError, setNameError] = useState('');
+  const [uniqUserError, setUniqUserError] = useState('');
   const navigate = useNavigate();
 
   const { t } = useTranslation();
@@ -41,14 +41,14 @@ const SignUp = () => {
     onSubmit: (values) => {
       AuthService.postSignUpData({ username: values.name, password: values.password })
         .then((response) => {
-          setNameError('');
+          setUniqUserError('');
           localStorage.setItem('user', JSON.stringify(values.name));
           localStorage.setItem('token', JSON.stringify(response.data.token));
           navigate(RouteService.root);
         })
         .catch((error) => {
           if (error.message === 'Request failed with status code 409') {
-            setNameError(t('sign_up.errors.user_not_uniq'));
+            setUniqUserError(t('sign_up.errors.user_not_uniq'));
           } else {
             toast.error(t('network_error'));
           }
@@ -68,8 +68,7 @@ const SignUp = () => {
         <Row>
           <Col lg={5} md={7} sm={9} xs={9}>
             <Form onSubmit={formik.handleSubmit}>
-              <fieldset disabled={formik.isSubmitting}>
-
+              <fieldset>
                 <Form.Group className="mb-3">
                   <FloatingLabel
                     controlId="name"
@@ -80,13 +79,13 @@ const SignUp = () => {
                       type="text"
                       aria-describedby="inputGroupPrepend"
                       placeholder={t('sign_up.forms.name')}
-                      isInvalid={!!formik.errors.name}
+                      isInvalid={!!formik.errors.name || uniqUserError}
                       onChange={formik.handleChange}
                       value={formik.values.name}
                       onBlur={formik.handleBlur}
                     />
                     <Form.Control.Feedback type="invalid" tooltip>
-                      {formik.errors.name || nameError}
+                      {formik.errors.name || uniqUserError}
                     </Form.Control.Feedback>
                   </FloatingLabel>
 
