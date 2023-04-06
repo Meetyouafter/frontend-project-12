@@ -6,11 +6,11 @@ import { useTranslation } from 'react-i18next';
 import {
   Row, Button, Form, Container, Col, FloatingLabel,
 } from 'react-bootstrap';
+import { toast } from 'react-toastify';
 import Header from '../header/Header';
 import AuthService from '../../api/AuthService';
 import RouteService from '../../api/RouteService';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';import './style.css';
+import './style.css';
 
 const SignUp = () => {
   const [nameError, setNameError] = useState('');

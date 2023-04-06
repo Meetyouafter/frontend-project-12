@@ -5,8 +5,8 @@ import {
   Form, Button, Modal, FloatingLabel,
 } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
-import { swearsFilter } from '../../textService';
 import { toast } from 'react-toastify';
+import { swearsFilter } from '../../textService';
 import SocketService from '../../api/SocketService';
 import './styles.css';
 
@@ -37,13 +37,23 @@ const RenameChannelModal = ({ channelId, channelName }) => {
     return !error.length;
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (validate()) {
-      SocketService.renameCurrentChannel({ id: channelId, name: swearsFilter(newChannelName) });
+  const callback = (status) => {
+    if (status === 'success') {
       setNewChannelName('');
       handleClose();
       toast.success(t('notification'));
+    } else {
+      setNewChannelName('');
+      handleClose();
+      toast.error(t('error_notification'));
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (validate()) {
+      SocketService
+        .renameCurrentChannel({ id: channelId, name: swearsFilter(newChannelName) }, callback);
     }
   };
 

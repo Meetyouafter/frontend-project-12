@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import {
   Row, InputGroup, Form, Col, Button, Container,
 } from 'react-bootstrap';
+import { toast } from 'react-toastify';
 import getInitialData from '../../store/getInitialData';
 import Channel from '../channel/Channel';
 import AddChannelModal from '../modalWindows/AddChannelModal';
@@ -72,14 +73,22 @@ const Chat = () => {
     dispatch(getInitialData(token));
   }, [dispatch, token]);
 
+  const callback = (status) => {
+    if (status === 'success') {
+      setMessage('');
+    } else {
+      setMessage('');
+      toast.error(t('error_notification'));
+    }
+  };
+
   const handleClick = (e) => {
     e.preventDefault();
     if (message.trim().length > 0) {
       const newMessage = {
         body: swearsFilter(message), channelId: currentChannel, username: user,
       };
-      SocketService.addNewMessage(newMessage);
-      setMessage('');
+      SocketService.addNewMessage(newMessage, callback);
     }
   };
 

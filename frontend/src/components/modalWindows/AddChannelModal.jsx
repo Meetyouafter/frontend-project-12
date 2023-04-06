@@ -6,10 +6,9 @@ import {
   Button, FloatingLabel, Modal, Form,
 } from 'react-bootstrap';
 import SocketService from '../../api/SocketService';
+import { toast } from 'react-toastify';
 import { swearsFilter } from '../../textService';
 import addIcon from '../../assets/images/add_icon.svg';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import './styles.css';
 
 const AddChannelModal = () => {
@@ -43,13 +42,22 @@ const AddChannelModal = () => {
     return !error.length;
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (validate()) {
-      SocketService.addNewChannel({ name: swearsFilter(newChannelName) });
+  const callback = (status) => {
+    if (status === 'success') {
       setNewChannelName('');
       handleClose();
       toast.success(t('notification'));
+    } else {
+      setNewChannelName('');
+      handleClose();
+      toast.error(t('error_notification'));
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (validate()) {
+      SocketService.addNewChannel({ name: swearsFilter(newChannelName) }, callback);
     }
   };
 

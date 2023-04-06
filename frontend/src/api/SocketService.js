@@ -47,31 +47,42 @@ const socketListener = () => {
   });
 };
 
-const addNewChannel = (channel) => socket.emit(chatEvents.newChannel, channel, (response) => {
-  if (response.status === 'ok') {
-    dispatch(changeCurrentChannel(response.data.id));
-  } else {
-    throw new Error(response.status);
-  }
-});
-
-const renameCurrentChannel = (channel) => socket.emit(chatEvents.renameChannel, channel);
-
-const removeCurrentChannel = (id) => socket.emit(
-  chatEvents.removeChannel,
-  id,
-  (response) => {
+const addNewChannel = (channel, callback) => socket
+  .emit(chatEvents.newChannel, channel, (response) => {
     if (response.status === 'ok') {
-      if (getCurrentChannel() === id.id) {
-        dispatch(changeCurrentChannel(initialActiveChannelId));
-      }
+      dispatch(changeCurrentChannel(response.data.id));
+      callback('success');
     } else {
-      throw new Error(response.status);
+      callback('error');
     }
-  },
-);
+  });
 
-const addNewMessage = (message) => socket.emit(chatEvents.newMessage, message);
+const renameCurrentChannel = (channel, callback) => socket
+  .emit(chatEvents.renameChannel, channel, (response) => {
+    if (response.status === 'ok') {
+      callback('success');
+    } else {
+      callback('error');
+    }
+  });
+
+const removeCurrentChannel = (id, callback) => socket
+  .emit(chatEvents.removeChannel, id, (response) => {
+    if (response.status === 'ok') {
+      callback('success');
+    } else {
+      callback('error');
+    }
+  });
+
+const addNewMessage = (message, callback) => socket
+  .emit(chatEvents.newMessage, message, (response) => {
+    if (response.status === 'ok') {
+      callback('success');
+    } else {
+      callback('error');
+    }
+  });
 
 const SocketService = {
   addNewChannel, renameCurrentChannel, removeCurrentChannel, addNewMessage,

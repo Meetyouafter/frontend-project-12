@@ -26,15 +26,7 @@ const App = () => (
             <Route path={RouteService.root} element={<Chat />} />
             <Route path={RouteService.notFound} element={<Error404 />} />
           </Routes>
-          <ToastContainer
-            position="top-right"
-            autoClose={50000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            theme="light"
-          />
+          <ToastContainer />
         </BrowserRouter>
       </Provider>
     </ErrorBoundary>

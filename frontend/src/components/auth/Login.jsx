@@ -9,7 +9,6 @@ import {
 import { toast } from 'react-toastify';
 import Header from '../header/Header';
 import AuthService from '../../api/AuthService';
-import 'react-toastify/dist/ReactToastify.css';
 import RouteService from '../../api/RouteService';
 import './style.css';
 

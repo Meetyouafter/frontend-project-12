@@ -4,6 +4,7 @@ import App from './App';
 import { socketListener } from './api/SocketService';
 import textService from './textService';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'react-toastify/dist/ReactToastify.css';
 import './index.css';
 
 socketListener();
