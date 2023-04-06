@@ -19,6 +19,7 @@ import sendImage from '../../assets/images/send_icon.svg';
 import { swearsFilter } from '../../textService';
 import SocketService from '../../api/SocketService';
 import RouteService from '../../api/RouteService';
+import { useAuth } from '../../context/AuthContext';
 import './styles.css';
 
 const Chat = () => {
@@ -39,6 +40,7 @@ const Chat = () => {
 
   const { currentChannel } = appData.channels;
   const { t } = useTranslation('translation', { keyPrefix: 'chat' });
+  const auth = useAuth();
 
   const channelsRef = useRef(null);
   const messagesRef = useRef(null);
@@ -51,18 +53,7 @@ const Chat = () => {
     scrollToBottom(channelsRef);
   }, [channelsRef]);
 
-  const getDataFromStorage = () => {
-    const userData = localStorage.getItem('user');
-    const tokenData = localStorage.getItem('token');
-    if (userData) {
-      const user = JSON.parse(userData);
-      const token = JSON.parse(tokenData);
-      return { user, token };
-    }
-    return { user: userData, token: tokenData };
-  };
-
-  const { user, token } = getDataFromStorage();
+  const { user, token } = auth.getData();
 
   const messagesCount = getMessagesCount(currentChannel, messages);
 
@@ -96,7 +87,7 @@ const Chat = () => {
     }
   };
 
-  if (!localStorage.token) return <Navigate to={RouteService.logIn} />;
+  if (!auth.isLogged) return <Navigate to={RouteService.logIn} />;
 
   if (appLoading) {
     return (

@@ -7,15 +7,16 @@ import logOutImg from '../../assets/images/logout_icon.svg';
 import lngImg from '../../assets/images/language_icon.svg';
 import RouteService from '../../api/RouteService';
 import './styles.css';
+import { useAuth } from '../../context/AuthContext';
 
 const Header = ({ withBackBtn }) => {
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
+  const auth = useAuth();
 
   const logout = () => {
-    localStorage.removeItem('user');
-    localStorage.removeItem('token');
-    return navigate(RouteService.logIn);
+    auth.logout();
+    navigate(RouteService.logIn);
   };
 
   const handleClick = (value) => {

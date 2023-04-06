@@ -9,6 +9,7 @@ import Login from './components/auth/Login';
 import SignUp from './components/auth/SignUp';
 import Chat from './components/chat/Chat';
 import RouteService from './api/RouteService';
+import { AuthProvider } from './context/AuthContext';
 
 const rollbarConfig = {
   accessToken: process.env.ROLLBAR_KEY,
@@ -16,21 +17,23 @@ const rollbarConfig = {
 };
 
 const App = () => (
-  <RollbarProvider config={rollbarConfig}>
-    <ErrorBoundary level={LEVEL_WARN} errorMessage="Error in React render">
-      <Provider store={store}>
-        <BrowserRouter>
-          <Routes>
-            <Route path={RouteService.signUp} element={<SignUp />} />
-            <Route exact path={RouteService.logIn} element={<Login />} />
-            <Route path={RouteService.root} element={<Chat />} />
-            <Route path={RouteService.notFound} element={<Error404 />} />
-          </Routes>
-          <ToastContainer />
-        </BrowserRouter>
-      </Provider>
-    </ErrorBoundary>
-  </RollbarProvider>
+  <AuthProvider>
+    <RollbarProvider config={rollbarConfig}>
+      <ErrorBoundary level={LEVEL_WARN} errorMessage="Error in React render">
+        <Provider store={store}>
+          <BrowserRouter>
+            <Routes>
+              <Route path={RouteService.signUp} element={<SignUp />} />
+              <Route exact path={RouteService.logIn} element={<Login />} />
+              <Route path={RouteService.root} element={<Chat />} />
+              <Route path={RouteService.notFound} element={<Error404 />} />
+            </Routes>
+            <ToastContainer />
+          </BrowserRouter>
+        </Provider>
+      </ErrorBoundary>
+    </RollbarProvider>
+  </AuthProvider>
 );
 
 export default App;

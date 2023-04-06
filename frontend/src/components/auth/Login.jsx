@@ -10,12 +10,14 @@ import { toast } from 'react-toastify';
 import Header from '../header/Header';
 import AuthService from '../../api/AuthService';
 import RouteService from '../../api/RouteService';
+import { useAuth } from '../../context/AuthContext';
 import './style.css';
 
 const Login = () => {
   const [authError, setAuthError] = useState('');
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const auth = useAuth();
 
   const formik = useFormik({
     initialValues: {
@@ -31,14 +33,16 @@ const Login = () => {
         .required(t('sign_up.errors.required')),
     }),
     onSubmit: async (values) => {
-      AuthService.postLoginData({ username: values.name, password: values.password })
+      AuthService
+        .postLoginData({ username: values.name, password: values.password }, auth.getToken())
         .then((response) => {
           if (!response.data.username) {
             setAuthError(t('login.errors.unregister'));
           } else {
             setAuthError('');
-            localStorage.setItem('user', JSON.stringify(response.data.username));
-            localStorage.setItem('token', JSON.stringify(response.data.token));
+            const username = JSON.stringify(response.data.username);
+            const token = JSON.stringify(response.data.token);
+            auth.login(username, token);
             navigate(RouteService.root);
           }
         })
