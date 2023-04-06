@@ -47,6 +47,10 @@ const Chat = () => {
     scrollToBottom(messagesRef);
   }, [messages]);
 
+  useEffect(() => {
+    scrollToBottom(channelsRef);
+  }, [channelsRef]);
+
   const getDataFromStorage = () => {
     const userData = localStorage.getItem('user');
     const tokenData = localStorage.getItem('token');

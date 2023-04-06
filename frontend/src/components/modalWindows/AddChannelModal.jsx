@@ -5,8 +5,8 @@ import { useSelector } from 'react-redux';
 import {
   Button, FloatingLabel, Modal, Form,
 } from 'react-bootstrap';
-import SocketService from '../../api/SocketService';
 import { toast } from 'react-toastify';
+import SocketService from '../../api/SocketService';
 import { swearsFilter } from '../../textService';
 import addIcon from '../../assets/images/add_icon.svg';
 import './styles.css';

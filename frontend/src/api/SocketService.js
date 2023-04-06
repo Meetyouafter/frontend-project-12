@@ -4,7 +4,6 @@ import { addMessage } from '../store/slices/messageSlice';
 import {
   addChannel, removeChannel, renameChannel, changeCurrentChannel,
 } from '../store/slices/channelSlice';
-import { scrollToBottom } from '../components/chat/functions';
 
 const chatEvents = {
   newMessage: 'newMessage',
@@ -27,8 +26,6 @@ const socket = io();
 const socketListener = () => {
   socket.on(chatEvents.newChannel, (channel) => {
     dispatch(addChannel(channel));
-    const channels = document.querySelector('.channels_container');
-    setTimeout(() => scrollToBottom(channels), 0);
   });
 
   socket.on(chatEvents.renameChannel, (channel) => {
