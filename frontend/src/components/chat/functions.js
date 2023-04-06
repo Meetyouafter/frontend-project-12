@@ -12,7 +12,9 @@ const getMessagesCount = (activeChannelId, messages = []) => {
 
 const scrollToBottom = (element) => {
   const el = element;
-  el.current.scrollTop = el.current.scrollHeight - el.current.clientHeight;
+  if (el.current) {
+    el.current.scrollTop = el.current.scrollHeight - el.current.clientHeight;
+  }
 };
 
 export {
