@@ -1,6 +1,7 @@
 export default {
   translation: {
     network_error: 'Network error',
+    connection_error: 'Please, check your connection227',
     header: {
       title: 'Hexlet Chat',
       en: 'En',
@@ -65,6 +66,7 @@ export default {
         unique_error: 'Name must be unique',
         notification: 'Channel was added',
         error_notification: 'Network error',
+        error_connection: 'Please, check your connection',
       },
       renameModal: {
         rename_link: 'Rename',

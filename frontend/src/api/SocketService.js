@@ -13,7 +13,6 @@ const chatEvents = {
   renameChannel: 'renameChannel',
 };
 
-const socket = io();
 const { dispatch } = store;
 const initialActiveChannelId = 1;
 
@@ -23,27 +22,30 @@ const getCurrentChannel = () => {
 };
 
 store.subscribe(getCurrentChannel);
+const socket = io();
 
-socket.on(chatEvents.newChannel, (channel) => {
-  dispatch(addChannel(channel));
-  const channels = document.querySelector('.channels_container');
-  setTimeout(() => scrollToBottom(channels), 0);
-});
+const socketListener = () => {
+  socket.on(chatEvents.newChannel, (channel) => {
+    dispatch(addChannel(channel));
+    const channels = document.querySelector('.channels_container');
+    setTimeout(() => scrollToBottom(channels), 0);
+  });
 
-socket.on(chatEvents.renameChannel, (channel) => {
-  dispatch(renameChannel(channel));
-});
+  socket.on(chatEvents.renameChannel, (channel) => {
+    dispatch(renameChannel(channel));
+  });
 
-socket.on(chatEvents.removeChannel, (id) => {
-  dispatch(removeChannel(id));
-  if (getCurrentChannel() === id.id) {
-    dispatch(changeCurrentChannel(initialActiveChannelId));
-  }
-});
+  socket.on(chatEvents.removeChannel, (id) => {
+    dispatch(removeChannel(id));
+    if (getCurrentChannel() === id.id) {
+      dispatch(changeCurrentChannel(initialActiveChannelId));
+    }
+  });
 
-socket.on(chatEvents.newMessage, (message) => {
-  dispatch(addMessage(message));
-});
+  socket.on(chatEvents.newMessage, (message) => {
+    dispatch(addMessage(message));
+  });
+};
 
 const addNewChannel = (channel) => socket.emit(chatEvents.newChannel, channel, (response) => {
   if (response.status === 'ok') {
@@ -76,3 +78,4 @@ const SocketService = {
 };
 
 export default SocketService;
+export { socketListener };
