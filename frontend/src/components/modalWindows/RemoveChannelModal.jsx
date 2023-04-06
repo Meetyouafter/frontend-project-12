@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { Button, Modal } from 'react-bootstrap';
-import { setNotificationProps } from '../../store/slices/notificationSlice';
+import { toast } from 'react-toastify';
 import SocketService from '../../api/SocketService';
 import './styles.css';
 
@@ -10,7 +9,6 @@ const RemoveChannelModal = ({ channelId }) => {
   const [show, setShow] = useState(false);
 
   const { t } = useTranslation('translation', { keyPrefix: 'modal.removeModal' });
-  const dispatch = useDispatch();
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -18,11 +16,7 @@ const RemoveChannelModal = ({ channelId }) => {
   const handleClick = () => {
     SocketService.removeCurrentChannel({ id: channelId });
     handleClose();
-    dispatch(setNotificationProps({
-      variant: 'success',
-      text: t('notification'),
-      isShow: true,
-    }));
+    toast.success(t('notification'));
   };
 
   return (

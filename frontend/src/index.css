@@ -41,3 +41,7 @@ body {
   width: 100%;
   height: 100%;
 }
+
+.Toastify__close-button.Toastify__close-button--light {
+  width: auto;
+}

@@ -3,22 +3,20 @@ import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
-import { useDispatch } from 'react-redux';
 import {
   Row, Button, Form, Container, Col, FloatingLabel,
 } from 'react-bootstrap';
 import Header from '../header/Header';
 import AuthService from '../../api/AuthService';
 import RouteService from '../../api/RouteService';
-import { setNotificationProps } from '../../store/slices/notificationSlice';
-import './style.css';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';import './style.css';
 
 const SignUp = () => {
   const [nameError, setNameError] = useState('');
   const navigate = useNavigate();
 
   const { t } = useTranslation();
-  const dispatch = useDispatch();
 
   const formik = useFormik({
     initialValues: {
@@ -52,11 +50,7 @@ const SignUp = () => {
           if (error.message === 'Request failed with status code 409') {
             setNameError(t('sign_up.errors.user_not_uniq'));
           } else {
-            dispatch(setNotificationProps({
-              variant: 'error',
-              text: t('network_error'),
-              isShow: true,
-            }));
+            toast.error(t('network_error'));
           }
         });
     },

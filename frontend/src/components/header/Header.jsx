@@ -1,26 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Button, Dropdown } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { setNotificationProps } from '../../store/slices/notificationSlice';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import logOutImg from '../../assets/images/logout_icon.svg';
 import lngImg from '../../assets/images/language_icon.svg';
-import Notification from '../notification/Notification';
 import RouteService from '../../api/RouteService';
 import './styles.css';
 
 const Header = ({ withBackBtn }) => {
-  const [isNotificationShow, setIsNotificationShow] = useState(false);
-  const { notificationProps } = useSelector((state) => state.notification);
-
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
-
-  useEffect(() => {
-    setIsNotificationShow(notificationProps.isShow);
-  }, [notificationProps]);
 
   const logout = () => {
     localStorage.removeItem('user');
@@ -31,19 +22,12 @@ const Header = ({ withBackBtn }) => {
   const handleClick = (value) => {
     window.localStorage.setItem('language', value);
     i18n.changeLanguage(value);
-    dispatch(setNotificationProps({
-      variant: 'info',
-      text: t('header.notification'),
-      isShow: true,
-    }));
+    toast.info(t('header.notification'));
   };
 
   return (
     <div className="header_wrapper">
       <a className="header_content" href={useLocation().pathname}>{t('header.title')}</a>
-      {/*
-        <Link className="header_content" to={RouteService.root}>{t('header.title')}</Link>
-      */}
       <div className="header_btn_container">
         {withBackBtn
         && (
@@ -65,14 +49,6 @@ const Header = ({ withBackBtn }) => {
           </Dropdown.Menu>
         </Dropdown>
       </div>
-      {isNotificationShow && (
-      <Notification
-        variant={notificationProps.variant}
-        text={notificationProps.text}
-        isShow={notificationProps.isShow}
-        toggleShow={setIsNotificationShow}
-      />
-      )}
     </div>
   );
 };

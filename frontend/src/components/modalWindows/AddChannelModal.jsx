@@ -1,14 +1,15 @@
 /* eslint-disable functional/no-let */
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import {
   Button, FloatingLabel, Modal, Form,
 } from 'react-bootstrap';
 import SocketService from '../../api/SocketService';
-import { setNotificationProps } from '../../store/slices/notificationSlice';
 import { swearsFilter } from '../../textService';
 import addIcon from '../../assets/images/add_icon.svg';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './styles.css';
 
 const AddChannelModal = () => {
@@ -17,7 +18,6 @@ const AddChannelModal = () => {
   const [formerror, setFormError] = useState('');
 
   const { t } = useTranslation('translation', { keyPrefix: 'modal.addModal' });
-  const dispatch = useDispatch();
 
   const channels = useSelector((state) => state.channels.channels);
   const channelsNames = channels.map((channel) => channel.name);
@@ -49,11 +49,7 @@ const AddChannelModal = () => {
       SocketService.addNewChannel({ name: swearsFilter(newChannelName) });
       setNewChannelName('');
       handleClose();
-      dispatch(setNotificationProps({
-        variant: 'success',
-        text: t('notification'),
-        isShow: true,
-      }));
+      toast.success(t('notification'));
     }
   };
 

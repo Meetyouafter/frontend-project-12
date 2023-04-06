@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { Provider as RollbarProvider, ErrorBoundary, LEVEL_WARN } from '@rollbar/react';
+import { ToastContainer } from 'react-toastify';
 import Error404 from './components/errors/Error404';
 import store from './store';
 import Login from './components/auth/Login';
@@ -25,6 +26,15 @@ const App = () => (
             <Route path={RouteService.root} element={<Chat />} />
             <Route path={RouteService.notFound} element={<Error404 />} />
           </Routes>
+          <ToastContainer
+            position="top-right"
+            autoClose={50000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            theme="light"
+          />
         </BrowserRouter>
       </Provider>
     </ErrorBoundary>

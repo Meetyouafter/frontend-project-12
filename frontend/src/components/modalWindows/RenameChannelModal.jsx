@@ -4,9 +4,9 @@ import { useTranslation } from 'react-i18next';
 import {
   Form, Button, Modal, FloatingLabel,
 } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
-import { setNotificationProps } from '../../store/slices/notificationSlice';
+import { useSelector } from 'react-redux';
 import { swearsFilter } from '../../textService';
+import { toast } from 'react-toastify';
 import SocketService from '../../api/SocketService';
 import './styles.css';
 
@@ -16,7 +16,6 @@ const RenameChannelModal = ({ channelId, channelName }) => {
   const [formerror, setFormError] = useState('');
 
   const { t } = useTranslation('translation', { keyPrefix: 'modal.renameModal' });
-  const dispatch = useDispatch();
 
   const handleClose = () => setIsShowModal(false);
   const handleShow = () => setIsShowModal(true);
@@ -44,11 +43,7 @@ const RenameChannelModal = ({ channelId, channelName }) => {
       SocketService.renameCurrentChannel({ id: channelId, name: swearsFilter(newChannelName) });
       setNewChannelName('');
       handleClose();
-      dispatch(setNotificationProps({
-        variant: 'success',
-        text: t('notification'),
-        isShow: true,
-      }));
+      toast.success(t('notification'));
     }
   };
 

@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import {
   Row, Col, Button, Form, FloatingLabel, Container,
 } from 'react-bootstrap';
+import { toast } from 'react-toastify';
 import Header from '../header/Header';
 import AuthService from '../../api/AuthService';
-import { setNotificationProps } from '../../store/slices/notificationSlice';
+import 'react-toastify/dist/ReactToastify.css';
 import RouteService from '../../api/RouteService';
 import './style.css';
 
@@ -17,7 +17,6 @@ const Login = () => {
   const [authError, setAuthError] = useState('');
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const dispatch = useDispatch();
 
   const formik = useFormik({
     initialValues: {
@@ -48,11 +47,7 @@ const Login = () => {
           if (error.message === 'Request failed with status code 401') {
             setAuthError(t('login.errors.unregister'));
           } else {
-            dispatch(setNotificationProps({
-              variant: 'error',
-              text: t('network_error'),
-              isShow: true,
-            }));
+            toast.error(t('network_error'));
           }
         });
     },

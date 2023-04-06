@@ -71,6 +71,7 @@
 
 .messages_header {
   height: 15%;
+  width: 100%;
   display: flex;
   border-bottom: 1px solid gray;
   background-color: #FFBB73;
@@ -205,81 +206,3 @@
     width: 70%;
   }
 }
-
-/*
-
-@media (max-width: 1012px) {
-  .channels_wrapper.row {
-    width: 25%;
-  }
-  .messages_wrapper.row {
-    width: 75%;
-  }
-  .layout_container.container {
-    min-width: 90%;
-  }
-  .channels_header > span {
-    width: auto;
-  }
-  .btn.btn-outline-light {
-    margin: 0;
-  }
-}
-
-@media (min-width: 768px) {
-  .layout_container.container {
-    width: 90%;
-  }
-}
-
-@media (max-width: 576px) {
-  .layout_container.container {
-    min-width: 100%;
-  }
-
-  input.form-control {
-    font-size: 12px;
-  }
-
-  .channel_name {
-    font-size: 12px;
-    width: 70%;
-  }
-
-  #dropdown-basic.dropdown-toggle.btn.btn-primary {
-    width: 20px;
-    height: 20px;
-}
-
-  .chat {
-    padding-left: 5px;
-    font-size: 12px;
-  }
-
-  .channels_header {
-    padding-left: 5px;
-    flex-wrap: wrap;
-    justify-content: center;
-    height: 60px;
-    font-size: 14px;
-  }
-
-  .messages_header {
-    font-size: 14px;
-    height: 60px;
-  }
-
-  .messages_container {
-    padding-left: 5px;
-    padding-right: 5px;
-  }
-
-  .modal_image {
-    width: 20px;
-  }
-
-  .open_modal_button {
-    margin-left: 10px;
-  }
-}
-*/
