@@ -1,3 +1,5 @@
+import { useEffect, useRef } from 'react';
+
 const getActiveChannelName = (channelsData, activeChannelId) => {
   const activeChannelName = channelsData
     .filter((channel) => channel.id === activeChannelId)
@@ -10,6 +12,14 @@ const getMessagesCount = (activeChannelId, messages = []) => {
   return filteredMessages.length;
 };
 
+const usePreviousValue = (value) => {
+  const ref = useRef();
+  useEffect(() => {
+    ref.current = value;
+  });
+  return ref.current;
+};
+
 const scrollToBottom = (element) => {
   const el = element;
   if (el.current) {
@@ -18,5 +28,5 @@ const scrollToBottom = (element) => {
 };
 
 export {
-  getActiveChannelName, getMessagesCount, scrollToBottom,
+  getActiveChannelName, getMessagesCount, scrollToBottom, usePreviousValue,
 };

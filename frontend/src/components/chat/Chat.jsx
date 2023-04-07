@@ -15,7 +15,7 @@ import Error from '../errors/Error';
 import Header from '../header/Header';
 import Loader from '../loader/Loader';
 import {
-  getActiveChannelName, getMessagesCount, scrollToBottom,
+  getActiveChannelName, getMessagesCount, scrollToBottom, usePreviousValue,
 } from './functions';
 import sendImage from '../../assets/images/send_icon.svg';
 import { swearsFilter } from '../../textService';
@@ -46,14 +46,17 @@ const Chat = () => {
 
   const channelsRef = useRef(null);
   const messagesRef = useRef(null);
+  const previousValue = usePreviousValue(channels.length);
 
   useEffect(() => {
     scrollToBottom(messagesRef);
   }, [messages]);
 
   useEffect(() => {
-    scrollToBottom(channelsRef);
-  }, [channels]);
+    if (channels.length > previousValue && previousValue !== 0) {
+      scrollToBottom(channelsRef);
+    }
+  }, [channels, previousValue]);
 
   const { user, token } = auth.getData();
 
