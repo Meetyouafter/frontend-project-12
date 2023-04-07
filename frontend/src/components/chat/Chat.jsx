@@ -51,7 +51,7 @@ const Chat = () => {
 
   useEffect(() => {
     scrollToBottom(channelsRef);
-  }, [channelsRef]);
+  }, [channels]);
 
   const { user, token } = auth.getData();
 
@@ -133,7 +133,7 @@ const Chat = () => {
           <Col>
             <div className="messages_header">
               <p className="header_channel">
-                #
+                {'# '}
                 {getActiveChannelName(channels, currentChannel)}
               </p>
               <p className="header_channel">

@@ -1,22 +1,27 @@
 import React, {
-  createContext, useContext, useState, useMemo,
+  createContext, useContext, useMemo,
 } from 'react';
 
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-  const [isLogged, setIsLogged] = useState(false);
+  const isLogged = () => {
+    const userData = localStorage.getItem('username');
+    const tokenData = localStorage.getItem('token');
+    if (userData && tokenData) {
+      return true;
+    }
+    return false;
+  };
 
   const login = (username, token) => {
     localStorage.setItem('username', username);
     localStorage.setItem('token', token);
-    setIsLogged(true);
   };
 
   const logout = () => {
     localStorage.removeItem('username');
     localStorage.removeItem('token');
-    setIsLogged(false);
   };
 
   const getData = () => {
@@ -34,7 +39,7 @@ const AuthProvider = ({ children }) => {
 
   const memoValue = useMemo(() => ({
     isLogged, login, logout, getData, getToken,
-  }), [isLogged]);
+  }), []);
 
   return (
     <AuthContext.Provider value={memoValue}>
