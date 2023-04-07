@@ -92,7 +92,9 @@ const Chat = () => {
     }
   };
 
-  if (!auth.isLogged) return <Navigate to={RouteService.logIn} />;
+  if (!auth.isLogged()) {
+    return <Navigate to={RouteService.logIn} />;
+  };
 
   if (appLoading) {
     return (
