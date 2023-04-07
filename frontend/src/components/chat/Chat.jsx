@@ -51,7 +51,7 @@ const Chat = () => {
   }, [messages]);
 
   useEffect(() => {
-    console.log(isMounted.current)
+    console.log(isMounted.current);
     if (isMounted.current) {
       scrollToBottom(channelsRef);
     }
