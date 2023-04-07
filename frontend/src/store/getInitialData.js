@@ -4,7 +4,7 @@ import InitialService from '../api/InitialService';
 const getInitialData = createAsyncThunk(
   'api/v1/data',
   async (token) => {
-    const response = await InitialService.getChannelData(token);
+    const response = await InitialService.getData(token);
     return response.data;
   },
 );

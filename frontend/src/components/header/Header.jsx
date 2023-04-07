@@ -6,8 +6,8 @@ import { toast } from 'react-toastify';
 import logOutImg from '../../assets/images/logout_icon.svg';
 import lngImg from '../../assets/images/language_icon.svg';
 import RouteService from '../../api/RouteService';
-import './styles.css';
 import { useAuth } from '../../context/AuthContext';
+import './styles.css';
 
 const Header = ({ withBackBtn }) => {
   const navigate = useNavigate();
