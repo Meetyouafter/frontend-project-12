@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate, Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
@@ -59,8 +59,6 @@ const SignUp = () => {
         });
     },
   });
-
-  if (auth.isLogged()) return <Navigate to={RouteService.root} />;
 
   return (
     <>
