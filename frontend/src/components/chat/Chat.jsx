@@ -1,4 +1,6 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, {
+  useEffect, useState, useRef,
+} from 'react';
 import { Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
@@ -44,27 +46,14 @@ const Chat = () => {
 
   const channelsRef = useRef(null);
   const messagesRef = useRef(null);
-  const isMounted = useRef(false);
 
   useEffect(() => {
     scrollToBottom(messagesRef);
   }, [messages]);
 
   useEffect(() => {
-    console.log(isMounted.current);
-    if (isMounted.current) {
-      scrollToBottom(channelsRef);
-    }
+    scrollToBottom(channelsRef);
   }, [channels]);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      isMounted.current = true;
-    }, 1000);
-    return () => {
-      clearTimeout(timer);
-    };
-  }, []);
 
   const { user, token } = auth.getData();
 
