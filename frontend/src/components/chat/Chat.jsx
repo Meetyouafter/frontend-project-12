@@ -44,14 +44,27 @@ const Chat = () => {
 
   const channelsRef = useRef(null);
   const messagesRef = useRef(null);
+  const isMounted = useRef(false);
 
   useEffect(() => {
     scrollToBottom(messagesRef);
   }, [messages]);
 
   useEffect(() => {
-    scrollToBottom(channelsRef);
+    console.log(isMounted.current)
+    if (isMounted.current) {
+      scrollToBottom(channelsRef);
+    }
   }, [channels]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      isMounted.current = true;
+    }, 1000);
+    return () => {
+      clearTimeout(timer);
+    };
+  }, []);
 
   const { user, token } = auth.getData();
 
