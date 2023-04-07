@@ -33,7 +33,7 @@ const Login = () => {
         .required(t('sign_up.errors.required')),
     }),
     onSubmit: async (values) => {
-      AuthService
+      await AuthService
         .postLoginData({ username: values.name, password: values.password }, auth.getToken())
         .then((response) => {
           if (!response.data.username) {

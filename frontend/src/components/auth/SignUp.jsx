@@ -40,23 +40,22 @@ const SignUp = () => {
     }),
     validateOnChange: false,
     validateOnBlur: false,
-    onSubmit: (values) => {
-      AuthService
-        .postSignUpData({ username: values.name, password: values.password }, auth.getToken())
-        .then((response) => {
-          setUniqUserError('');
-          const username = JSON.stringify(response.data.username);
-          const token = JSON.stringify(response.data.token);
-          auth.login(username, token);
-          navigate(RouteService.root);
-        })
-        .catch((error) => {
-          if (error.message === 'Request failed with status code 409') {
-            setUniqUserError(t('sign_up.errors.user_not_uniq'));
-          } else {
-            toast.error(t('network_error'));
-          }
-        });
+    onSubmit: async (values) => {
+      try {
+        const response = await AuthService
+          .postSignUpData({ username: values.name, password: values.password }, auth.getToken());
+        const username = JSON.stringify(response.data.username);
+        const token = JSON.stringify(response.data.token);
+        auth.login(username, token);
+        setUniqUserError('');
+        navigate(RouteService.root);
+      } catch (error) {
+        if (error.message === 'Request failed with status code 409') {
+          setUniqUserError(t('sign_up.errors.user_not_uniq'));
+        } else {
+          toast.error(t('network_error'));
+        }
+      }
     },
   });
 
