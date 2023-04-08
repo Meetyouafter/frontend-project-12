@@ -1,5 +1,5 @@
 import React, {
-  createContext, useContext, useMemo,
+  createContext, useCallback, useContext, useMemo,
 } from 'react';
 import { io } from 'socket.io-client';
 import store from '../store/index';
@@ -48,7 +48,7 @@ const SocketProvider = ({ children }) => {
     dispatch(addMessage(message));
   });
 
-  const addNewChannel = (channel, callback) => socket
+  const addNewChannel = useCallback((channel, callback) => socket
     .emit(chatEvents.newChannel, channel, (response) => {
       if (response.status === 'ok') {
         dispatch(changeCurrentChannel(response.data.id));
@@ -56,38 +56,38 @@ const SocketProvider = ({ children }) => {
       } else {
         callback('error');
       }
-    });
+    }), [chatEvents.newChannel, dispatch, socket]);
 
-  const renameCurrentChannel = (channel, callback) => socket
+  const renameCurrentChannel = useCallback((channel, callback) => socket
     .emit(chatEvents.renameChannel, channel, (response) => {
       if (response.status === 'ok') {
         callback('success');
       } else {
         callback('error');
       }
-    });
+    }), [chatEvents.renameChannel, socket]);
 
-  const removeCurrentChannel = (id, callback) => socket
+  const removeCurrentChannel = useCallback((id, callback) => socket
     .emit(chatEvents.removeChannel, id, (response) => {
       if (response.status === 'ok') {
         callback('success');
       } else {
         callback('error');
       }
-    });
+    }), [chatEvents.removeChannel, socket]);
 
-  const addNewMessage = (message, callback) => socket
+  const addNewMessage = useCallback((message, callback) => socket
     .emit(chatEvents.newMessage, message, (response) => {
       if (response.status === 'ok') {
         callback('success');
       } else {
         callback('error');
       }
-    });
+    }), [chatEvents.newMessage, socket]);
 
   const memoValue = useMemo(() => ({
     addNewChannel, removeCurrentChannel, renameCurrentChannel, addNewMessage,
-  }), []);
+  }), [addNewChannel, addNewMessage, removeCurrentChannel, renameCurrentChannel]);
 
   return (
     <SocketContext.Provider value={memoValue}>
