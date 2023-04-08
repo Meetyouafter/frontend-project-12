@@ -19,9 +19,9 @@ import {
 } from './functions';
 import sendImage from '../../assets/images/send_icon.svg';
 import { swearsFilter } from '../../textService';
-import SocketService from '../../api/SocketService';
 import RouteService from '../../api/RouteService';
 import { useAuth } from '../../context/AuthContext';
+import { useSocket } from '../../context/SocketContext';
 import './styles.css';
 
 const Chat = () => {
@@ -43,6 +43,7 @@ const Chat = () => {
   const { currentChannel } = appData.channels;
   const { t } = useTranslation('translation', { keyPrefix: 'chat' });
   const auth = useAuth();
+  const socket = useSocket();
 
   const channelsRef = useRef(null);
   const messagesRef = useRef(null);
@@ -88,7 +89,7 @@ const Chat = () => {
       const newMessage = {
         body: swearsFilter(message), channelId: currentChannel, username: user,
       };
-      SocketService.addNewMessage(newMessage, callback);
+      socket.addNewMessage(newMessage, callback);
     }
   };
 

@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button, Modal } from 'react-bootstrap';
 import { toast } from 'react-toastify';
-import SocketService from '../../api/SocketService';
+import { useSocket } from '../../context/SocketContext';
 import './styles.css';
 
 const RemoveChannelModal = ({ channelId }) => {
   const [show, setShow] = useState(false);
 
   const { t } = useTranslation('translation', { keyPrefix: 'modal.removeModal' });
+  const socket = useSocket();
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -24,7 +25,7 @@ const RemoveChannelModal = ({ channelId }) => {
   };
 
   const handleClick = () => {
-    SocketService.removeCurrentChannel({ id: channelId }, callback);
+    socket.removeCurrentChannel({ id: channelId }, callback);
   };
 
   return (

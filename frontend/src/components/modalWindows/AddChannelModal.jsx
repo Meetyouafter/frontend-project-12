@@ -6,8 +6,8 @@ import {
   Button, FloatingLabel, Modal, Form,
 } from 'react-bootstrap';
 import { toast } from 'react-toastify';
-import SocketService from '../../api/SocketService';
 import { swearsFilter } from '../../textService';
+import { useSocket } from '../../context/SocketContext';
 import addIcon from '../../assets/images/add_icon.svg';
 import './styles.css';
 
@@ -17,6 +17,7 @@ const AddChannelModal = () => {
   const [formerror, setFormError] = useState('');
 
   const { t } = useTranslation('translation', { keyPrefix: 'modal.addModal' });
+  const socket = useSocket();
 
   const channels = useSelector((state) => state.channels.channels);
   const channelsNames = channels.map((channel) => channel.name);
@@ -57,7 +58,7 @@ const AddChannelModal = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validate()) {
-      SocketService.addNewChannel({ name: swearsFilter(newChannelName) }, callback);
+      socket.addNewChannel({ name: swearsFilter(newChannelName) }, callback);
     }
   };
 

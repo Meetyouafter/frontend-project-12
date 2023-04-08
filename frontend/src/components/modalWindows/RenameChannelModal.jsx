@@ -7,7 +7,7 @@ import {
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { swearsFilter } from '../../textService';
-import SocketService from '../../api/SocketService';
+import { useSocket } from '../../context/SocketContext';
 import './styles.css';
 
 const RenameChannelModal = ({ channelId, channelName }) => {
@@ -16,6 +16,7 @@ const RenameChannelModal = ({ channelId, channelName }) => {
   const [formerror, setFormError] = useState('');
 
   const { t } = useTranslation('translation', { keyPrefix: 'modal.renameModal' });
+  const socket = useSocket();
 
   const handleClose = () => setIsShowModal(false);
   const handleShow = () => setIsShowModal(true);
@@ -52,8 +53,7 @@ const RenameChannelModal = ({ channelId, channelName }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validate()) {
-      SocketService
-        .renameCurrentChannel({ id: channelId, name: swearsFilter(newChannelName) }, callback);
+      socket.renameCurrentChannel({ id: channelId, name: swearsFilter(newChannelName) }, callback);
     }
   };
 
