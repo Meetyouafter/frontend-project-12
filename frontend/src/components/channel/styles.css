@@ -6,6 +6,8 @@
   display: flex;
   align-items: center;
   border-radius: 6px;
+  border: 1px solid gray;
+  background-color: #5aacc7;
 }
 
 .chat:hover {
@@ -53,6 +55,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  text-align: left;
 }
 
 .channel_name::before {

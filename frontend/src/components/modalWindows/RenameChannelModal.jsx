@@ -1,4 +1,3 @@
-/* eslint-disable functional/no-let */
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
@@ -25,17 +24,19 @@ const RenameChannelModal = ({ channelId, channelName }) => {
   const channelsNames = channels.map((channel) => channel.name);
 
   const validate = () => {
-    let error = '';
+    const error = {};
     if (!newChannelName) {
-      error = t('required_error');
+      error.error = t('required_error');
     } else if (newChannelName.length < 3 || newChannelName.length > 20) {
-      error = t('length_error');
+      error.error = t('length_error');
     } else if (channelsNames.includes(newChannelName)) {
-      error = t('unique_error');
+      error.error = t('unique_error');
+    } else {
+      error.error = '';
     }
 
-    setFormError(error);
-    return !error.length;
+    setFormError(error.error);
+    return Object.values(error).includes('');
   };
 
   const callback = (status) => {
