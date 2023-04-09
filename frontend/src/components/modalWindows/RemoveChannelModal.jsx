@@ -15,11 +15,10 @@ const RemoveChannelModal = ({ channelId }) => {
   const handleShow = () => setShow(true);
 
   const callback = (status) => {
+    handleClose();
     if (status === 'success') {
-      handleClose();
       toast.success(t('notification'));
     } else {
-      handleClose();
       toast.error(t('error_notification'));
     }
   };

@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import * as Yup from 'yup';
 import { useTranslation } from 'react-i18next';
+import { useFormik } from 'formik';
 import {
   Form, Button, Modal, FloatingLabel,
 } from 'react-bootstrap';
@@ -11,8 +13,6 @@ import './styles.css';
 
 const RenameChannelModal = ({ channelId, channelName }) => {
   const [isShowModal, setIsShowModal] = useState(false);
-  const [newChannelName, setNewChannelName] = useState(channelName);
-  const [formerror, setFormError] = useState('');
 
   const { t } = useTranslation('translation', { keyPrefix: 'modal.renameModal' });
   const socket = useSocket();
@@ -23,40 +23,34 @@ const RenameChannelModal = ({ channelId, channelName }) => {
   const channels = useSelector((state) => state.channels.channels);
   const channelsNames = channels.map((channel) => channel.name);
 
-  const validate = () => {
-    const error = {};
-    if (!newChannelName) {
-      error.error = t('required_error');
-    } else if (newChannelName.length < 3 || newChannelName.length > 20) {
-      error.error = t('length_error');
-    } else if (channelsNames.includes(newChannelName)) {
-      error.error = t('unique_error');
-    } else {
-      error.error = '';
-    }
-
-    setFormError(error.error);
-    return Object.values(error).includes('');
-  };
-
   const callback = (status) => {
+    handleClose();
     if (status === 'success') {
-      setNewChannelName('');
-      handleClose();
       toast.success(t('notification'));
     } else {
-      setNewChannelName('');
-      handleClose();
       toast.error(t('error_notification'));
     }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (validate()) {
-      socket.renameCurrentChannel({ id: channelId, name: swearsFilter(newChannelName) }, callback);
-    }
-  };
+  const formik = useFormik({
+    initialValues: {
+      newChannelName: channelName,
+    },
+    validateOnChange: false,
+    validateOnBlur: false,
+    validationSchema: Yup.object().shape({
+      newChannelName: Yup.string()
+        .required(t('required_error'))
+        .min(3, t('length_error'))
+        .max(20, t('length_error'))
+        .notOneOf(channelsNames, t('unique_error')),
+    }),
+    onSubmit: (values) => {
+      socket.renameCurrentChannel({
+        id: channelId, name: swearsFilter(values.newChannelName),
+      }, callback);
+    },
+  });
 
   return (
     <>
@@ -70,7 +64,7 @@ const RenameChannelModal = ({ channelId, channelName }) => {
           <Modal.Title>{t('title')}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form onSubmit={handleSubmit} className="modal_body">
+          <Form onSubmit={formik.handleSubmit} className="modal_body">
             <FloatingLabel
               controlId="floatingInput"
               label={t('label')}
@@ -78,17 +72,19 @@ const RenameChannelModal = ({ channelId, channelName }) => {
             >
               <Form.Control
                 type="text"
+                name="newChannelName"
                 placeholder={t('input_form')}
                 htmlFor="rename channel input"
                 autoFocus
-                isInvalid={!!formerror}
-                value={newChannelName}
-                onChange={(e) => setNewChannelName(e.target.value)}
+                isInvalid={!!formik.errors.newChannelName}
+                onChange={formik.handleChange}
                 onFocus={(e) => e.target.select()}
+                value={formik.values.newChannelName}
+                onBlur={formik.handleBlur}
                 aria-describedby="inputGroupPrepend"
               />
               <Form.Control.Feedback type="invalid" tooltip>
-                {formerror}
+                {formik.errors.newChannelName}
               </Form.Control.Feedback>
             </FloatingLabel>
             <div className="modal_button_group">

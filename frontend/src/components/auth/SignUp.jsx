@@ -48,7 +48,7 @@ const SignUp = () => {
         const token = JSON.stringify(response.data.token);
         auth.login(username, token);
         setUniqUserError('');
-        navigate(RouteService.root);
+        navigate(RouteService.root, { replace: true });
       } catch (error) {
         if (error.message === 'Request failed with status code 409') {
           setUniqUserError(t('sign_up.errors.user_not_uniq'));

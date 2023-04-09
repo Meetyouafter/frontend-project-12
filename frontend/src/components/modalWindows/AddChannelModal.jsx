@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import * as Yup from 'yup';
 import { useTranslation } from 'react-i18next';
+import { useFormik } from 'formik';
 import { useSelector } from 'react-redux';
 import {
   Button, FloatingLabel, Modal, Form,
@@ -12,8 +14,6 @@ import './styles.css';
 
 const AddChannelModal = () => {
   const [isShowModal, setIsShowModal] = useState(false);
-  const [newChannelName, setNewChannelName] = useState('');
-  const [formerror, setFormError] = useState('');
 
   const { t } = useTranslation('translation', { keyPrefix: 'modal.addModal' });
   const socket = useSocket();
@@ -23,49 +23,43 @@ const AddChannelModal = () => {
 
   const handleClose = () => {
     setIsShowModal(false);
-    setNewChannelName('');
-  };
-
-  const handleShow = () => setIsShowModal(true);
-
-  const validate = () => {
-    const error = {};
-    if (!newChannelName) {
-      error.error = t('required_error');
-    } else if (newChannelName.length < 3 || newChannelName.length > 20) {
-      error.error = t('length_error');
-    } else if (channelsNames.includes(newChannelName)) {
-      error.error = t('unique_error');
-    } else {
-      error.error = '';
-    }
-
-    setFormError(error.error);
-    return Object.values(error).includes('');
   };
 
   const callback = (status) => {
+    handleClose();
     if (status === 'success') {
-      setNewChannelName('');
-      handleClose();
       toast.success(t('notification'));
     } else {
-      setNewChannelName('');
-      handleClose();
       toast.error(t('error_notification'));
     }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (validate()) {
-      socket.addNewChannel({ name: swearsFilter(newChannelName) }, callback);
-    }
-  };
+  const formik = useFormik({
+    initialValues: {
+      newChannelName: '',
+    },
+    validateOnChange: false,
+    validateOnBlur: false,
+    validationSchema: Yup.object().shape({
+      newChannelName: Yup.string()
+        .required(t('required_error'))
+        .min(3, t('length_error'))
+        .max(20, t('length_error'))
+        .notOneOf(channelsNames, t('unique_error')),
+    }),
+    onSubmit: (values, { resetForm }) => {
+      socket.addNewChannel({ name: swearsFilter(values.newChannelName) }, callback);
+      resetForm({
+        values: {
+          newChannelName: '',
+        },
+      });
+    },
+  });
 
   return (
     <>
-      <Button onClick={handleShow} variant="outline-light" className="open_modal_button">
+      <Button onClick={() => setIsShowModal(true)} variant="outline-light" className="open_modal_button">
         <img className="modal_image" src={addIcon} alt="add channel" />
         <span className="visually-hidden">+</span>
       </Button>
@@ -74,7 +68,7 @@ const AddChannelModal = () => {
           <Modal.Title>{t('title')}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form onSubmit={handleSubmit} className="modal_body">
+          <Form onSubmit={formik.handleSubmit} className="modal_body">
             <FloatingLabel
               controlId="floatingInput"
               label={t('label')}
@@ -82,16 +76,18 @@ const AddChannelModal = () => {
             >
               <Form.Control
                 type="text"
+                name="newChannelName"
                 placeholder={t('input_form')}
                 htmlFor="add channel input"
                 autoFocus
-                isInvalid={!!formerror}
-                value={newChannelName}
-                onChange={(e) => setNewChannelName(e.target.value)}
+                isInvalid={!!formik.errors.newChannelName}
+                onChange={formik.handleChange}
+                value={formik.values.newChannelName}
+                onBlur={formik.handleBlur}
                 aria-describedby="inputGroupPrepend"
               />
               <Form.Control.Feedback type="invalid" tooltip>
-                {formerror}
+                {formik.errors.newChannelName}
               </Form.Control.Feedback>
             </FloatingLabel>
             <div className="modal_button_group">

@@ -91,5 +91,12 @@ export default {
         error_notification: 'Network error',
       },
     },
+    error: {
+      button: 'Back to the chat',
+      not_found: 'Page not found',
+    },
+    loader: {
+      title: 'Loading...',
+    },
   },
 };

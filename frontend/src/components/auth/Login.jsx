@@ -33,26 +33,25 @@ const Login = () => {
         .required(t('sign_up.errors.required')),
     }),
     onSubmit: async (values) => {
-      await AuthService
-        .postLoginData({ username: values.name, password: values.password }, auth.getToken())
-        .then((response) => {
-          if (!response.data.username) {
-            setAuthError(t('login.errors.unregister'));
-          } else {
-            setAuthError('');
-            const username = JSON.stringify(response.data.username);
-            const token = JSON.stringify(response.data.token);
-            auth.login(username, token);
-            navigate(RouteService.root);
-          }
-        })
-        .catch((error) => {
-          if (error.message === 'Request failed with status code 401') {
-            setAuthError(t('login.errors.unregister'));
-          } else {
-            toast.error(t('network_error'));
-          }
-        });
+      try {
+        const response = await AuthService
+          .postLoginData({ username: values.name, password: values.password }, auth.getToken());
+        if (!response.data.username) {
+          setAuthError(t('login.errors.unregister'));
+        } else {
+          setAuthError('');
+          const username = JSON.stringify(response.data.username);
+          const token = JSON.stringify(response.data.token);
+          auth.login(username, token);
+          navigate(RouteService.root, { replace: true });
+        }
+      } catch (error) {
+        if (error.message === 'Request failed with status code 401') {
+          setAuthError(t('login.errors.unregister'));
+        } else {
+          toast.error(t('network_error'));
+        }
+      }
     },
   });
 

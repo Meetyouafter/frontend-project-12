@@ -93,5 +93,12 @@ export default {
         error_notification: 'Ошибка соединения',
       },
     },
+    error: {
+      button: 'Вернуться на главную',
+      not_found: 'Страница не найдена',
+    },
+    loader: {
+      title: 'Загрузка...',
+    },
   },
 };

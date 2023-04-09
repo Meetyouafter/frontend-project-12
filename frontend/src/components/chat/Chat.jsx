@@ -75,10 +75,8 @@ const Chat = () => {
   }, [dispatch, token]);
 
   const callback = (status) => {
-    if (status === 'success') {
-      setMessage('');
-    } else {
-      setMessage('');
+    setMessage('');
+    if (status !== 'success') {
       toast.error(t('error_notification'));
     }
   };
