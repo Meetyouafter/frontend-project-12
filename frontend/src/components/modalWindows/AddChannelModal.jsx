@@ -90,16 +90,17 @@ const AddChannelModal = () => {
                 {formik.errors.newChannelName}
               </Form.Control.Feedback>
             </FloatingLabel>
-            <div className="modal_button_group">
-              <Button variant="secondary" className="modal_button" onClick={handleClose}>
-                {t('escape_button')}
-              </Button>
-              <Button variant="primary" className="modal_button" type="submit">
-                {t('success_button')}
-              </Button>
-            </div>
           </Form>
         </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" className="modal_button" onClick={handleClose}>
+            {t('escape_button')}
+          </Button>
+          <Button variant="primary" className="modal_button" type="submit">
+            {t('success_button')}
+          </Button>
+        </Modal.Footer>
+
       </Modal>
     </>
   );

@@ -15,6 +15,9 @@ import { SocketProvider } from './context/SocketContext';
 const rollbarConfig = {
   accessToken: process.env.ROLLBAR_KEY,
   environment: 'production',
+  enubled: true,
+  captureUnhandleRejections: true,
+  captureUncaught: true,
 };
 
 const App = () => (
