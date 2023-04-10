@@ -80,11 +80,9 @@ const RenameChannelModal = ({ channelId, channelName }) => {
                 name="newChannelName"
                 placeholder={t('input_form')}
                 htmlFor="rename channel input"
-                autoFocus
                 ref={inputRef}
                 isInvalid={!!formik.errors.newChannelName}
                 onChange={formik.handleChange}
-                onFocus={(e) => e.target.select()}
                 value={formik.values.newChannelName}
                 onBlur={formik.handleBlur}
                 aria-describedby="inputGroupPrepend"
