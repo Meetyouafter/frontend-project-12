@@ -44,6 +44,8 @@ const Chat = () => {
   const { t } = useTranslation('translation', { keyPrefix: 'chat' });
   const auth = useAuth();
   const socket = useSocket();
+  const { user, token } = auth.getData();
+  const messagesCount = getMessagesCount(currentChannel, messages);
 
   const channelsRef = useRef(null);
   const messagesRef = useRef(null);
@@ -59,9 +61,9 @@ const Chat = () => {
     }
   }, [channels, previousValue]);
 
-  const { user, token } = auth.getData();
-
-  const messagesCount = getMessagesCount(currentChannel, messages);
+  useEffect(() => {
+    dispatch(getInitialData(token));
+  }, [dispatch, token]);
 
   const getStyleForMessage = (name) => {
     if (name === user) {
@@ -70,11 +72,7 @@ const Chat = () => {
     return 'username';
   };
 
-  useEffect(() => {
-    dispatch(getInitialData(token));
-  }, [dispatch, token]);
-
-  const callback = (status) => {
+  const getSocketStatusAction = (status) => {
     setMessage('');
     if (status !== 'success') {
       toast.error(t('error_notification'));
@@ -87,7 +85,7 @@ const Chat = () => {
       const newMessage = {
         body: swearsFilter(message), channelId: currentChannel, username: user,
       };
-      socket.addNewMessage(newMessage, callback);
+      socket.addNewMessage(newMessage, getSocketStatusAction);
     }
   };
 

@@ -19,13 +19,13 @@ const AddChannelModal = () => {
   const socket = useSocket();
 
   const channels = useSelector((state) => state.channels.channels);
-  const channelsNames = channels.map((channel) => channel.name);
+  const channelNames = channels.map((channel) => channel.name);
 
   const handleClose = () => {
     setIsShowModal(false);
   };
 
-  const callback = (status) => {
+  const getSocketStatusAction = (status) => {
     handleClose();
     if (status === 'success') {
       toast.success(t('notification'));
@@ -45,10 +45,10 @@ const AddChannelModal = () => {
         .required(t('required_error'))
         .min(3, t('length_error'))
         .max(20, t('length_error'))
-        .notOneOf(channelsNames, t('unique_error')),
+        .notOneOf(channelNames, t('unique_error')),
     }),
     onSubmit: (values, { resetForm }) => {
-      socket.addNewChannel({ name: swearsFilter(values.newChannelName) }, callback);
+      socket.addNewChannel({ name: swearsFilter(values.newChannelName) }, getSocketStatusAction);
       resetForm({
         values: {
           newChannelName: '',
@@ -63,6 +63,7 @@ const AddChannelModal = () => {
         <img className="modal_image" src={addIcon} alt="add channel" />
         <span className="visually-hidden">+</span>
       </Button>
+
       <Modal centered show={isShowModal} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>{t('title')}</Modal.Title>
@@ -100,7 +101,6 @@ const AddChannelModal = () => {
             {t('success_button')}
           </Button>
         </Modal.Footer>
-
       </Modal>
     </>
   );

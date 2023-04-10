@@ -6,15 +6,15 @@ import { useSocket } from '../../context/SocketContext';
 import './styles.css';
 
 const RemoveChannelModal = ({ channelId }) => {
-  const [show, setShow] = useState(false);
+  const [isShowModal, setIsShowModal] = useState(false);
 
   const { t } = useTranslation('translation', { keyPrefix: 'modal.removeModal' });
   const socket = useSocket();
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleClose = () => setIsShowModal(false);
+  const handleShow = () => setIsShowModal(true);
 
-  const callback = (status) => {
+  const getSocketStatusAction = (status) => {
     handleClose();
     if (status === 'success') {
       toast.success(t('notification'));
@@ -24,7 +24,7 @@ const RemoveChannelModal = ({ channelId }) => {
   };
 
   const handleClick = () => {
-    socket.removeCurrentChannel({ id: channelId }, callback);
+    socket.removeCurrentChannel({ id: channelId }, getSocketStatusAction);
   };
 
   return (
@@ -34,7 +34,7 @@ const RemoveChannelModal = ({ channelId }) => {
         <span className="visually-hidden">{t('remove_link')}</span>
       </Button>
 
-      <Modal centered show={show} onHide={handleClose}>
+      <Modal centered show={isShowModal} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>{t('title')}</Modal.Title>
         </Modal.Header>

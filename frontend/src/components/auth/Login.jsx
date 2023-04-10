@@ -96,7 +96,7 @@ const Login = () => {
                     <Form.Control
                       name="password"
                       type="password"
-                      placeholder={t('login.forms.name')}
+                      placeholder={t('login.forms.password')}
                       isInvalid={!!authError || !!formik.errors.password}
                       onChange={formik.handleChange}
                       value={formik.values.password}

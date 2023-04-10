@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
@@ -18,10 +17,13 @@ const ChannelMenu = ({ channelId, channelName }) => {
           {t('label')}
         </span>
       </Dropdown.Toggle>
-
       <Dropdown.Menu>
-        <RemoveChannelModal channelId={channelId} />
-        <RenameChannelModal channelId={channelId} channelName={channelName} />
+        <Dropdown.Item>
+          <RemoveChannelModal channelId={channelId} />
+        </Dropdown.Item>
+        <Dropdown.Item>
+          <RenameChannelModal channelId={channelId} channelName={channelName} />
+        </Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>
   );
@@ -29,19 +31,33 @@ const ChannelMenu = ({ channelId, channelName }) => {
 
 const ChannelItem = ({ currentChannel, channelData }) => {
   const dispatch = useDispatch();
+  const { removable } = channelData;
 
   return (
-    <div
-      className={currentChannel === channelData.id ? 'chat active_chat' : 'chat'}
-      onClick={() => dispatch(changeCurrentChannel(channelData.id))}
-      onKeyUp={() => dispatch(changeCurrentChannel(channelData.id))}
-    >
-      <p className="channel_name">
-        {channelData.name}
-      </p>
-      {channelData.removable
+    removable ? (
+      <div className={currentChannel === channelData.id ? 'chat active_chat' : 'chat'}>
+        <button
+          type="button"
+          className="channel_name"
+          onClick={() => dispatch(changeCurrentChannel(channelData.id))}
+        >
+          {channelData.name}
+        </button>
+        {channelData.removable
       && <ChannelMenu channelId={channelData.id} channelName={channelData.name} />}
-    </div>
+      </div>
+    )
+      : (
+        <button
+          className={currentChannel === channelData.id ? 'chat active_chat' : 'chat'}
+          onClick={() => dispatch(changeCurrentChannel(channelData.id))}
+          type="button"
+        >
+          <p className="channel_name">
+            {channelData.name}
+          </p>
+        </button>
+      )
   );
 };
 

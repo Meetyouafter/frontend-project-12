@@ -56,6 +56,8 @@
   overflow: hidden;
   text-overflow: ellipsis;
   text-align: left;
+  background: none;
+  border: none;
 }
 
 .channel_name::before {

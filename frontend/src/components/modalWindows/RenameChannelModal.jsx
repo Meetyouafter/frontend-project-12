@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import * as Yup from 'yup';
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
@@ -16,14 +16,19 @@ const RenameChannelModal = ({ channelId, channelName }) => {
 
   const { t } = useTranslation('translation', { keyPrefix: 'modal.renameModal' });
   const socket = useSocket();
-
-  const handleClose = () => setIsShowModal(false);
-  const handleShow = () => setIsShowModal(true);
+  const inputRef = useRef();
 
   const channels = useSelector((state) => state.channels.channels);
   const channelsNames = channels.map((channel) => channel.name);
 
-  const callback = (status) => {
+  const handleClose = () => setIsShowModal(false);
+
+  const getInputFocus = () => {
+    inputRef.current.focus();
+    inputRef.current.select();
+  };
+
+  const getSocketStatusAction = (status) => {
     handleClose();
     if (status === 'success') {
       toast.success(t('notification'));
@@ -48,18 +53,18 @@ const RenameChannelModal = ({ channelId, channelName }) => {
     onSubmit: (values) => {
       socket.renameCurrentChannel({
         id: channelId, name: swearsFilter(values.newChannelName),
-      }, callback);
+      }, getSocketStatusAction);
     },
   });
 
   return (
     <>
-      <Button variant="outlined-light" onClick={handleShow} className="open_modal_button">
+      <Button variant="outlined-light" onClick={() => setIsShowModal(true)} className="open_modal_button">
         {t('rename_link')}
         <span className="visually-hidden">{t('rename_link')}</span>
       </Button>
 
-      <Modal centered show={isShowModal} onHide={handleClose}>
+      <Modal centered show={isShowModal} onHide={handleClose} onEntered={getInputFocus}>
         <Modal.Header closeButton>
           <Modal.Title>{t('title')}</Modal.Title>
         </Modal.Header>
@@ -76,6 +81,7 @@ const RenameChannelModal = ({ channelId, channelName }) => {
                 placeholder={t('input_form')}
                 htmlFor="rename channel input"
                 autoFocus
+                ref={inputRef}
                 isInvalid={!!formik.errors.newChannelName}
                 onChange={formik.handleChange}
                 onFocus={(e) => e.target.select()}

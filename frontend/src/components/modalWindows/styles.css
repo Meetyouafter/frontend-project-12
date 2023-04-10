@@ -23,10 +23,6 @@
   font-size: 16px;
 }
 
-.open_modal_button.btn.btn-outlined-light:hover {
-  background-color: lightgray;
-}
-
 .modal_image {
   width: 25px;
   cursor: pointer;

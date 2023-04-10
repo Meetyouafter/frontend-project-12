@@ -16,7 +16,7 @@ const Header = ({ withBackBtn }) => {
 
   const logout = () => {
     auth.logout();
-    navigate(RouteService.logIn);
+    navigate(RouteService.logIn, { replace: true });
   };
 
   const handleClick = (value) => {
