@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { Dropdown } from 'react-bootstrap';
@@ -9,20 +9,28 @@ import './styles.css';
 
 const ChannelMenu = ({ channelId, channelName }) => {
   const { t } = useTranslation('translation', { keyPrefix: 'chat' });
+  const menuRef = useRef();
+  const handleClose = () => {
+    menuRef.current.className = 'dropdown-menu';
+  };
 
   return (
-    <Dropdown onClick={(e) => e.stopPropagation()} autoClose>
+    <Dropdown onClick={(e) => e.stopPropagation()}>
       <Dropdown.Toggle id="dropdown-basic">
         <span className="visually-hidden">
           {t('label')}
         </span>
       </Dropdown.Toggle>
-      <Dropdown.Menu>
+      <Dropdown.Menu ref={menuRef}>
         <div className="dropdown-item">
-          <RemoveChannelModal channelId={channelId} />
+          <RemoveChannelModal channelId={channelId} handleClose={handleClose} />
         </div>
         <div className="dropdown-item">
-          <RenameChannelModal channelId={channelId} channelName={channelName} />
+          <RenameChannelModal
+            channelId={channelId}
+            channelName={channelName}
+            handleClose={handleClose}
+          />
         </div>
       </Dropdown.Menu>
     </Dropdown>

@@ -11,7 +11,7 @@ import { swearsFilter } from '../../textService';
 import { useSocket } from '../../context/SocketContext';
 import './styles.css';
 
-const RenameChannelModal = ({ channelId, channelName }) => {
+const RenameChannelModal = ({ channelId, channelName, handleClose }) => {
   const [isShowModal, setIsShowModal] = useState(false);
 
   const { t } = useTranslation('translation', { keyPrefix: 'modal.renameModal' });
@@ -21,7 +21,7 @@ const RenameChannelModal = ({ channelId, channelName }) => {
   const channels = useSelector((state) => state.channels.channels);
   const channelsNames = channels.map((channel) => channel.name);
 
-  const handleClose = () => setIsShowModal(false);
+  const handleCloseWodal = () => setIsShowModal(false);
 
   const getInputFocus = () => {
     inputRef.current.focus();
@@ -29,12 +29,17 @@ const RenameChannelModal = ({ channelId, channelName }) => {
   };
 
   const getSocketStatusAction = (status) => {
-    handleClose();
+    handleCloseWodal();
     if (status === 'success') {
       toast.success(t('notification'));
     } else {
       toast.error(t('error_notification'));
     }
+  };
+
+  const handleClick = () => {
+    handleClose();
+    setIsShowModal(true);
   };
 
   const formik = useFormik({
@@ -59,12 +64,12 @@ const RenameChannelModal = ({ channelId, channelName }) => {
 
   return (
     <>
-      <Button variant="outlined-light" onClick={() => setIsShowModal(true)} className="open_modal_button">
+      <Button variant="outlined-light" onClick={handleClick} className="open_modal_button">
         {t('rename_link')}
         <span className="visually-hidden">{t('rename_link')}</span>
       </Button>
 
-      <Modal centered show={isShowModal} onHide={handleClose} onEntered={getInputFocus}>
+      <Modal centered show={isShowModal} onHide={handleCloseWodal} onEntered={getInputFocus}>
         <Modal.Header closeButton>
           <Modal.Title>{t('title')}</Modal.Title>
         </Modal.Header>
@@ -94,7 +99,7 @@ const RenameChannelModal = ({ channelId, channelName }) => {
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" className="modal_button" onClick={handleClose}>
+          <Button variant="secondary" className="modal_button" onClick={handleCloseWodal}>
             {t('escape_button')}
           </Button>
           <Button variant="primary" className="modal_button" type="submit">
